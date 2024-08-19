@@ -2,39 +2,92 @@ import React from 'react';
 import barcode from './img/barcode.jpg';
 import { Button } from '@nextui-org/button';
 import ExpandableCard from './ExpandableCard.jsx';
+import useUserData from '../../api/useUserData.jsx';
+import useLogout from '../../api/useLogout.jsx';
 
 const MemberTop = () => {
+	const { user, token, setUser, setToken } = useStateContext();
+	const { data: userData, error, isLoading } = useUserData();
+	const logoutMutation = useLogout();
+
+	useEffect(() => {
+		if (userData) {
+			setUser(userData);
+		}
+		if (token) {
+			setToken(token);
+		}
+	}, [userData, setUser]);
+
+	const onLogout = () => {
+		logoutMutation.mutate(); // Trigger the mutation when the button is clicked
+	};
+	if (!token) {
+		return <Navigate to='/login' />;
+	}
+	// const mutation = useMutation({
+	// 	mutationFn: logOut,
+	// 	onSuccess: () => {
+	// 		// Clear user data and token on successful logout
+	// 		setUser(null);
+	// 		setToken(null);
+	// 	},
+	// 	onError: (error) => {
+	// 		console.error('Logout failed:', error);
+	// 		// Handle errors, show a message, etc.
+	// 	},
+	// });
+	// const onLogout = () => {
+	// 	mutation.mutate(); // Trigger the mutation when the button is clicked
+	// };
+	const handleScrollToSection = (sectionId) => {
+		setTimeout(() => {
+			const element = document.getElementById(sectionId);
+			if (element) {
+				element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+			}
+		}, 1100); // 1-second delay
+	};
+
 	return (
 		<>
 			<div className='w-[90%] h-16'>
 				<header className='py-2 w-36  md:w-48 md:ml-10 md:px-5 md:py-4 text-2xl text-center bg-indigo-200'>
-					Hello
+					Member Page
 				</header>
 			</div>
 			<div className='flex justify-center mt-3'>
 				<div className='flex container mx-auto w-[80%]'>
 					<div className='flex-row w-1/3 h-min py-3 mx-3 mr-2 flex-1 overflow-auto  border-1.5 border-zinc-400'>
 						<div className='py-2 px-8 align-middle'>
-							<p className='text-2xl font-bold'>Member Name</p>
-							<p>hahaha@gmail.com</p>
+							<p className='text-2xl font-bold'> {user.name}</p>
+							<p>{user.email}</p>
 						</div>
 						<div className='mt-4'>
 							<img className='mx-auto' src={barcode} alt='' />
 							<p className='text-center'>123456789</p>
 						</div>
 						{/* //TODO Need write condition to display or not */}
-						<div className='mt-4'>
+						{/* <div className='mt-4'>
 							<p className='text-center'>還有資料還沒填唷</p>
-						</div>
+						</div> */}
 						<div className='flex justify-center mt-4'>
-							<Button className='text-center bg-indigo-300 w-full h-11 mx-2 rounded-sm'>
+							<Button
+								onPress={() => {
+									handleScrollToSection('memberInfo');
+								}}
+								className='text-center bg-indigo-300 w-full h-11 mx-2 rounded-sm'
+							>
 								編輯會員資料
 							</Button>
 						</div>
 						<hr className='mt-4 border-1.5 border-red-600' />
 						<div className='flex justify-center mt-4'>
-							<Button className='text-center bg-indigo-300 w-full h-11 mx-2 rounded-sm'>
-								編輯會員資料
+							<Button
+								onPress={onLogout}
+								className='text-center bg-indigo-300 w-full h-11 mx-2 rounded-sm'
+							>
+								登出
 							</Button>
 						</div>
 					</div>
@@ -70,6 +123,7 @@ const MemberTop = () => {
 		</>
 	);
 };
+
 
 // // method to jump to the desired element by using the element's id
 // const jumpToReleventDiv = (id) => {

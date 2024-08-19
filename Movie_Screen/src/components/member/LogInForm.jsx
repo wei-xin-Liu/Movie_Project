@@ -29,7 +29,7 @@ const LogInForm = () => {
 	});
 
 	const postData = async (data) => {
-		const response = await axiosClient.post('/login', data);
+		const response = await axiosClient.post('/membertop', data);
 		return response.data;
 	};
 
