@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Foods extends Model
 {
     use HasFactory;
+
+    public function ticket()
+    {
+        return $this->belongsTo(Tickets::class);
+    }
 }

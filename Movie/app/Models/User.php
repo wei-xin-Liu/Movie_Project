@@ -62,4 +62,9 @@ class User extends Authenticatable implements JWTSubject
             'iat' => time(), // Issued at time
         ];
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Tickets::class);
+    }
 }
