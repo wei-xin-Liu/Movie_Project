@@ -43,6 +43,9 @@ const TicketBooking = () => {
 			.catch(error => console.error('Error fetching foods:', error));
 	}, []);
 
+	// 計算總票數
+	const totalTickets = Object.values(ticketCounts).reduce((sum, count) => sum + count, 0);
+
 	// 是否中午過後
 	const isAfterNoon = () => time >= "12:00:00";
 
@@ -260,6 +263,7 @@ const TicketBooking = () => {
 			>
 				<h3 className="text-lg font-bold text-gray-800">總價格 NT{totalPrice()}</h3>
 				<button
+					disabled={totalTickets === 0}
 					onClick={submit}
 					className="
 						bg-transparent
