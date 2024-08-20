@@ -11,13 +11,13 @@ export default {
       keyframes: {
         shake: {
           '0%, 100%': { transform: 'translateX(0)' },
-          '25%': { transform: 'translateX(-5%)' },
-          '50%': { transform: 'translateX(5%)' },
-          '75%': { transform: 'translateX(-5%)' },
+          '25%': { transform: 'translateX(-1%)' },
+          '50%': { transform: 'translateX(1%)' },
+          '75%': { transform: 'translateX(-1%)' },
         },
       },
       animation: {
-        shake: 'shake 0.5s ease-in-out',
+        shake: 'shake 0.1s ease-in-out',
       },
     },
   },

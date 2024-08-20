@@ -1,9 +1,9 @@
 import TicketBooking from '../components/TicketBooking';
 
 const Ticketing = () => {
-  return (
-    <TicketBooking />
-  );
+	return (
+		<TicketBooking />
+	);
 }
 
 export default Ticketing;

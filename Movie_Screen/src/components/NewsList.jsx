@@ -3,17 +3,12 @@ import React from 'react'
 function NewsList() {
     return (
         <>
-            <div className="mx-auto">
-                <div className="flex mb-[2%] w-[448px]">
-                    <h2 className="text-3xl font-bold text-blue-800">最新公告</h2>
-                    {/* 查看更多按鈕 */}
-                    <div className="text-2xl pt-[1%] ml-[5%]">
-                        <a href="/News" className="text-black hover:text-blue-800">查看更多公告</a>
-                    </div>
-                </div>
+            <div className="flex flex-col items-center">
+                <h2 className="text-3xl font-bold text-blue-800">最新公告</h2>
+                {/* 查看更多按鈕 */}
+                <a href="/News" className="text-2xl pt-[2%] font-bold text-sky-900 hover:text-blue-800">查看更多公告</a>
 
-
-                <ul className="space-y-4">
+                <ul className="space-y-4 pt-[2%]">
                     {/* 公告項目 1 */}
                     <li className="flex">
                         <span className=" text-gray-500 mr-[5%]">2024/04/01</span>

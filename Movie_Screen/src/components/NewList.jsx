@@ -14,7 +14,18 @@ function NewList() {
                 <ul className='block list-disc my-[1em] px-[40px]'>
                     <h1 className="newsH1 block text-[2em] my-[0.67em] font-bold">最新公告</h1>
                     {newsItems.map((item, index) => (
-                        <li key={index} className="catNewsLi border-dotted border-b-2  border-black w-[90%] py-[20px] tracking-[1.5px]">
+                        <li
+                            key={index}
+                            className="
+                                catNewsLi
+                                border-dotted
+                                border-b-2
+                                border-black
+                                w-[90%]
+                                py-[20px]
+                                tracking-[1.5px]
+                            "
+                        >
                             <time className="catTime bg-[#2f96ee] text-white p-[0.5%]">{item.date}</time>
                             <a className='pl-[1%] text-black' href={item.link}>{item.title}</a>
                         </li>

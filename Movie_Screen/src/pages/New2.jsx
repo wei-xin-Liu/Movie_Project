@@ -3,7 +3,7 @@ import "../css/TheaterInfo_News_Audio.css";
 
 function New2() {
     return (
-        <>
+        <React.Fragment>
             <div className="container loca w-[80%] block">
                 <time className="newsTime text-gray-400 tracking-[1.5px] p-[0.5%] mt-[2%]">2023/10/02</time>
                 <h1 className="newsH1 text-[#2f96ee] block text-[2em] my-[0.67em] font-bold">iShow會員權益公告</h1>
@@ -17,10 +17,25 @@ function New2() {
                     )，以利後續會員相關權益執行。</p><br/>
                 <p>第一影城保有對網路會員、iShow會員之申請及停用之准駁、各項服務說明及行銷活動之解釋、修改、隨時變更或終止各項服務與活動之權利。</p>
                 <br/>
-                    <button className="backTo"><a className='text-[#666] cursor-pointer text-sm w-[100px] h-[40px] bg-gray-300 border border-black rounded-sm' href="News">回上一頁</a></button>
+                    <button className="backTo">
+                        <a className='
+                                text-[#666]
+                                cursor-pointer
+                                text-sm
+                                w-[100px]
+                                h-[40px]
+                                bg-gray-300
+                                border
+                                border-black
+                                rounded-sm'
+                            href="News"
+                        >
+                            回上一頁
+                        </a>
+                    </button>
             </div>
             <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-        </>
+        </React.Fragment>
     )
 }
 

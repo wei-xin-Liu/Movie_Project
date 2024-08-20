@@ -68,13 +68,13 @@ function TheaterInformation() {
                             </tr>
                         </thead>
                         <tbody >
-                            {tickets.map(ticket => (
-                                <tr key={ticket.TID}>
-                                    <td className=' p-[10px]'>{ticket.theaters.name}</td>
-                                    <td className=' p-[10px]'>{ticket.T_Adult}</td>
-                                    <td className=' p-[10px]'>{ticket.T_Stud}</td>
-                                    <td className=' p-[10px]'>{ticket.T_Early}</td>
-                                    <td className=' p-[10px]'>{ticket.T_Love}</td>
+                            {tickets.map(({ TID, theaters, T_Adult, T_Stud, T_Early, T_Love }) => (
+                                <tr key={TID}>
+                                    <td className=' p-[10px]'>{theaters.name}</td>
+                                    <td className=' p-[10px]'>{T_Adult}</td>
+                                    <td className=' p-[10px]'>{T_Stud}</td>
+                                    <td className=' p-[10px]'>{T_Early}</td>
+                                    <td className=' p-[10px]'>{T_Love}</td>
                                 </tr>
                             ))}
                         </tbody>
