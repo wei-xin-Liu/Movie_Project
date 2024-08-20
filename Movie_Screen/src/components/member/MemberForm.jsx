@@ -32,31 +32,46 @@ const MemberForm = () => {
 		successMessage,
 	} = useUpdateUserInfo();
 
-	const getData = async (data) => {
-		const response = await axiosClient.get(
-			'/info',
-			{
-				timeout: 1000, // 1 second timeout
-			},
-			data
-		);
-		return response.data;
-	};
+	// const getData = async (data) => {
+	// 	const response = await axiosClient.get(
+	// 		'/info',
+	// 		{
+	// 			timeout: 1000, // 1 second timeout
+	// 		},
+	// 		data
+	// 	);
+	// 	return response.data;
+	// };
 
-	const { data: userData } = useQuery({
-		queryFn: getData,
-		queryKey: ['getUserData'],
-	});
+	// const { data: userData } = useQuery({
+	// 	queryFn: getData,
+	// 	queryKey: ['getUserData'],
+	// });
 
+	// useEffect(() => {
+	// 	if (userData) {
+	// 		setUser(userData);
+	// 	}
+	// }, [userData, setUser]);
+	const { data: userData } = useUserData();
 	useEffect(() => {
 		if (userData) {
 			setUser(userData);
 		}
+		console.log('userData:', userData); //not defined
+		// console.log(userData.name);
+		console.log('userData:', token);
+		console.log(user); //
+		console.log(userData?.name);
 	}, [userData, setUser]);
 
-	if (!token) {
-		return <Navigate to='/login' />;
-	}
+	useEffect(() => {
+		if (token) {
+			setToken(token);
+		}
+	}, [userData, setToken]);
+	// console.log('user:', user.name);
+	// console.log('token:', token);
 
 	const MemberFormData = () => {
 		const [showInput, setShowInput] = useState(false);
@@ -114,84 +129,89 @@ const MemberForm = () => {
 
 		return (
 			<>
-				<form className='w-full ml-5 mx-auto' onSubmit={handleSubmit(onSubmit)}>
-					<div className='py-1'>
-						<Input
-							{...register('name')}
-							type='text'
-							label='Name'
-							radius='sm'
-							labelPlacement='outside'
-							isDisabled={!showInput}
-							defaultValue={user.name}
-							isInvalid={!!errors.name}
-							color={errors.name ? 'danger' : 'default'}
-							errorMessage={errors.name?.message}
-							// classNames={{
-							// 	label: '!text-sky-400/50', // Change this to your desired color
-							// }}
-						/>
-					</div>
-					<div className='py-1'>
-						<Input
-							{...register('email')}
-							type='email'
-							label='Email'
-							radius='sm'
-							labelPlacement='outside'
-							isDisabled={!showInput}
-							defaultValue={user.email}
-							isInvalid={!!errors.email}
-							color={errors.email ? 'danger' : 'default'}
-							errorMessage={errors.email?.message}
-							// classNames={{ inputWrapper: 'bg-red-500/80' }}
-						/>
-					</div>
-					{showInput && (
-						<>
-							<div className='py-1'>
-								<Input
-									{...register('password')}
-									type='password'
-									label='Password'
-									radius='sm'
-									labelPlacement='outside'
-									isDisabled={!showInput}
-									isInvalid={!!errors.password}
-									color={errors.password ? 'danger' : 'default'}
-									errorMessage={errors.password?.message}
-									// classNames={{
-									// 	label: '!text-sky-400/50', // Change this to your desired color
-									// }}
-								/>
-							</div>
-							<div className='py-1'>
-								<Input
-									{...register('password_confirmation')}
-									type='password'
-									label='Confirm Password'
-									radius='sm'
-									labelPlacement='outside'
-									placeholder='Confirm your password'
-									isDisabled={!showInput}
-									isInvalid={!!errors.password_confirmation}
-									color={errors.password_confirmation ? 'danger' : 'default'}
-									errorMessage={errors.password_confirmation?.message}
-									// classNames={{
-									// 	label: '!text-sky-400/50', // Change this to your desired color
-									// }}
-								/>
-							</div>
-						</>
-					)}
-					{/* <label htmlFor='birth_Date'>Birth Date</label>
+				<p>{userData.id}</p>
+				<div id='memberInfo'>
+					<form
+						className='w-full ml-5 mx-auto'
+						onSubmit={handleSubmit(onSubmit)}
+					>
+						<div className='py-1'>
+							<Input
+								{...register('name')}
+								type='text'
+								label='Name'
+								radius='sm'
+								labelPlacement='outside'
+								isDisabled={!showInput}
+								defaultValue={user?.name}
+								isInvalid={!!errors.name}
+								color={errors.name ? 'danger' : 'default'}
+								errorMessage={errors.name?.message}
+								// classNames={{
+								// 	label: '!text-sky-400/50', // Change this to your desired color
+								// }}
+							/>
+						</div>
+						<div className='py-1'>
+							<Input
+								{...register('email')}
+								type='email'
+								label='Email'
+								radius='sm'
+								labelPlacement='outside'
+								isDisabled={!showInput}
+								defaultValue={user?.email}
+								isInvalid={!!errors.email}
+								color={errors.email ? 'danger' : 'default'}
+								errorMessage={errors.email?.message}
+								// classNames={{ inputWrapper: 'bg-red-500/80' }}
+							/>
+						</div>
+						{showInput && (
+							<>
+								<div className='py-1'>
+									<Input
+										{...register('password')}
+										type='password'
+										label='Password'
+										radius='sm'
+										labelPlacement='outside'
+										isDisabled={!showInput}
+										isInvalid={!!errors.password}
+										color={errors.password ? 'danger' : 'default'}
+										errorMessage={errors.password?.message}
+										// classNames={{
+										// 	label: '!text-sky-400/50', // Change this to your desired color
+										// }}
+									/>
+								</div>
+								<div className='py-1'>
+									<Input
+										{...register('password_confirmation')}
+										type='password'
+										label='Confirm Password'
+										radius='sm'
+										labelPlacement='outside'
+										placeholder='Confirm your password'
+										isDisabled={!showInput}
+										isInvalid={!!errors.password_confirmation}
+										color={errors.password_confirmation ? 'danger' : 'default'}
+										errorMessage={errors.password_confirmation?.message}
+										// classNames={{
+										// 	label: '!text-sky-400/50', // Change this to your desired color
+										// }}
+									/>
+								</div>
+							</>
+						)}
+						{/* <label htmlFor='birth_Date'>Birth Date</label>
 					<DatePicker
 						id='birth_Date'
 						{...register('birth_Date')}
 						isInvalid={!!errors.birth_Date}
 						errorMessage={errors.birth_Date?.message}
 					/> */}
-					{/* <Controller
+						{/* <Controller
 						name='birth_Date'
 						control={control}
 						render={({ field: { onChange, onBlur, value, ref } }) => (
@@ -209,39 +229,43 @@ const MemberForm = () => {
 							/>
 						)}
 					/> */}
-					{generalError && (
-						<div className='text-red-500 mb-4'>{generalError}</div>
-					)}
-					{successMessage && (
-						<div className='text-green-500 mb-4'>{successMessage}</div>
-					)}
-					<div className='flex my-5'>
-						<Button className='mr-3 w-32' onPress={handleModifyButtonClick}>
-							修改個人資料
-						</Button>
-						<Button
-							type='submit'
-							className='mr-3 w-32'
-							onPress={handleConfirmButtonClick}
-						>
-							確認
-						</Button>
-					</div>
-				</form>
-				<div>
-					<div className>
-						<p
-							onClick={handleToggleClick}
-							className='text-blue-500 cursor-pointer'
-						>
-							{showMore ? 'Show Less' : 'Show More'}
-						</p>
-					</div>
-					{showMore && (
-						<div>
-							<DeleteAccountButton className='w-full ml-10 mx-auto' />
+						{generalError && (
+							<div className='text-red-500 mb-4'>{generalError}</div>
+						)}
+						{successMessage && (
+							<div className='text-green-500 mb-4'>{successMessage}</div>
+						)}
+						<div className='flex my-5'>
+							<Button
+								className='mr-3 w-32 text-center text-slate-100 bg-blue-500 rounded-sm'
+								onPress={handleModifyButtonClick}
+							>
+								修改個人資料
+							</Button>
+							<Button
+								type='submit'
+								className='mr-3 w-32 text-center text-slate-100 bg-blue-500 rounded-sm'
+								onPress={handleConfirmButtonClick}
+							>
+								確認
+							</Button>
 						</div>
-					)}
+					</form>
+					<div>
+						<div className='ml-6'>
+							<p
+								onClick={handleToggleClick}
+								className='text-sm text-blue-500 cursor-pointer'
+							>
+								{showMore ? '隱藏更多功能' : '顯示更多功能'}
+							</p>
+						</div>
+						{showMore && (
+							<div className='ml-5 mt-3 '>
+								<DeleteAccountButton />
+							</div>
+						)}
+					</div>
 				</div>
 			</>
 		);
@@ -270,5 +294,4 @@ const MemberForm = () => {
 		<div>{showSecondComponent ? <MemberFormData /> : <LoadingSpinner />}</div>
 	);
 };
-
 export default MemberForm;

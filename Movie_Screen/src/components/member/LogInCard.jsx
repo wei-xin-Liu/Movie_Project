@@ -66,7 +66,7 @@ const RegistrationCard = () => {
 						}`}
 					>
 						<Card className='sm:w-[450px]  max-h-screen'>
-							<CardHeader className='flex h-15 gap-3 bg-indigo-600'>
+							<CardHeader className='flex items-center justify-between h-15 gap-3 bg-indigo-600'>
 								<Image
 									alt='nextui logo'
 									height={40}
@@ -75,19 +75,26 @@ const RegistrationCard = () => {
 									width={40}
 								/>
 								<div className='flex flex-col'>
-									<p className='text-md'>NextUI</p>
-									<p className='text-small text-default-500'>nextui.org</p>
+									<p className='text-white'>會員登入</p>
 								</div>
+								<IconXboxX
+									stroke={1}
+									className='cursor-pointer text-white'
+									onClick={closeModal}
+								/>
 							</CardHeader>
 							<Divider />
 							<CardBody>
 								<LogInForm />
 							</CardBody>
 							<Divider />
-							<CardFooter>
-								<Link underline='focus' href='http://localhost:5173/'>
-									already registered?
-								</Link>
+							<CardFooter className='flex justify-end'>
+								<RouterLink to='/signin' className='text-blue-600 '>
+									<span className='text-zinc-400 no-underline	'>
+										Not registered?{' '}
+									</span>
+									{'   '} Create an account
+								</RouterLink>
 							</CardFooter>
 						</Card>
 					</div>

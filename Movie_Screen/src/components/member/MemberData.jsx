@@ -31,8 +31,10 @@ const MemberData = () => {
 		<div className='w-[80%] mx-auto my-5'>
 			<ButtonGroup radius='sm' size='lg' className='my-5 mt-10'>
 				<Button
-					className={`${
-						selectedPart === 'info' ? 'bg-blue-700' : 'bg-blue-500'
+					className={` px-4 py-2 text-base tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
+						selectedPart === 'info'
+							? 'text-[#415a77] border-b-[7px] border-[#415a77]'
+							: ''
 					}`}
 					onPress={() => {
 						setSelectedPart('info');
@@ -42,8 +44,10 @@ const MemberData = () => {
 					個人資料
 				</Button>
 				<Button
-					className={`${
-						selectedPart === 'reward' ? 'bg-blue-700' : 'bg-blue-500'
+					className={` px-4 py-2 text-base tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
+						selectedPart === 'reward'
+							? 'text-[#415a77] border-b-[7px] border-[#415a77]'
+							: ''
 					}`}
 					onPress={() => {
 						setSelectedPart('reward');
@@ -53,8 +57,10 @@ const MemberData = () => {
 					紅利點數
 				</Button>
 				<Button
-					className={`${
-						selectedPart === 'seen' ? 'bg-blue-700' : 'bg-blue-500'
+					className={` px-4 py-2 text-base tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
+						selectedPart === 'seen'
+							? 'text-[#415a77] border-b-[7px] border-[#415a77]'
+							: ''
 					}`}
 					onPress={() => {
 						setSelectedPart('seen');
@@ -64,6 +70,7 @@ const MemberData = () => {
 					觀影記錄
 				</Button>
 			</ButtonGroup>
+			<hr className='mt-0' />
 			<div id='info-section' className='mt-4'>
 				{selectedPart === 'info' && showComponent()}
 			</div>

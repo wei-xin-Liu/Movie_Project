@@ -18,7 +18,7 @@ import { IconXboxX } from '@tabler/icons-react';
 import { Link as RouterLink } from 'react-router-dom'; // Import React Router Link
 
 const RegistrationCard = () => {
-	const [isModalVisible, setIsModalVisible] = useState(true);
+	const [isModalVisible, setIsModalVisible] = useState(false); //to let init show or not
 	const [isAnimating, setIsAnimating] = useState(false);
 
 	const openModal = () => {
@@ -62,7 +62,8 @@ const RegistrationCard = () => {
 									width={40}
 								/>
 								<div className='flex flex-col'>
-									<p className='text-white'>會員註冊</p>
+									<p className='text-md'>NextUI</p>
+									<p className='text-small text-default-500'>nextui.org</p>
 								</div>
 								<IconXboxX
 									stroke={1}

@@ -44,7 +44,11 @@ const DeleteAccountButton = () => {
 
 	return (
 		<div>
-			<Button onPress={handleDelete} disabled={isLoading}>
+			<Button
+				onPress={handleDelete}
+				disabled={isLoading}
+				className='text-slate-100 bg-red-500 rounded-sm'
+			>
 				{isLoading ? 'Deleting...' : 'Delete Account'}
 			</Button>
 
