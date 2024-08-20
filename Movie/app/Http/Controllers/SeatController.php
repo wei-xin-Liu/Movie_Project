@@ -24,7 +24,6 @@ class SeatController extends Controller
     {
         $showDate    = $request->input('show_date');
         $showTime    = $request->input('show_time');
-        $MID         = $request->input('MID');
         $theaterName = $request->input('theater');
 
         $TID = $this->getTIDByTheaterName($theaterName);
@@ -33,7 +32,7 @@ class SeatController extends Controller
             return response()->json(['message' => 'Theater not found'], 404);
         }
 
-        $emptySeats = DB::select('CALL GetEmptySeats(?, ?, ?, ?)', [$showDate, $showTime, $MID, $TID]);
+        $emptySeats = DB::select('CALL GetEmptySeats(?, ?, ?)', [$showDate, $showTime, $TID]);
 
         return response()->json($emptySeats);
     }

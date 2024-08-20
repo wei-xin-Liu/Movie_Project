@@ -21,6 +21,16 @@ const Seats = () => {
 
 	const totalTicket = Object.values(ticketCounts).reduce((sum, count) => sum + count, 0);
 
+	useEffect(() => {
+		console.log(date);
+		console.log(time);
+		console.log(theater);
+		console.log(ticketCounts);
+		console.log(foodCounts);
+		console.log(totalPrice);
+		console.log(selectedSeats);
+	}, [date, time, theater, ticketCounts, foodCounts, totalPrice, selectedSeats]);
+
 	// 至少選擇1張票
 	useEffect(() => {
 		if (totalTicket === 0) {
@@ -59,7 +69,6 @@ const Seats = () => {
 				const response = await axios.post('http://localhost/Movie_Project/Movie/public/api/get-empty-seats', { // http://localhost:8000/api/get-empty-seats
 					show_date: formatDate(date),
 					show_time: time,
-					MID,
 					theater
 				});
 				setEmptySeats(response.data);
@@ -69,7 +78,7 @@ const Seats = () => {
 		};
 
 		fetchEmptySeats();
-	}, [MID, date, time, theater]);
+	}, [date, time, theater]);
 
 	const handleSeatSelection = (selectedSeats) => {
 		setSelectedSeats(selectedSeats);
@@ -80,7 +89,7 @@ const Seats = () => {
 		setIsSubmitting(true);
 		try {
 			const bookingData = selectedSeats.map(seat_id => ({
-				MID,
+				member_id: 1, // 用戶測試
 				seat_id,
 				watch_time: time,
 				watch_date: formatDate(date),

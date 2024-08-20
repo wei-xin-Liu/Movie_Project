@@ -10,7 +10,7 @@ class Bookings extends Model
     use HasFactory;
 
     protected $fillable = [
-        'MID',
+        'member_id',
         'seat_id',
         'watch_time',
         'watch_date',
