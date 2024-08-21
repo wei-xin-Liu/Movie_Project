@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useStateContext } from '../context/ContextProvider';
-import { IconAlertTriangleFilled } from '@tabler/icons-react';
 import { IconExclamationCircle } from '@tabler/icons-react';
 
 const ProtectedRoute = ({ element }) => {
