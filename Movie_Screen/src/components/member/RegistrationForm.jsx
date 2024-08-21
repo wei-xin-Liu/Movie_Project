@@ -3,10 +3,10 @@ import { Input, Button } from '@nextui-org/react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import RegistrationSchema from './RegistrationSchema.js';
-import axiosClient from './axiosSetUp.js';
-import { useStateContext } from './context/ContextProvider.jsx';
 import { useNavigate } from 'react-router-dom';
+import RegistrationSchema from '../../schema/RegistrationSchema.js';
+import axiosClient from '../../api/axiosSetUp.js';
+import { useStateContext } from '../../context/ContextProvider.jsx';
 
 const RegistrationForm = () => {
 	const { user, token, setUser, setToken } = useStateContext();

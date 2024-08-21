@@ -1,9 +1,11 @@
-import React from 'react';
-import barcode from './img/barcode.jpg';
+import React, { useEffect } from 'react';
+import barcode from '../../img/barcode.jpg';
+import { Navigate } from 'react-router-dom';
 import { Button } from '@nextui-org/button';
 import ExpandableCard from './ExpandableCard.jsx';
 import useUserData from '../../api/useUserData.jsx';
 import useLogout from '../../api/useLogout.jsx';
+import { useStateContext } from '../../context/ContextProvider.jsx';
 
 const MemberTop = () => {
 	const { user, token, setUser, setToken } = useStateContext();
@@ -50,8 +52,8 @@ const MemberTop = () => {
 	return (
 		<>
 			<div className='w-[90%] h-16'>
-				<header className='py-2 w-36 mt-2  md:w-48 md:ml-10 md:px-5 md:py-4 text-2xl text-white text-center bg-[#415a77] rounded-sm'>
-					Member Page
+				<header className='py-2 w-36 mt-2  md:w-48 md:ml-10 md:px-5 md:py-4 text-2xl text-white text-center bg-[#415a77] rounded-md'>
+					會員中心
 				</header>
 			</div>
 			<div className='flex justify-center mt-6'>
@@ -64,7 +66,7 @@ const MemberTop = () => {
 							<p>{token && user.email}</p>
 						</div>
 						<div className='mt-4'>
-							<img className='mx-auto' src={barcode} alt='' />
+							<img className='mx-auto w-56' src={barcode} alt='' />
 							<p className='text-center'>123456789</p>
 						</div>
 						{/* //TODO Need write condition to display or not */}
@@ -127,7 +129,6 @@ const MemberTop = () => {
 		</>
 	);
 };
-
 
 // // method to jump to the desired element by using the element's id
 // const jumpToReleventDiv = (id) => {

@@ -1,6 +1,7 @@
-import axiosClient from './axiosSetUp.js';
 import { useMutation } from '@tanstack/react-query';
-import { useStateContext } from './context/ContextProvider.jsx';
+import RegistrationSchema from '.././schema/RegistrationSchema';
+import axiosClient from '../api/axiosSetUp.js';
+import { useStateContext } from '../context/ContextProvider.jsx';
 
 // const useLogout = () => {
 // 	// Define the logout function to call the API
