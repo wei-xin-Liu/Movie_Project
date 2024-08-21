@@ -10,8 +10,10 @@ import {
 } from '@nextui-org/react';
 import hamburger from '../../img/hamburger.jpg';
 import LogInForm from './LogInForm';
+import { IconXboxX } from '@tabler/icons-react';
+import { Link as RouterLink } from 'react-router-dom'; // Import React Router Link
 
-const RegistrationCard = () => {
+const LogInCardBtn = () => {
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [isAnimating, setIsAnimating] = useState(false);
 
@@ -88,10 +90,13 @@ const RegistrationCard = () => {
 								<LogInForm />
 							</CardBody>
 							<Divider />
-							<CardFooter>
-								<Link underline='focus' href='http://localhost:5173/'>
-									already registered?
-								</Link>
+							<CardFooter className='flex justify-end'>
+								<RouterLink to='/signin' className='text-blue-600 '>
+									<span className='text-zinc-400 no-underline	'>
+										Not registered?{' '}
+									</span>
+									{'   '} Create an account
+								</RouterLink>
 							</CardFooter>
 						</Card>
 					</div>
@@ -101,4 +106,4 @@ const RegistrationCard = () => {
 	);
 };
 
-export default RegistrationCard;
+export default LogInCardBtn;

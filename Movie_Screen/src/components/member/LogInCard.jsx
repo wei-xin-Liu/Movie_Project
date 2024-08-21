@@ -10,8 +10,10 @@ import {
 } from '@nextui-org/react';
 import hamburger from '../../img/hamburger.jpg';
 import LogInForm from './LogInForm';
+import { IconXboxX } from '@tabler/icons-react';
+import { Link as RouterLink } from 'react-router-dom'; // Import React Router Link
 
-const RegistrationCard = () => {
+const LogInCard = () => {
 	const [isModalVisible, setIsModalVisible] = useState(true);
 	const [isAnimating, setIsAnimating] = useState(false);
 
@@ -104,4 +106,4 @@ const RegistrationCard = () => {
 	);
 };
 
-export default RegistrationCard;
+export default LogInCard;
