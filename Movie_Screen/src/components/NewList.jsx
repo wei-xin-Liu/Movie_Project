@@ -9,7 +9,7 @@ function NewList() {
     ];
 
     return (
-        <>
+        <React.Fragment>
             <div className="container">
                 <ul className='block list-disc my-[1em] px-[40px]'>
                     <h1 className="newsH1 block text-[2em] my-[0.67em] font-bold">最新公告</h1>
@@ -34,7 +34,7 @@ function NewList() {
                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 </ul>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

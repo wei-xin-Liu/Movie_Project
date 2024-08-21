@@ -48,7 +48,7 @@ const SeatMap = ({ seats, emptySeats, onSeatSelected, ticketCounts, children }) 
 							justify-center
 							m-1
 							cursor-pointer
-							${isAvailable ? (isSelected ? 'bg-green-500' : 'bg-gray-300') : 'bg-orange-500'}
+							${isAvailable ? (isSelected ? 'bg-green-500' : 'bg-gray-100') : 'bg-orange-500'}
 							hover:shadow-sm
 							hover:shadow-gray-500
 							hover:scale-110

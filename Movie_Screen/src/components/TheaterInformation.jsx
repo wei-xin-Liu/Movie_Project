@@ -12,7 +12,7 @@ function TheaterInformation() {
     }, []);
 
     return (
-        <>
+        <React.Fragment>
             {/* 內容 */}
             <div className="content mt-[2%]">
                 <div className="container intro w-[80%] flex">
@@ -81,7 +81,7 @@ function TheaterInformation() {
                     </table>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

@@ -40,14 +40,14 @@ function ChooseDate() {
             <div className="mt-[7%] md:mt-[2%] m-[2%]">線上訂票</div>
 
             <div id="chooseticket" className="flex mt-[2%] ml-[5%]">
-                {dates.map((item, index) => (
+                {dates.map(({ date, day }, index) => (
                     <button
                         key={index}
                         className={`w-[15%] md:w-[7%] ${activeButtonIndex === index ? 'choosedate' : ''}`}
                         onClick={() => handleButtonClick(index)}
                     >
-                        <p>{item.date}</p>
-                        <p>{item.day}</p>
+                        <p>{date}</p>
+                        <p>{day}</p>
                     </button>
                 ))}
             </div>
