@@ -52,8 +52,8 @@ const MemberTop = () => {
 	return (
 		<>
 			<div className='w-[90%] h-16'>
-				<header className='py-2 w-36 mt-2  md:w-48 md:ml-10 md:px-5 md:py-4 text-2xl text-white text-center bg-[#415a77] rounded-sm'>
-					Member Page
+				<header className='py-2 w-36 mt-2  md:w-48 md:ml-10 md:px-5 md:py-4 text-2xl text-white text-center bg-[#415a77] rounded-md'>
+					會員中心
 				</header>
 			</div>
 			<div className='flex justify-center mt-6'>
