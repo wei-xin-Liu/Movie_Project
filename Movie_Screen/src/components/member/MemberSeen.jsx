@@ -18,12 +18,17 @@ const MemberSeen = () => {
 			return (
 				<div className='flex gap-3'>
 					<ExpandableCard width='w-1/3' />
+				</div>
+			);
+		};
+		const WatchedComponent = () => {
+			return (
+				<div className='flex gap-3'>
 					<ExpandableCard width='w-1/3' />
 					<ExpandableCard width='w-1/3' />
 				</div>
 			);
 		};
-		const WatchedComponent = () => <p className='text-2xl'>已觀賞的內容</p>;
 		const ExpiredComponent = () => <p className='text-2xl'>失效的內容</p>;
 
 		const [selectedButton, setSelectedButton] = useState('unwatch');

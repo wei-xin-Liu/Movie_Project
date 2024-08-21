@@ -9,8 +9,8 @@ const Member = () => {
 	console.log('User:', user);
 	console.log('Token:', token);
 
-	if (!token) {LogInForm.component';
-		return <Navigate to='/login' />;
+	if (!token) {
+		return <Navigate to='/' />;
 	}
 
 	const logOut = async () => {
@@ -55,7 +55,6 @@ const Member = () => {
 	console.log('context user', user.name);
 	console.log('the user data:', userData);
 
-	
 	return (
 		<div>
 			<p>Hello, member: {user && user.name ? user.name : 'Loading...'}</p>
