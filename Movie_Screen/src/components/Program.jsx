@@ -181,7 +181,7 @@ function Program({
 											${isPastShowtime ? 'opacity-50 cursor-not-allowed' : ''}
 										`}
 									>
-										{time}
+										{time.substring(0, 5)}
 									</button>
 								);
 							})}
