@@ -67,7 +67,7 @@ function MovieClassName() {
                         >
                             <img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
                             <div className="flex justify-between">
-                                <p className="w-1/2 text-2xl py-2 pl-3 text-black font-bold text-sky-900">{title}</p>
+                                <p className="w-1/2 text-xl py-2 pl-3 text-black font-bold text-sky-900">{title}</p>
                                 <img className="h-16 p-2" src={rating.ratingimgurl} alt={rating.ratingdesc} />
                             </div>
                             <div className="grow" />

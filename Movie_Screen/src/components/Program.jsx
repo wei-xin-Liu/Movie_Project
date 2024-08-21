@@ -131,18 +131,18 @@ function Program({
 			<div className="mt-[7%] sm:mt-[2%]">線上訂票</div>
 
 			<div id="chooseticket" className="flex mt-[2%] ml-[5%]">
-				{weekDates.map((date, index) => (
+				{weekDates.map(({ dateString, dayString }, index) => (
 					<button
 						key={index}
 						className={`w-[15%] sm:w-[7%] choosedate
             ${selectedDateIdx === index ? 'bg-indigo-500 text-white' : ''}
             ${hoveredDateIdx === index && selectedDateIdx !== index ? 'bg-gray-300' : ''}`}
-						onClick={() => handleDateClick(index, date.dateString)}
+						onClick={() => handleDateClick(index, dateString)}
 						onMouseEnter={() => setHoveredDateIdx(index)}
 						onMouseLeave={() => setHoveredDateIdx(null)}
 					>
-						<p>{date.dateString}</p>
-						<p>{date.dayString}</p>
+						<p>{dateString}</p>
+						<p>{dayString}</p>
 					</button>
 				))}
 			</div>

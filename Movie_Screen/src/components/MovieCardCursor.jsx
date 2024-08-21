@@ -94,7 +94,7 @@ function MovieCardCursor() {
 											>
 												<img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
 												<img className="absolute right-0 w-12 p-2" src={rating.ratingimgurl} alt={rating.ratingdesc} />
-												<p className="text-black text-2xl py-2 pl-3">{title}</p>
+												<p className="text-black text-xl py-2 pl-3">{title}</p>
 												<div className="grow" />
 												<p className="text-1xl pl-3">{e_title}</p>
 												<div className="content-center">
