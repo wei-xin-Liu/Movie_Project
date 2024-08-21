@@ -23,7 +23,7 @@ class BookingController extends Controller
         $request->merge(['TID' => $TID]);
 
         $validatedData = $request->validate([
-            'MID'           => 'required|integer',
+            'member_id'     => 'required|integer',
             'seat_id'       => 'required|integer',
             'watch_time'    => 'required|string',
             'watch_date'    => 'required|date',
@@ -32,8 +32,8 @@ class BookingController extends Controller
 
         // 檢查是否已經存在相同座位的預訂
         $existingBooking = Bookings::where([
-            ['seat_id', $validatedData['seat_id']],
-            ['TID', $validatedData['TID']],
+            ['seat_id',    $validatedData['seat_id']],
+            ['TID',        $validatedData['TID']],
             ['watch_time', $validatedData['watch_time']],
             ['watch_date', $validatedData['watch_date']],
         ])->first();

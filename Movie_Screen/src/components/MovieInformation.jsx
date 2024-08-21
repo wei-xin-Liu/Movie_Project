@@ -32,9 +32,9 @@ function MovieInformation() {
     }); // Find the movie with the matching id      
 
     return (
-        <>
+        <React.Fragment>
             {movie && (
-                <>
+                <React.Fragment>
                     {/* Movie Information */}
                     <div className="grid grid-flow-row md:grid-cols-[15%_85%] m-[2%]">
                         <div className="rounded-b">
@@ -87,9 +87,9 @@ function MovieInformation() {
                                 src={movie.iframe} title="Trailer"></iframe>
                         </div>
                     </div>
-                </>
+                </React.Fragment>
             )}
-        </>
+        </React.Fragment>
     );
 }
 

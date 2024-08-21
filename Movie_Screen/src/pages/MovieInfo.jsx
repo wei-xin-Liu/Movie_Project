@@ -4,14 +4,14 @@ import ChooseDate from '../components/ChooseDate';
 import ChooseTime from '../components/ChooseTime';
 
 function MovieInfo() {
-  
-  return (
-    <>
-      <MovieInformation/>
-      <ChooseDate />
-      <ChooseTime />
-    </>
-  )
+
+	return (
+		<React.Fragment>
+			<MovieInformation />
+			<ChooseDate />
+			<ChooseTime />
+		</React.Fragment>
+	)
 }
 
 export default MovieInfo

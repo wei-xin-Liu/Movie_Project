@@ -21,7 +21,7 @@ function MovieCursor() {
         return () => clearInterval(interval);
     }, []);
     return (
-        <>
+        <React.Fragment>
             <div className="flex justify-center">
 
                 {/* 導航按鈕 */}
@@ -50,7 +50,7 @@ function MovieCursor() {
                     </svg>
                 </button>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

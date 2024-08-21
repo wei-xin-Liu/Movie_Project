@@ -120,9 +120,8 @@ function QuickBuy() {
 
     return (
         <>
-
-            <div className="bg-gray-100 p-2 md:p-6 rounded-lg shadow-md w-full md:w-[448px] mx-auto">
-                <h2 className="text-2xl font-bold mb-2 md:mb-4 text-center text-gray-800">快速訂票</h2>
+            <div className="bg-gray-100 p-2 md:p-6 rounded-lg shadow-md w-full mx-auto">
+                <h2 className="text-2xl font-bold mb-2 md:mb-4 text-center font-bold text-sky-900">快速訂票</h2>
                 <form>
                     {/* 選擇電影 */}
                     <div className="mb-2 md:mb-4">
@@ -224,13 +223,13 @@ function QuickBuy() {
                         </select>
                     </div>
 
+
                     {/* 提交按鈕 */}
                     <div>
                         <button onClick={() => handleTimeClick(selectedTimeId, selectedTheaterId)} className="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700">
                             立即訂票
                         </button>
                     </div>
-
                 </form>
             </div>
         </>
