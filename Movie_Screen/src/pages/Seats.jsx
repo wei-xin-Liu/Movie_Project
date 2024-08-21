@@ -91,7 +91,7 @@ const Seats = () => {
         axios.post('http://localhost/Movie_Project/Movie/public/api/book-seat', data) // http://localhost:8000/api/book-seat
       ));
 
-      navigate('/');
+      navigate('/Choosepay');
     } catch (error) {
       console.error('Error booking seats:', error);
       setIsSubmitting(false);
