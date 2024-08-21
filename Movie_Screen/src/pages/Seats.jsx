@@ -21,15 +21,6 @@ const Seats = () => {
 
 	const totalTicket = Object.values(ticketCounts).reduce((sum, count) => sum + count, 0);
 
-	useEffect(() => {
-		console.log(date);
-		console.log(time);
-		console.log(theater);
-		console.log(ticketCounts);
-		console.log(foodCounts);
-		console.log(totalPrice);
-		console.log(selectedSeats);
-	}, [date, time, theater, ticketCounts, foodCounts, totalPrice, selectedSeats]);
 
 	// 至少選擇1張票
 	useEffect(() => {
@@ -100,12 +91,12 @@ const Seats = () => {
 				axios.post('http://localhost/Movie_Project/Movie/public/api/book-seat', data) // http://localhost:8000/api/book-seat
 			));
 
-			navigate('/');
+			navigate('/Choosepay');
 		} catch (error) {
-			console.error('Error booking seats:', error);
-			setIsSubmitting(false);
+		  console.error('Error booking seats:', error);
+		  setIsSubmitting(false);
 		}
-	};
+	  };
 
 	return (
 		<div className="w-full">
