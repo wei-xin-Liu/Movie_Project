@@ -21,9 +21,9 @@ function Program() {
 	}, [id]);
 
 	return (
-		<div className="">
+		<React.Fragment>
 			{movies ? <ProgramComponent {...movies} /> : <p>Loading...</p>}
-		</div>
+		</React.Fragment>
 	)
 }
 

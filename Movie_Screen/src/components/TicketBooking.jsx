@@ -18,7 +18,7 @@ const TicketBooking = () => {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	  }, []);
+	}, []);
 
 	// 獲取影廳票價
 	useEffect(() => {
@@ -110,7 +110,9 @@ const TicketBooking = () => {
 			state: {
 				ticketCounts,
 				foodCounts,
-				totalPrice: totalPrice()
+				totalPrice: totalPrice(),
+				foods,
+				title
 			}
 		});
 	};
@@ -150,7 +152,7 @@ const TicketBooking = () => {
 				<TicketInfo label="電影名稱" value={title} />
 				<TicketInfo label="影廳" value={theater} />
 				<TicketInfo label="預定日期" value={date} />
-				<TicketInfo label="場次時間" value={time} />
+				<TicketInfo label="場次時間" value={time.substring(0, 5)} />
 			</div>
 
 			{/* 票種區塊 */}

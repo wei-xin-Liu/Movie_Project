@@ -27,7 +27,7 @@ function MyTop() {
     };
 
     return (
-        <>
+        <React.Fragment>
             {/* {isVisible && ( */}
                 <button
                     onClick={scrollToTop}
@@ -52,7 +52,7 @@ function MyTop() {
                     </svg>
                 </button>
             {/* )} */}
-        </>
+        </React.Fragment>
     );
 
 

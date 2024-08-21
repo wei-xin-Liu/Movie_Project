@@ -13,11 +13,13 @@ const Seats = () => {
 	const [selectedSeats, setSelectedSeats] = useState([]);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
+	const [selectedData, setSelectedData] = useState([]);
+
 	const { selectedTicket } = useContext(TicketContext);
-	const { MID, date, time, theater } = selectedTicket;
+	const { date, time, theater } = selectedTicket;
 
 	const location = useLocation();
-	const { ticketCounts, foodCounts, totalPrice } = location.state || {};
+	const { title, ticketCounts, foodCounts, totalPrice, foods } = location.state || {};
 
 	const totalTicket = Object.values(ticketCounts).reduce((sum, count) => sum + count, 0);
 
@@ -75,9 +77,34 @@ const Seats = () => {
 		setSelectedSeats(selectedSeats);
 	};
 
+	// 用戶所有選擇資訊紀錄
+	useEffect(() => {
+		const selectedFoods = foods
+			.filter(({ FID }) => foodCounts[FID] > 0)
+			.map(({ name, FID }) => ({
+				name,
+				quantity: foodCounts[FID]
+			}));
+
+		const data = {
+			title: title,
+			date: formatDate(date),
+			time: time,
+			theater: theater,
+			ticketCounts: ticketCounts,
+			selectedSeats: selectedSeats,
+			selectedFoods: selectedFoods,
+			totalPrice: totalPrice
+		};
+
+		setSelectedData(data);
+
+	}, [title, date, time, theater, ticketCounts, foodCounts, totalPrice, selectedSeats, foods]);
+
 	// 提交訂單資訊
 	const submit = async () => {
 		setIsSubmitting(true);
+		const jsonData = JSON.stringify(selectedData);
 		try {
 			const bookingData = selectedSeats.map(seat_id => ({
 				member_id: 1, // 用戶測試
@@ -90,6 +117,11 @@ const Seats = () => {
 			await Promise.all(bookingData.map(data =>
 				axios.post('http://localhost/Movie_Project/Movie/public/api/book-seat', data) // http://localhost:8000/api/book-seat
 			));
+
+			await axios.post('http://localhost/Movie_Project/Movie/public/api/member-order', {
+				member_id: 1,
+				detail: jsonData
+			});
 
 			navigate('/Choosepay');
 		} catch (error) {
