@@ -11,7 +11,7 @@ const ProtectedRoute = ({ element }) => {
 		if (!token) {
 			const timer = setTimeout(() => {
 				setShouldNavigate(true);
-			}, 3000); // 1-second delay
+			}, 2500); // 1-second delay
 
 			return () => clearTimeout(timer);
 		}
@@ -28,7 +28,7 @@ const ProtectedRoute = ({ element }) => {
 	return (
 		<>
 			<section className='text-center flex flex-col justify-center items-center h-96'>
-				<IconExclamationCircle className='text-red-600 w-[300px] h-[300px] mb-4' />
+				<IconExclamationCircle className='text-red-600 w-[300px] h-[300px] mt-8 mb-4' />
 				<h1 className='text-6xl font-bold mb-2'>您尚未登入會員</h1>
 				<p className='mt-5 text-xl mb-5'>將跳轉至首頁....</p>
 			</section>
