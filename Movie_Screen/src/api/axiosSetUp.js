@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useStateContext } from './context/ContextProvider.jsx';
+import { useStateContext } from '../context/ContextProvider';
 
 const axiosClient = axios.create({
 	//TODO: modify correct url

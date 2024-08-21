@@ -13,8 +13,8 @@ import Ticketing from './pages/Ticketing';
 import Seats from './pages/Seats';
 import Program from './pages/Program';
 import Bluepay from './pages/Bluepay';
-import Choosepay from './pages/Choosepay'
-
+import Choosepay from './pages/Choosepay';
+import LogInCard from './components/member/LogInCard';
 
 const routes = createBrowserRouter([
 	{
@@ -72,6 +72,10 @@ const routes = createBrowserRouter([
 			{
 				path: '/Bluepay',
 				element: <Bluepay />,
+			},
+			{
+				path: '/login',
+				element: <LogInCard />,
 			},
 		],
 	},
