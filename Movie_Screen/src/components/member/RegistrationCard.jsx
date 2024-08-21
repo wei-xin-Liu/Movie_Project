@@ -10,7 +10,7 @@ import {
 	Input,
 	Button,
 } from '@nextui-org/react';
-import hamburger from './img/hamburger.jpg';
+import hamburger from '../../img/hamburger.jpg';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import RegistrationForm from './RegistrationForm';

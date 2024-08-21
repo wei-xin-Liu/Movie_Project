@@ -91,7 +91,7 @@ const LogInCard = () => {
 							</CardBody>
 							<Divider />
 							<CardFooter className='flex justify-end'>
-								<RouterLink to='/signin' className='text-blue-600 '>
+								<RouterLink to='/register' className='text-blue-600 '>
 									<span className='text-zinc-400 no-underline	'>
 										Not registered?{' '}
 									</span>

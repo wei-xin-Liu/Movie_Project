@@ -1,9 +1,11 @@
-import React from 'react';
-import barcode from './img/barcode.jpg';
+import React, { useEffect } from 'react';
+import barcode from '../../img/barcode.jpg';
+import { Navigate } from 'react-router-dom';
 import { Button } from '@nextui-org/button';
 import ExpandableCard from './ExpandableCard.jsx';
 import useUserData from '../../api/useUserData.jsx';
 import useLogout from '../../api/useLogout.jsx';
+import { useStateContext } from '../../context/ContextProvider.jsx';
 
 const MemberTop = () => {
 	const { user, token, setUser, setToken } = useStateContext();
@@ -127,7 +129,6 @@ const MemberTop = () => {
 		</>
 	);
 };
-
 
 // // method to jump to the desired element by using the element's id
 // const jumpToReleventDiv = (id) => {

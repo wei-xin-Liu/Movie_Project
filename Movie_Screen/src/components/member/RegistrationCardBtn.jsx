@@ -10,9 +10,7 @@ import {
 	Input,
 	Button,
 } from '@nextui-org/react';
-import hamburger from './img/hamburger.jpg';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import hamburger from '../../img/hamburger.jpg';
 import RegistrationForm from './RegistrationForm';
 import { IconXboxX } from '@tabler/icons-react';
 import { Link as RouterLink } from 'react-router-dom'; // Import React Router Link
