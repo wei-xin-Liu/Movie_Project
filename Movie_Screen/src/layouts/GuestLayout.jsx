@@ -1,18 +1,19 @@
 import React from 'react';
-import { Link, Navigate, Outlet } from 'react-router-dom';
 import MyHeader from '../components/MyHeader';
 import MyFooter from '../components/MyFooter';
-import { useStateContext } from '../context/ContextProvider';
+import MyTop from '../components/MyTop';
+import MovieCursor from '../components/MovieCursor';
+
+import { Outlet } from 'react-router-dom';
 
 const GuestLayout = () => {
-	const { token } = useStateContext();
-
 	return (
 		<div>
 			<MyHeader />
-			<NavBar />
+			<MovieCursor />
 			<Outlet />
 			<MyFooter />
+			<MyTop />
 		</div>
 	);
 };

@@ -66,7 +66,7 @@ const MemberTop = () => {
 							<p>{token && user.email}</p>
 						</div>
 						<div className='mt-4'>
-							<img className='mx-auto' src={barcode} alt='' />
+							<img className='mx-auto w-56' src={barcode} alt='' />
 							<p className='text-center'>123456789</p>
 						</div>
 						{/* //TODO Need write condition to display or not */}

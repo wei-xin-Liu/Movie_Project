@@ -3,17 +3,10 @@ import MovieCursor from '../components/MovieCursor';
 import QuickBuy from '../components/QuickBuy';
 import NewsList from '../components/NewsList';
 import MovieCardCursor from '../components/MovieCardCursor';
-import LogInCard from '../components/member/LogInCard';
-import { useLocation } from 'react-router-dom';
 
 function Home() {
-	const location = useLocation();
-	const queryParams = new URLSearchParams(location.search);
-	const showLoginCard = queryParams.get('showLogin') === 'true';
-
 	return (
 		<React.Fragment>
-			{showLoginCard && <LogInCard />}
 			<MovieCursor />
 
 			<div className='m-[2%] grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-0'>

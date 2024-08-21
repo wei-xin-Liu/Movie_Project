@@ -14,29 +14,29 @@ use App\Http\Controllers\MemberorderController;
 
 use App\Http\Controllers\bluepay;
 
-
 use App\Http\Controllers\Api\ApiController;
-
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/movieinfo'         , [MovieInfoController::class  ,  'getData']);
-Route::get('/tickets'           , [TicketsController::class    ,  'getData']);
+Route::get('/movieinfo', [MovieInfoController::class, 'getData']);
+Route::get('/tickets', [TicketsController::class, 'getData']);
 
-Route::get('/movies/{id}'       , [MovieController::class      ,  'show']);
-Route::get('/foods'             , [FoodController::class       ,  'index']);
+Route::get('/movies/{id}', [MovieController::class, 'show']);
+Route::get('/foods', [FoodController::class, 'index']);
 
 Route::post('/get-empty-seats', [SeatController::class, 'getEmptySeats']);
 Route::post('/get-total-seats', [SeatController::class, 'getTotalSeats']);
 Route::post('/get-ticket-prices', [TicketController::class, 'getTicketPrices']);
 Route::post('/book-seat', [BookingController::class, 'bookSeat']);
-Route::post('/member-order'     , [MemberorderController::class,  'memberOrder']);
+Route::post('/member-order', [MemberorderController::class, 'memberOrder']);
 
 Route::get('/bluepay', [App\Http\Controllers\bluepay::class, 'submitPayment']);
-Route::post('/bluepaysuccessful', [App\Http\Controllers\bluepay::class, 'bluepaysuccessful']);
-
+Route::post('/bluepaysuccessful', [
+    App\Http\Controllers\bluepay::class,
+    'bluepaysuccessful',
+]);
 
 # YK API ROUTE
 Route::post('signup', [ApiController::class, 'signup']);

@@ -46,12 +46,12 @@ const LogInCard = () => {
 
 	return (
 		<div>
-			<button
+			{/* <button
 				onClick={openModal}
 				className='px-4 py-2 bg-indigo-600 text-white rounded'
 			>
 				Show Card
-			</button>
+			</button> */}
 			{isModalVisible && (
 				<div className='fixed inset-0 z-50 flex items-center justify-center'>
 					{/* Backdrop */}

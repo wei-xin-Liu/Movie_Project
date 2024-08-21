@@ -31,12 +31,12 @@ const RegistrationCard = () => {
 	};
 	return (
 		<div>
-			<button
+			{/* <button
 				onClick={openModal}
 				className='px-4 py-2 bg-indigo-600 text-white rounded'
 			>
 				Show Card
-			</button>
+			</button> */}
 
 			{isModalVisible && (
 				<div className='fixed inset-0 z-50 flex items-center justify-center'>
@@ -76,7 +76,7 @@ const RegistrationCard = () => {
 							</CardBody>
 							<Divider />
 							<CardFooter className='flex justify-end'>
-								<RouterLink to='/signin' className='text-blue-600 '>
+								<RouterLink to='/login' className='text-blue-600 '>
 									<span className='text-zinc-400 no-underline	'>
 										Already registered?
 									</span>
