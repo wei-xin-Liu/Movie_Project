@@ -35,7 +35,7 @@ function MovieClassName() {
     );
 
     return (
-        <React.Fragment>
+        <div className="md:mx-20">
             <div className="ml-8 mt-8">
                 <CategoryButton category="熱映中" label="熱映中" />
                 {/* <CategoryButton category="即將上映" label="即將上映" /> */}
@@ -48,7 +48,7 @@ function MovieClassName() {
                 {/* <CategoryButton category="即將入場" label="即將入場" /> */}
             </div>
 
-            <div className="grid grid-flow-row md:grid-cols-5 gap-4 p-8">
+            <div className="grid grid-flow-row md:grid-cols-4 gap-4 p-8">
                 {filterMovies().map(({ MID, image, title, rating, e_title, release_date }) => (
                     <a href={`/program/${MID}`} key={MID} className="no-underline">
                         <div
@@ -97,7 +97,7 @@ function MovieClassName() {
                     </a>
                 ))}
             </div>
-        </React.Fragment>
+        </div>
     );
 }
 

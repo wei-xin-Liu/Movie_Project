@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TicketContext } from '../pages/Program';
-
 import '../css/MovieInformation.css';
 
 function Program({
@@ -20,49 +19,38 @@ function Program({
 	rating
 }) {
 	const [isExpanded, setIsExpanded] = useState(false);
-
-	const toggleMovieText = () => {
-		setIsExpanded(!isExpanded);
-	};
-
-	const navigate = useNavigate();
-	const { selectedTicket, setSelectedTicket } = useContext(TicketContext);
-
-	// 狀態來追蹤當前選中的日期，默認選中索引0
 	const [selectedDateIdx, setSelectedDateIdx] = useState(0);
 	const [hoveredDateIdx, setHoveredDateIdx] = useState(null);
+
+	const { selectedTicket, setSelectedTicket } = useContext(TicketContext);
+	const navigate = useNavigate();
+
+	const toggleMovieText = () => setIsExpanded(!isExpanded);
 
 	// 從今天開始的未來7天供用戶選擇
 	const getWeekDates = () => {
 		const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-		const dates = [];
-		const today = new Date();
-
-		for (let i = 0; i < 7; i++) {
-			const date = new Date(today);
-			date.setDate(today.getDate() + i);
-			const dateString = `${date.getMonth() + 1}/${date.getDate()}`;
-			const dayString = weekDays[date.getDay()];
-			dates.push({ dateString, dayString });
-		}
-
-		return dates;
+		return Array.from({ length: 7 }, (_, i) => {
+			const date = new Date();
+			date.setDate(date.getDate() + i);
+			return {
+				dateString: `${date.getMonth() + 1}/${date.getDate()}`,
+				dayString: weekDays[date.getDay()],
+			};
+		});
 	};
 
 	const weekDates = getWeekDates();
 
-	// 當組件加載時，默認設置選中的日期為第一個日期
 	useEffect(() => {
 		setSelectedTicket({ ...selectedTicket, date: weekDates[0].dateString });
 	}, []);
 
-	// 更新當前選中的日期狀態
 	const handleDateClick = (index, dateString) => {
 		setSelectedDateIdx(index);
 		setSelectedTicket({ ...selectedTicket, date: dateString });
 	};
 
-	// 更新選擇的票券資料
 	const handleTimeClick = (time, theater) => {
 		const selectedDate = selectedTicket.date || weekDates[0].dateString;
 		setSelectedTicket({
@@ -71,50 +59,75 @@ function Program({
 			MID,
 			time,
 			title,
-			theater
+			theater,
 		});
 		navigate('/ticketing');
 	};
 
-	return (
-		<div className="font-sans p-[2%]">
-			<div className="grid grid-flow-row sm:grid-cols-[15%_85%]">
-				<div className="rounded-b">
-					<img src={`/${image}`} alt={title} />
-				</div>
+	const InfoRow = ({ label, children }) => (
+		<div className="flex items-center justify-between mb-2">
+			<h1 className="text-teal-800 w-[30%] sm:w-[35%] md:w-[20%] text-center">{label}</h1>
+			<div className="w-[70%] sm:w-[65%] md:w-[80%]">{children}</div>
+		</div>
+	);
 
-				<div className="ml-[2%] mt-[2%] sm:mt-[0%]">
-					<h1 className="font-bold">{title}</h1>
-					<h1>{e_title}</h1>
-					<div className="grid grid-cols-[20%_80%] sm:grid-cols-[5%_95%] gap-[1%] mt-[2%] font-bold">
-						<h1 className="text-teal-800">級別</h1><div><img className="w-[10%] md:w-[2%]" src={`/${rating.ratingimgurl}`} alt={rating.ratingiddesc} /></div>
-						<h1 className="text-teal-800">片長</h1><div>{movieLength}分鐘</div>
-						<h1 className="text-teal-800">上映日</h1><div>{release_date}</div>
-						<h1 className="text-teal-800">類型</h1><div>{genre}</div>
-						<h1 className="text-teal-800">演員</h1><div>{actor}</div>
-						<h1 className="text-teal-800">導演</h1><div>{director}</div>
-						<h1 className="text-teal-800">簡介</h1>
-						<div>
-							<p id="movieText" className={`text-sky-900 mr-[5%] movieText ${isExpanded ? 'expanded' : ''}`}>
+	return (
+		<div className="font-sans p-[2%] md:mx-20">
+			<div className="flex flex-col sm:flex-row sm:space-x-4">
+				<div className="flex justify-center rounded-b lg:w-[15%]">
+					<img
+						src={`/${image}`}
+						alt={title}
+						className="h-[200px] sm:h-[250px] object-cover"
+					/>
+				</div>
+				<div className="sm:w-[85%] ml-[2%] mt-[2%] sm:mt-[0%]">
+					<h1 className="font-bold text-red-900 text-xl w-[30%] sm:w-[35%] md:w-[20%] text-center">{title}</h1>
+					<h1 className="text-red-600 text-xs w-[30%] sm:w-[35%] md:w-[20%] text-center">{e_title}</h1>
+					<div className="mt-[2%] font-bold">
+						<InfoRow label="級別">
+							<img
+								className="w-[50px] md:w-[40px] sm:w-[30px]"
+								src={`/${rating.ratingimgurl}`}
+								alt={rating.ratingiddesc}
+							/>
+						</InfoRow>
+						<InfoRow label="片長">{movieLength}分鐘</InfoRow>
+						<InfoRow label="上映日">{release_date}</InfoRow>
+						<InfoRow label="類型">{genre}</InfoRow>
+						<InfoRow label="演員">{actor}</InfoRow>
+						<InfoRow label="導演">{director}</InfoRow>
+						<InfoRow label="簡介">
+							<p
+								id="movieText"
+								className={`text-sky-900 mr-[5%] movieText ${isExpanded ? 'expanded' : ''
+									}`}
+							>
 								{description}
 							</p>
 							<button
 								id="btnmovieText"
 								onClick={toggleMovieText}
 								className="
-									w-[20%]
-									sm:w-[5%]
+									min-w-[100px]
+									w-[30%]
+									sm:min-w-[60px]
+									sm:w-[20%]
 									border-2
 									border-indigo-500
 									hover:bg-indigo-500
 									mb-[10%]
 									md:mb-[0%]
 									font-bold
+									text-xs
+									overflow-hidden
+									truncate
+									text-center
 								"
 							>
 								{isExpanded ? '更少...' : '更多...'}
 							</button>
-						</div>
+						</InfoRow>
 					</div>
 				</div>
 			</div>
@@ -122,26 +135,33 @@ function Program({
 			<div className="grid grid-flow-row gap-[2%] mt-[2%]">
 				<h1 className="font-bold text-red-900">電影預告</h1>
 				<div className="bg-black">
-					<iframe className="ml-[10%] mr-[10%] w-[80%] h-[200px] sm:h-[800px]"
-						src={iframe}></iframe>
+					<iframe
+					className="ml-[10%] mr-[10%] w-[80%] h-[200px] sm:h-[400px] md:h-[600px] lg:h-[800px]"
+					src={iframe}
+					></iframe>
 				</div>
 			</div>
 
 			<div className="mt-[7%] sm:mt-[2%] font-bold text-red-900">線上訂票</div>
 
-			<div id="chooseticket" className="flex mt-[2%] ml-[5%]">
+			<div
+				id="chooseticket"
+				className="flex mt-[2%] ml-[5%] overflow-x-auto whitespace-nowrap"
+			>
 				{weekDates.map(({ dateString, dayString }, index) => (
 					<button
 						key={index}
-						className={`w-[15%] sm:w-[7%] choosedate
-            ${selectedDateIdx === index ? 'bg-indigo-500 text-white' : ''}
-            ${hoveredDateIdx === index && selectedDateIdx !== index ? 'bg-gray-300' : ''}`}
+						className={`min-w-[100px] sm:min-w-[80px] w-auto sm:w-auto choosedate inline-block px-2 ${selectedDateIdx === index ? 'bg-indigo-500 text-white' : ''
+							} ${hoveredDateIdx === index && selectedDateIdx !== index
+								? 'bg-gray-300'
+								: ''
+							}`}
 						onClick={() => handleDateClick(index, dateString)}
 						onMouseEnter={() => setHoveredDateIdx(index)}
 						onMouseLeave={() => setHoveredDateIdx(null)}
 					>
-						<p className="font-bold">{dateString}</p>
-						<p className="text-red-900 font-bold">{dayString}</p>
+						<p className="font-bold whitespace-nowrap">{dateString}</p>
+						<p className="text-red-900 font-bold whitespace-nowrap">{dayString}</p>
 					</button>
 				))}
 			</div>
@@ -152,15 +172,16 @@ function Program({
 						<h3 className="font-bold">{theater}</h3>
 						<div className="flex flex-wrap">
 							{theaters[theater].map((time, idx) => {
-								// 只有當日且時間已過的按鈕會禁用
-								const isPastShowtime = selectedDateIdx === 0 && (() => {
-									const now = new Date();
-									const [hours, minutes, seconds] = time.split(':').map(Number);
-									const showTime = new Date();
-									showTime.setHours(hours, minutes, seconds, 0);
+								const isPastShowtime =
+									selectedDateIdx === 0 &&
+									(() => {
+										const now = new Date();
+										const [hours, minutes, seconds] = time.split(':').map(Number);
+										const showTime = new Date();
+										showTime.setHours(hours, minutes, seconds, 0);
 
-									return now >= showTime;
-								})();
+										return now >= showTime;
+									})();
 
 								return (
 									<button
@@ -168,6 +189,8 @@ function Program({
 										onClick={() => handleTimeClick(time, theater)}
 										disabled={isPastShowtime}
 										className={`
+											min-w-[80px]
+											sm:min-w-[50px]
 											w-[30%]
 											sm:w-[10%]
 											text-center
@@ -177,8 +200,8 @@ function Program({
 											border-indigo-500
 											hover:scale-[1.1]
 											hover:bg-indigo-500
-											${isPastShowtime ? 'opacity-50 cursor-not-allowed' : ''}
-										`}
+											truncate ${isPastShowtime ? 'opacity-50 cursor-not-allowed' : ''
+										}`}
 									>
 										{time.substring(0, 5)}
 									</button>
