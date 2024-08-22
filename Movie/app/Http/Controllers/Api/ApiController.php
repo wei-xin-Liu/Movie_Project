@@ -32,7 +32,7 @@ class ApiController extends Controller
 
         // Get the authenticated user
         $user = JWTAuth::user();
-        // $token = JWTAuth::fromUser($user);
+        $token = JWTAuth::fromUser($user);
 
         // return response(compact('user', 'token'));
         return response([
@@ -84,6 +84,8 @@ class ApiController extends Controller
     {
         //$userData = auth()->user();
         $userData = request()->user();
+        $user = JWTAuth::user();
+        $token = JWTAuth::fromUser($user);
 
         return response()->json([
             'status' => true,
@@ -92,6 +94,7 @@ class ApiController extends Controller
             'user_id' => request()->user()->id,
             'name' => request()->user()->name,
             'email' => request()->user()->email,
+            'token' => $token,
         ]);
     }
     public function refreshToken()
