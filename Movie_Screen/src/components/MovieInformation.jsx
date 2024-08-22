@@ -10,7 +10,6 @@ function MovieInformation() {
 	useEffect(() => {
 		const fetchMovies = async () => {
 			try {
-				// const response = await axios.get('http://localhost/Movie_Project/Movie/public/api/movieinfo');
 				const response = await axios.get('http://127.0.0.1:8000/api/movieinfo');
 				setMovies(response.data);
 			} catch (error) {
