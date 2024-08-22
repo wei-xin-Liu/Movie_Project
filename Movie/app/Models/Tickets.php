@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Theaters;
 
-
 class Tickets extends Model
 {
     use HasFactory;
@@ -14,6 +13,17 @@ class Tickets extends Model
 
     public function theaters()
     {
-        return $this->hasone(Theaters::class, 'TID', 'theaters_id');
+        return $this->hasOne(Theaters::class, 'TID', 'theaters_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+   
+    public function foods()
+    {
+        return $this->belongsToMany(Foods::class, 'ticket_food');
     }
 }

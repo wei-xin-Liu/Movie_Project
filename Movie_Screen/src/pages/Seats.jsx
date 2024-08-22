@@ -23,6 +23,7 @@ const Seats = () => {
 
 	const totalTicket = Object.values(ticketCounts).reduce((sum, count) => sum + count, 0);
 
+
 	// 至少選擇1張票
 	useEffect(() => {
 		if (totalTicket === 0) {
@@ -123,12 +124,12 @@ const Seats = () => {
 				totalPrice
 			});
 
-			navigate('/');
+			navigate('/Choosepay');
 		} catch (error) {
-			console.error('Error booking seats:', error);
-			setIsSubmitting(false);
+		  console.error('Error booking seats:', error);
+		  setIsSubmitting(false);
 		}
-	};
+	  };
 
 	return (
 		<div className="w-full">
