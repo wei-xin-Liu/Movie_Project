@@ -30,9 +30,9 @@ const useUserData = () => {
 	return useQuery({
 		queryKey: ['userData'],
 		queryFn: getData,
-		staleTime: 5 * 60 * 1000, // 5 minutes
-		cacheTime: 10 * 60 * 1000, // 10 minutes
-		retry: 2,
+		staleTime: 30 * 60 * 1000, // 5 minutes
+		// cacheTime: 120 * 60 * 1000, // 10 minutes
+		// retry: 2,
 		onSuccess: (data) => {
 			console.log('login success', data);
 			// localStorage.setItem('ACCESS_TOKEN', data.token);

@@ -84,9 +84,7 @@ function QuickBuy() {
 	useEffect(() => {
 		if (selectedMovieId) {
 			axios
-				.get(
-					`http://localhost/Movie_Project/Movie/public/api/movies/${selectedMovieId}`
-				)
+				.get(`http://127.0.0.1:8000/api/movies/${selectedMovieId}`)
 				.then((response) => {
 					setOneMovie(response.data);
 				})
@@ -226,7 +224,7 @@ function QuickBuy() {
 							<option value=''>選擇時間</option>
 							{selectedTheaterId != '' &&
 								onemovie.theaters[selectedTheaterId].map((time, index) => {
-									console.log(selectedDateIdx);
+									// console.log(selectedDateIdx);
 
 									const isPastShowtime =
 										selectedDateIdx === 0 &&

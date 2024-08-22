@@ -29,7 +29,7 @@ const TicketBooking = () => {
 	useEffect(() => {
 		if (theater) {
 			axios
-				.post('	http://127.0.0.1:8000/api/get-ticket-prices', {
+				.post('http://127.0.0.1:8000/api/get-ticket-prices', {
 					theaterName: theater,
 				}) // http://localhost:8000/api/get-ticket-prices
 				.then((response) => setTicketPrice(response.data))
