@@ -121,7 +121,7 @@ function QuickBuy() {
     return (
         <>
             <div className="bg-gray-100 p-2 md:p-6 rounded-lg shadow-md w-full mx-auto">
-                <h2 className="text-2xl font-bold mb-2 md:mb-4 text-center font-bold text-sky-900">快速訂票</h2>
+                <h2 className="text-2xl font-bold mb-2 md:mb-4 text-center text-sky-900">快速訂票</h2>
                 <form>
                     {/* 選擇電影 */}
                     <div className="mb-2 md:mb-4">

@@ -122,8 +122,8 @@ const Seats = () => {
 				member_id: 1,
 				detail: jsonData
 			});
-
-			navigate('/Choosepay');
+			
+			navigate('/Choosepay', { state: selectedData });
 		} catch (error) {
 		  console.error('Error booking seats:', error);
 		  setIsSubmitting(false);

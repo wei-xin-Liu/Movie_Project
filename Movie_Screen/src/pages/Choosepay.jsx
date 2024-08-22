@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Choosepay() {
+    const { state } = useLocation();
+
+    let itemDescArray = '';
+    const { selectedFoods, ticketCounts, totalPrice } = state;
+    for (let index = 0; index < selectedFoods.length; index++) {
+        itemDescArray += `${selectedFoods[index].name}x${selectedFoods[index].quantity}, `;
+    }
+    const entries = Object.entries(ticketCounts);
+    const filteredEntries = entries.filter(([key, value]) => value > 0);
+    filteredEntries.map(([key, value]) => itemDescArray += `${key}x${value}, `);
+
+    const totalPricestr = totalPrice.toString()
+
     const [paymentMethod, setPaymentMethod] = useState('online');
     const [data, setData] = useState([]);
 
@@ -11,8 +25,8 @@ function Choosepay() {
     const handleSubmit = async (e) => {
         e.preventDefault(); // 阻止表單默認提交行為
 
-        try {
-            const response = await axios.get('http://localhost/Movie_Project/Movie/public/api/bluepay');
+        try {           
+            const response = await axios.post('http://localhost/Movie_Project/Movie/public/api/bluepay', { itemDescArray, totalPricestr});
 
             setData(response.data); // 保存數據到狀態
 
@@ -23,7 +37,6 @@ function Choosepay() {
             console.error('Error fetching data:', error);
         }
     };
-    console.log(data);
 
 
     return (

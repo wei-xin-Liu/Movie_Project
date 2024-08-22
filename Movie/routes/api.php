@@ -34,8 +34,9 @@ Route::post('/get-ticket-prices', [TicketController::class, 'getTicketPrices']);
 Route::post('/book-seat', [BookingController::class, 'bookSeat']);
 Route::post('/member-order'     , [MemberorderController::class,  'memberOrder']);
 
-Route::get('/bluepay', [App\Http\Controllers\bluepay::class, 'submitPayment']);
+Route::post('/bluepay', [App\Http\Controllers\bluepay::class, 'submitPayment']);
 Route::post('/bluepaysuccessful', [App\Http\Controllers\bluepay::class, 'bluepaysuccessful']);
+
 
 
 # YK API ROUTE
