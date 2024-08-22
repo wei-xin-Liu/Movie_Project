@@ -30,4 +30,12 @@ class MovieController extends Controller
             return response()->json(['message' => 'Movie not found'], 404);
         }
     }
+
+    public function getTopMovies()
+    {
+        // 限制返回 8 部電影
+        $movies = Movies::with('rating')->limit(8)->get();
+
+        return response()->json($movies);
+    }
 }

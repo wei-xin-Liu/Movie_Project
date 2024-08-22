@@ -26,6 +26,7 @@ Route::get('/movieinfo'         , [MovieInfoController::class  ,  'getData']);
 Route::get('/tickets'           , [TicketsController::class    ,  'getData']);
 
 Route::get('/movies/{id}'       , [MovieController::class      ,  'show']);
+Route::get('/movieTop'          , [MovieController::class      ,  'getTopMovies']);
 Route::get('/foods'             , [FoodController::class       ,  'index']);
 
 Route::post('/get-empty-seats', [SeatController::class, 'getEmptySeats']);

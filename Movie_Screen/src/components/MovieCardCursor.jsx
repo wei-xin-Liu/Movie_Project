@@ -8,7 +8,7 @@ function MovieCardCursor() {
 	useEffect(() => {
 		const fetchMovies = async () => {
 			try {
-				const response = await axios.get('http://localhost/Movie_Project/Movie/public/api/movieinfo');
+				const response = await axios.get('http://localhost/Movie_Project/Movie/public/api/movieTop');
 				// 假設 API 返回一個大的電影數組
 				const allMovies = response.data;
 
@@ -85,20 +85,22 @@ function MovieCardCursor() {
 													bg-white
 													rounded
 													font-bold
-													text-sky-900
 													shadow-md
-													relative
 													transition-transform
 													hover:translate-y-[-5px]
 												"
 											>
-												<img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
-												<img className="absolute right-0 w-12 p-2" src={rating.ratingimgurl} alt={rating.ratingdesc} />
-												<p className="text-black text-xl py-2 pl-3">{title}</p>
-												<div className="grow" />
-												<p className="text-1xl pl-3">{e_title}</p>
-												<div className="content-center">
-													<p className="text-1xl pl-3">上映日期：{release_date}</p>
+												<div className="relative">
+    												<img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
+    												<img className="absolute top-2 right-2 w-8 z-10" src={rating.ratingimgurl} alt={rating.ratingdesc} />
+												</div>
+												<div className="h-full flex flex-col p-2">
+													<p className="text-red-900 text-xl">{title}</p>
+													<p className="text-red-600 text-xs">{e_title}</p>
+													<div className="grow" />
+													<div className="content-center">
+														<p className="text-orange-800 text-1xl pt-2">上映日期：{release_date}</p>
+													</div>
 												</div>
 												<button
 													className="
@@ -132,7 +134,7 @@ function MovieCardCursor() {
 
 
 
-			<div className="flex justify-center mx-auto">
+			<div className="flex justify-center">
 				{/* 導航按鈕 */}
 				<button onClick={prevSlide2} className="hover:bg-white/50 text-black p-2 md:hidden">
 					<svg className="w-3 md:w-24 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -147,7 +149,7 @@ function MovieCardCursor() {
 						{movieGroups2.map((group, index) => (
 							<div key={index} className="w-full flex-shrink-0 md:hidden">
 								<div className="grid grid-cols-2 gap-2">
-									{group.map(({ MID, image, title, e_title, release_date }) => (
+									{group.map(({ MID, image, title, e_title, release_date, rating }) => (
 										<a href={`/program/${MID}`} key={MID} className="no-underline">
 											<div
 												key={MID}
@@ -160,17 +162,21 @@ function MovieCardCursor() {
 													font-bold
 													text-sky-900
 													shadow-md
-													relative
 													transition-transform
 													hover:translate-y-[-5px]
 												"
 											>
-												<img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
-												<p className="text-black text-2xl py-2 pl-3">{title}</p>
-												<div className="grow" />
-												<p className="pl-3">{e_title}</p>
-												<div className="content-center">
-													<p className="pl-3">上映日期：{release_date}</p>
+												<div className="relative">
+    												<img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
+    												<img className="absolute top-2 right-2 w-8 z-10" src={rating.ratingimgurl} alt={rating.ratingdesc} />
+												</div>
+												<div className="h-full flex flex-col p-2">
+													<p className="text-orange-900 text-xl">{title}</p>
+													<p className="text-orange-600 text-xs">{e_title}</p>
+													<div className="grow" />
+													<div className="content-center">
+														<p className="text-orange-800 text-1xl pt-2">上映日期：{release_date}</p>
+													</div>
 												</div>
 												<div className="content-center">
 													<button

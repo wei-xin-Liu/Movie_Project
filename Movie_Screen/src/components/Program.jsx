@@ -12,13 +12,12 @@ function Program({
 	genre,
 	release_date,
 	movieLength,
-	grade,
 	actor,
 	image,
 	iframe,
 	e_title,
 	theaters,
-	rating,
+	rating
 }) {
 	const [isExpanded, setIsExpanded] = useState(false);
 
@@ -121,14 +120,14 @@ function Program({
 			</div>
 
 			<div className="grid grid-flow-row gap-[2%] mt-[2%]">
-				<div>電影預告</div>
+				<h1 className="font-bold text-red-900">電影預告</h1>
 				<div className="bg-black">
 					<iframe className="ml-[10%] mr-[10%] w-[80%] h-[200px] sm:h-[800px]"
 						src={iframe}></iframe>
 				</div>
 			</div>
 
-			<div className="mt-[7%] sm:mt-[2%]">線上訂票</div>
+			<div className="mt-[7%] sm:mt-[2%] font-bold text-red-900">線上訂票</div>
 
 			<div id="chooseticket" className="flex mt-[2%] ml-[5%]">
 				{weekDates.map(({ dateString, dayString }, index) => (
@@ -141,8 +140,8 @@ function Program({
 						onMouseEnter={() => setHoveredDateIdx(index)}
 						onMouseLeave={() => setHoveredDateIdx(null)}
 					>
-						<p>{dateString}</p>
-						<p>{dayString}</p>
+						<p className="font-bold">{dateString}</p>
+						<p className="text-red-900 font-bold">{dayString}</p>
 					</button>
 				))}
 			</div>
@@ -150,7 +149,7 @@ function Program({
 			<div className="mt-[2%] ml-[5%]">
 				{Object.keys(theaters).map((theater, index) => (
 					<div key={index} className="mb-[2%]">
-						<h3>{theater}</h3>
+						<h3 className="font-bold">{theater}</h3>
 						<div className="flex flex-wrap">
 							{theaters[theater].map((time, idx) => {
 								// 只有當日且時間已過的按鈕會禁用

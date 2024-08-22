@@ -85,7 +85,7 @@ const TicketBooking = () => {
 
 	// 包裝相同布局的預約資訊
 	const TicketInfo = ({ label, value }) => (
-		<h1 className="flex w-full text-sky-900 font-bold">
+		<h1 className="flex w-full font-bold">
 			<span className="w-1/2">{label}</span>
 			<span className="w-1/2 text-rose-800">{value}</span>
 		</h1>
@@ -125,7 +125,7 @@ const TicketBooking = () => {
 			timers.push(
 				setTimeout(() => {
 					setShowSection(i);
-				}, i * 500)
+				}, i * 200)
 			);
 		}
 
@@ -174,7 +174,7 @@ const TicketBooking = () => {
 					${showSection >= 2 ? 'opacity-100' : 'opacity-0'}
 				`}
 			>
-				<h2 className="text-xl font-bold text-center text-sky-900">票種</h2>
+				<h2 className="text-xl font-bold text-center">票種</h2>
 				<ul>
 					{ticketPrice.map(({ T_Adult, T_Stud, T_Early, T_Love }, index) => (
 						<li className="flex flex-col my-2" key={index}>
@@ -204,7 +204,7 @@ const TicketBooking = () => {
 					${showSection >= 3 ? 'opacity-100' : 'opacity-0'}
 				`}
 			>
-				<h2 className="text-xl font-bold text-center text-sky-900 pb-4">可選食物</h2>
+				<h2 className="text-xl font-bold text-center pb-4">可選食物</h2>
 				<ul className="grid grid-cols-2 gap-4">
 					{foods.map(({ FID, name, price, image }) => (
 						<li

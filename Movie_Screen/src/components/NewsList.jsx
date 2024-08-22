@@ -6,7 +6,7 @@ function NewsList() {
             <div className="flex flex-col items-center">
                 <h2 className="text-3xl font-bold text-blue-800">最新公告</h2>
                 {/* 查看更多按鈕 */}
-                <a href="/News" className="text-2xl pt-[2%] font-bold text-sky-900 hover:text-blue-800">查看更多公告</a>
+                <a href="/News" className="text-xl pt-[2%] font-bold text-sky-900 hover:text-blue-800">查看更多</a>
 
                 <ul className="space-y-4 pt-[2%]">
                     {/* 公告項目 1 */}
