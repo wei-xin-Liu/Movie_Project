@@ -119,7 +119,8 @@ const Seats = () => {
 
 			await axios.post('http://localhost/Movie_Project/Movie/public/api/member-order', {
 				member_id: 1,
-				detail: jsonData
+				detail: jsonData,
+				totalPrice
 			});
 
 			navigate('/');

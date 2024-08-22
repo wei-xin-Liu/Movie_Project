@@ -13,7 +13,8 @@ class Memberorder extends Model
 
     protected $fillable = [
         'member_id',
-        'detail'
+        'detail',
+        'totalPrice'
     ];
 
     public $timestamps = false;

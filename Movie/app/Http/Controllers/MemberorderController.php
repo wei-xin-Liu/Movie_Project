@@ -11,7 +11,8 @@ class MemberorderController extends Controller
     {
         $validatedData = $request->validate([
             'member_id'     => 'required|integer',
-            'detail'        => 'required|json'
+            'detail'        => 'required|json',
+            'totalPrice'    => 'required|integer'
         ]);
 
         Memberorder::create($validatedData);
