@@ -62,7 +62,7 @@ const MemberForm = () => {
 		// console.log(userData.name);
 		console.log('userData:', token);
 		console.log(user); //
-		console.log(userData?.name);
+		console.log(userData?.user.name);
 	}, [userData, setUser]);
 
 	useEffect(() => {

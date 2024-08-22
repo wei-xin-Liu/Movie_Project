@@ -1,29 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../context/ContextProvider';
 import { IconExclamationCircle } from '@tabler/icons-react';
+import useUserData from '../api/useUserData.jsx';
+import Loading from '../components/Loading.jsx';
 
 const ProtectedRoute = ({ element }) => {
 	const { token } = useStateContext(); // Assuming useStateContext provides the token
 	const [shouldNavigate, setShouldNavigate] = useState(false);
+	const navigate = useNavigate();
+	const { data: userData, isLoading } = useUserData();
+	console.log('userData:', userData); //not defined
+	// console.log(userData.name);
+	console.log('userData:', token);
+	console.log(userData?.user.name);
+	console.log(userData?.token);
 
-	useEffect(() => {
-		if (!token) {
-			const timer = setTimeout(() => {
-				setShouldNavigate(true);
-			}, 2500); // 1-second delay
+	// useEffect(() => {
+	// 	if (!userData?.token) {
+	// 		const timer = setTimeout(() => {
+	// 			setShouldNavigate(true);
+	// 		}, 2500); // 1-second delay
 
-			return () => clearTimeout(timer);
-		}
-	}, [token]);
+	// 		return () => clearTimeout(timer);
+	// 	}
+	// }, [userData]);
 
-	if (token) {
+	if (isLoading) {
+		return (
+			<div>
+				<Loading />
+			</div>
+		);
+	}
+
+	if (userData?.token) {
 		return element; // If user is authenticated, render the protected element
 	}
 
-	if (shouldNavigate) {
-		return <Navigate to='/' />; // After 1 second, redirect to the home page
-	}
+	useEffect(() => {
+		if (!tokenData) {
+			navigate('/');
+		}
+	}, [tokenData, navigate]);
 
 	return (
 		<>

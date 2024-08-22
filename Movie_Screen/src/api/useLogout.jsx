@@ -1,8 +1,8 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, QueryClient } from '@tanstack/react-query';
 import RegistrationSchema from '.././schema/RegistrationSchema';
 import axiosClient from '../api/axiosSetUp.js';
 import { useStateContext } from '../context/ContextProvider.jsx';
-
+import { useNavigate } from 'react-router-dom';
 // const useLogout = () => {
 // 	// Define the logout function to call the API
 // 	const logOut = async () => {
@@ -28,10 +28,11 @@ import { useStateContext } from '../context/ContextProvider.jsx';
 const useLogout = () => {
 	// Define the logout function to call the API
 	const { setUser, setToken } = useStateContext();
-
+	const queryClient = new QueryClient();
 	const logOut = async () => {
 		await axiosClient.get('/logout');
 	};
+	const navigate = useNavigate();
 
 	// OR const useLogout = (setUser, setToken) => {
 	//     // Define the logout function to call the API
@@ -46,6 +47,9 @@ const useLogout = () => {
 			// Clear user data and token on successful logout
 			setUser(null);
 			setToken(null);
+			localStorage.removeItem('token');
+			queryClient.invalidateQueries(['userData']);
+			navigate('/');
 		},
 		onError: (error) => {
 			console.error('Logout failed:', error);
