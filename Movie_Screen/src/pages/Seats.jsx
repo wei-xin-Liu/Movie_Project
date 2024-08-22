@@ -19,10 +19,13 @@ const Seats = () => {
 	const { date, time, theater } = selectedTicket;
 
 	const location = useLocation();
-	const { title, ticketCounts, foodCounts, totalPrice, foods } = location.state || {};
+	const { title, ticketCounts, foodCounts, totalPrice, foods } =
+		location.state || {};
 
-	const totalTicket = Object.values(ticketCounts).reduce((sum, count) => sum + count, 0);
-
+	const totalTicket = Object.values(ticketCounts).reduce(
+		(sum, count) => sum + count,
+		0
+	);
 
 	// 至少選擇1張票
 	useEffect(() => {
@@ -42,9 +45,13 @@ const Seats = () => {
 	useEffect(() => {
 		const fetchTotalSeats = async () => {
 			try {
-				const response = await axios.post('http://localhost/Movie_Project/Movie/public/api/get-total-seats', { // http://localhost:8000/api/get-total-seats
-					theater
-				});
+				const response = await axios.post(
+					'http://127.0.0.1:8000/api/get-total-seats',
+					{
+						// http://localhost:8000/api/get-total-seats
+						theater,
+					}
+				);
 				const { total_seats } = response.data;
 				setTotalSeats(total_seats);
 			} catch (error) {
@@ -59,11 +66,15 @@ const Seats = () => {
 	useEffect(() => {
 		const fetchEmptySeats = async () => {
 			try {
-				const response = await axios.post('http://localhost/Movie_Project/Movie/public/api/get-empty-seats', { // http://localhost:8000/api/get-empty-seats
-					show_date: formatDate(date),
-					show_time: time,
-					theater
-				});
+				const response = await axios.post(
+					'http://127.0.0.1:8000/api/get-empty-seats',
+					{
+						// http://localhost:8000/api/get-empty-seats
+						show_date: formatDate(date),
+						show_time: time,
+						theater,
+					}
+				);
 				setEmptySeats(response.data);
 			} catch (error) {
 				console.error('Error fetching empty seats:', error);
@@ -83,7 +94,7 @@ const Seats = () => {
 			.filter(({ FID }) => foodCounts[FID] > 0)
 			.map(({ name, FID }) => ({
 				name,
-				quantity: foodCounts[FID]
+				quantity: foodCounts[FID],
 			}));
 
 		const data = {
@@ -94,44 +105,55 @@ const Seats = () => {
 			ticketCounts: ticketCounts,
 			selectedSeats: selectedSeats,
 			selectedFoods: selectedFoods,
-			totalPrice: totalPrice
+			totalPrice: totalPrice,
 		};
 
 		setSelectedData(data);
-
-	}, [title, date, time, theater, ticketCounts, foodCounts, totalPrice, selectedSeats, foods]);
+	}, [
+		title,
+		date,
+		time,
+		theater,
+		ticketCounts,
+		foodCounts,
+		totalPrice,
+		selectedSeats,
+		foods,
+	]);
 
 	// 提交訂單資訊
 	const submit = async () => {
 		setIsSubmitting(true);
 		const jsonData = JSON.stringify(selectedData);
 		try {
-			const bookingData = selectedSeats.map(seat_id => ({
+			const bookingData = selectedSeats.map((seat_id) => ({
 				member_id: 1, // 用戶測試
 				seat_id,
 				watch_time: time,
 				watch_date: formatDate(date),
-				theater
+				theater,
 			}));
 
-			await Promise.all(bookingData.map(data =>
-				axios.post('http://localhost/Movie_Project/Movie/public/api/book-seat', data) // http://localhost:8000/api/book-seat
-			));
+			await Promise.all(
+				bookingData.map(
+					(data) => axios.post('http://127.0.0.1:8000/api/book-seat', data) // http://localhost:8000/api/book-seat
+				)
+			);
 
-			await axios.post('http://localhost/Movie_Project/Movie/public/api/member-order', {
+			await axios.post('http://127.0.0.1:8000/api/member-order', {
 				member_id: 1,
-				detail: jsonData
+				detail: jsonData,
 			});
 			
 			navigate('/Choosepay', { state: selectedData });
 		} catch (error) {
-		  console.error('Error booking seats:', error);
-		  setIsSubmitting(false);
+			console.error('Error booking seats:', error);
+			setIsSubmitting(false);
 		}
-	  };
+	};
 
 	return (
-		<div className="w-full">
+		<div className='w-full'>
 			{totalSeats ? (
 				<React.Fragment>
 					<SeatMap
@@ -142,7 +164,7 @@ const Seats = () => {
 					>
 						<button
 							onClick={submit}
-							className="
+							className='
 								bg-transparent
 								hover:bg-teal-600
 								text-teal-600
@@ -154,7 +176,7 @@ const Seats = () => {
 								border-teal-600
 								hover:border-transparent
 								rounded
-							"
+							'
 							disabled={selectedSeats.length < totalTicket || isSubmitting} // 按鈕禁用條件
 						>
 							{isSubmitting ? '預訂中...' : '確認並預訂座位'}
@@ -162,7 +184,7 @@ const Seats = () => {
 					</SeatMap>
 				</React.Fragment>
 			) : (
-				<p className="flex justify-center">Loading...</p>
+				<p className='flex justify-center'>Loading...</p>
 			)}
 		</div>
 	);

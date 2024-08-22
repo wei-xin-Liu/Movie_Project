@@ -6,6 +6,8 @@ import MovieInfo from './pages/MovieInfo';
 import MovieClass from './pages/MovieClass';
 import TheaterInfo from './pages/TheaterInfo';
 import Header_Footer_Top from './layouts/Header_Footer_Top';
+import ProtectedRoute from './layouts/ProtectedRoute';
+import GuestLayout from './layouts/GuestLayout';
 import New1 from './pages/New1';
 import New2 from './pages/New2';
 import New3 from './pages/New3';
@@ -15,7 +17,10 @@ import Program from './pages/Program';
 import Bluepay from './pages/Bluepay';
 import Bluepaysuccess from './pages/Bluepaysuccess';
 import Choosepay from './pages/Choosepay';
+import MemberPage from './pages/MemberPage';
 import LogInCard from './components/member/LogInCard';
+import RegistrationCard from './components/member/RegistrationCard';
+import NotFound from './pages/NotFound';
 
 const routes = createBrowserRouter([
 	{
@@ -79,8 +84,26 @@ const routes = createBrowserRouter([
 				element: <Bluepaysuccess />,
 			},
 			{
+				path: '/member',
+				element: <ProtectedRoute element={<MemberPage />} />,
+			},
+		],
+	},
+	{
+		path: '/',
+		element: <GuestLayout />,
+		children: [
+			{
 				path: '/login',
 				element: <LogInCard />,
+			},
+			{
+				path: '/register',
+				element: <RegistrationCard />,
+			},
+			{
+				path: '*',
+				element: <NotFound />,
 			},
 		],
 	},

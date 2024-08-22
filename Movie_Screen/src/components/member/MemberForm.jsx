@@ -14,9 +14,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Navigate } from 'react-router-dom';
 import DeleteAccountButton from './DeleteAccountButton.jsx';
 import useUpdateUserInfo from '../../api/useUpdateUserInfo.jsx';
-import axiosClient from '../../api/axiosSetUp.js';
 import { useStateContext } from '../../context/ContextProvider.jsx';
 import inFoSchema from '../../schema/inFoSchema.js';
+import useUserData from '../../api/useUserData.jsx';
 
 const MemberForm = () => {
 	const { user, token, setUser, setToken } = useStateContext();
@@ -129,7 +129,6 @@ const MemberForm = () => {
 
 		return (
 			<>
-				<p>{userData.id}</p>
 				<div id='memberInfo'>
 					<form
 						className='w-full ml-5 mx-auto'

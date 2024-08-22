@@ -12,6 +12,7 @@ import hamburger from '../../img/hamburger.jpg';
 import LogInForm from './LogInForm';
 import { IconXboxX } from '@tabler/icons-react';
 import { Link as RouterLink } from 'react-router-dom'; // Import React Router Link
+import { IconMovie } from '@tabler/icons-react';
 
 const LogInCard = () => {
 	const [isModalVisible, setIsModalVisible] = useState(true);
@@ -46,12 +47,12 @@ const LogInCard = () => {
 
 	return (
 		<div>
-			<button
+			{/* <button
 				onClick={openModal}
 				className='px-4 py-2 bg-indigo-600 text-white rounded'
 			>
 				Show Card
-			</button>
+			</button> */}
 			{isModalVisible && (
 				<div className='fixed inset-0 z-50 flex items-center justify-center'>
 					{/* Backdrop */}
@@ -69,15 +70,13 @@ const LogInCard = () => {
 					>
 						<Card className='sm:w-[450px]  max-h-screen'>
 							<CardHeader className='flex items-center justify-between h-15 gap-3 bg-indigo-600'>
-								<Image
-									alt='nextui logo'
-									height={40}
-									radius='sm'
-									src={hamburger}
-									width={40}
+								<IconMovie
+									className='mr-3 text-white w-[40px] h-[40px]'
+									stroke={1.75}
 								/>
-								<div className='flex flex-col'>
-									<p className='text-white'>會員登入</p>
+
+								<div className='flex flex-col justify-between'>
+									<p className='text-white text-center'>會員登入</p>
 								</div>
 								<IconXboxX
 									stroke={1}
@@ -91,7 +90,7 @@ const LogInCard = () => {
 							</CardBody>
 							<Divider />
 							<CardFooter className='flex justify-end'>
-								<RouterLink to='/signin' className='text-blue-600 '>
+								<RouterLink to='/register' className='text-blue-600 '>
 									<span className='text-zinc-400 no-underline	'>
 										Not registered?{' '}
 									</span>

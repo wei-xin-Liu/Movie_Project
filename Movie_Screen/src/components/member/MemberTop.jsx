@@ -1,9 +1,11 @@
-import React from 'react';
-import barcode from './img/barcode.jpg';
+import React, { useEffect } from 'react';
+import barcode from '../../img/barcode.png';
+import { Navigate } from 'react-router-dom';
 import { Button } from '@nextui-org/button';
 import ExpandableCard from './ExpandableCard.jsx';
 import useUserData from '../../api/useUserData.jsx';
 import useLogout from '../../api/useLogout.jsx';
+import { useStateContext } from '../../context/ContextProvider.jsx';
 
 const MemberTop = () => {
 	const { user, token, setUser, setToken } = useStateContext();
@@ -49,23 +51,29 @@ const MemberTop = () => {
 
 	return (
 		<>
-			<div className='w-[90%] h-16'>
-				<header className='py-2 w-36 mt-2  md:w-48 md:ml-10 md:px-5 md:py-4 text-2xl text-white text-center bg-[#415a77] rounded-sm'>
-					Member Page
+			<div className='w-[90%]'>
+				<header className='mt-6 py-2 w-36 h-16 md:w-48 md:ml-10 md:px-5 md:py-4 text-2xl bg-[#8e9aaf]  text-white text-center border-1  border-[#415a77] rounded-md'>
+					會員中心
 				</header>
 			</div>
-			<div className='flex justify-center mt-6'>
+			<div className='flex justify-center mt-4'>
 				<div className='flex container mx-auto w-[80%]'>
 					<div className='flex-row w-1/3 h-min py-3 mx-3 mr-2 flex-1 overflow-auto  border-1.5 border-zinc-400'>
-						<div className='py-2 px-8 align-middle'>
-							<p className='text-2xl text-slate-700 font-bold'>
-								{token && user.name}
+						<div className='py-2 px-5 align-middle'>
+							<p className='text-lg text-slate-700 font-bold'>
+								Hello! 親愛的會員{' '}
+								<p className='text-2xl indent-2'> {token && user.name} </p>
 							</p>
-							<p>{token && user.email}</p>
+							<p className='text-lg text-slate-700 font-bold mt-3'>
+								會員信箱：
+								<span className='text-xl indent-2'>
+									{' '}
+									{token && user.email}{' '}
+								</span>
+							</p>
 						</div>
-						<div className='mt-4'>
-							<img className='mx-auto' src={barcode} alt='' />
-							<p className='text-center'>123456789</p>
+						<div className='mt-2'>
+							<img className='mx-auto w-72 h-40' src={barcode} alt='' />
 						</div>
 						{/* //TODO Need write condition to display or not */}
 						{/* <div className='mt-4'>
@@ -127,7 +135,6 @@ const MemberTop = () => {
 		</>
 	);
 };
-
 
 // // method to jump to the desired element by using the element's id
 // const jumpToReleventDiv = (id) => {
