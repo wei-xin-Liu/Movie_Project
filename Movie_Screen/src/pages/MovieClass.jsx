@@ -63,19 +63,20 @@ function MovieClassName() {
                                 relative
                                 transition-transform
                                 hover:translate-y-[-5px]
+                                font-bold
                             "
                         >
-                            <img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
-                            <div className="flex justify-between">
-                                <p className="w-1/2 text-xl py-2 pl-3 text-black font-bold text-sky-900">{title}</p>
-                                <img className="h-16 p-2" src={rating.ratingimgurl} alt={rating.ratingdesc} />
+                            <div className="relative">
+                                <img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
+                                <img className="absolute top-2 right-2 w-8 z-10" src={rating.ratingimgurl} alt={rating.ratingdesc} />
                             </div>
-                            <div className="grow" />
-                            <div>
-                                <p className="text-1xl pl-3">{e_title}</p>
-                            </div>
-                            <div className="content-center">
-                                <p className="text-1xl pl-3">上映日期：{release_date}</p>
+                            <div className="h-full flex flex-col p-2">
+                                <p className="text-red-900 text-xl">{title}</p>
+                                <p className="text-red-600 text-xs">{e_title}</p>
+                                <div className="grow" />
+                                <div className="content-center">
+                                    <p className="text-orange-800 text-1xl pt-2">上映日期：{release_date}</p>
+                                </div>
                             </div>
                             <div className="content-center">
                                 <button

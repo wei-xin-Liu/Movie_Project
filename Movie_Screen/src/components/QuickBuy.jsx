@@ -226,7 +226,7 @@ function QuickBuy() {
 
                     {/* 提交按鈕 */}
                     <div>
-                        <button onClick={() => handleTimeClick(selectedTimeId, selectedTheaterId)} className="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700">
+                        <button onClick={() => handleTimeClick(selectedTimeId, selectedTheaterId)} className="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700 font-bold">
                             立即訂票
                         </button>
                     </div>

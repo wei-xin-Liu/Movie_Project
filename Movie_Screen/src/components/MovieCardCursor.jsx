@@ -73,7 +73,7 @@ function MovieCardCursor() {
 						{/* 輪播項目 */}
 						{movieGroups.map((group, index) => (
 							<div key={index} className="w-full flex-shrink-0 hidden md:block">
-								<div className="grid md:grid-cols-4 gap-4 p-8">
+								<div className="grid md:grid-cols-4 gap-4 p-8 h-full">
 									{group.map(({ MID, image, rating, title, e_title, release_date }) => (
 										<a href={`/program/${MID}`} key={MID} className="no-underline">
 											<div
@@ -110,8 +110,8 @@ function MovieCardCursor() {
 														p-2
 														rounded-md
 														hover:bg-indigo-700
-														font-bold"
-													>
+													"
+												>
 														線上訂票
 												</button>
 											</div>
@@ -148,7 +148,7 @@ function MovieCardCursor() {
 						{/* 輪播項目 */}
 						{movieGroups2.map((group, index) => (
 							<div key={index} className="w-full flex-shrink-0 md:hidden">
-								<div className="grid grid-cols-2 gap-2">
+								<div className="grid grid-cols-2 gap-2 h-full">
 									{group.map(({ MID, image, title, e_title, release_date, rating }) => (
 										<a href={`/program/${MID}`} key={MID} className="no-underline">
 											<div
