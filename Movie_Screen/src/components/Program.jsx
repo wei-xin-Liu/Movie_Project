@@ -65,25 +65,25 @@ function Program({
 	};
 
 	const InfoRow = ({ label, children }) => (
-		<div className="flex items-center justify-between mb-2">
-			<h1 className="text-teal-800 w-[30%] sm:w-[35%] md:w-[20%] text-center">{label}</h1>
-			<div className="w-[70%] sm:w-[65%] md:w-[80%]">{children}</div>
+		<div className="flex mb-2">
+			<h1 className="text-sky-900 w-[15%] sm:w-[12%] md:w-[10%]">{label}</h1>
+			<div className="text-gray-500 w-[85%] sm:w-[88%] md:w-[90%]">{children}</div>
 		</div>
 	);
 
 	return (
 		<div className="font-sans p-[2%] md:mx-20">
 			<div className="flex flex-col sm:flex-row sm:space-x-4">
-				<div className="flex justify-center rounded-b lg:w-[15%]">
+				<div className="flex justify-center rounded-b sm:w-[25%]">
 					<img
 						src={`/${image}`}
 						alt={title}
-						className="h-[200px] sm:h-[250px] object-cover"
+						className="h-[400px] sm:h-[200px] md:h-[300px] lg:h-[350px] object-cover"
 					/>
 				</div>
-				<div className="sm:w-[85%] ml-[2%] mt-[2%] sm:mt-[0%]">
-					<h1 className="font-bold text-red-900 text-xl w-[30%] sm:w-[35%] md:w-[20%] text-center">{title}</h1>
-					<h1 className="text-red-600 text-xs w-[30%] sm:w-[35%] md:w-[20%] text-center">{e_title}</h1>
+				<div className="sm:w-[75%] mt-[2%] sm:mt-[0%]">
+					<h1 className="font-bold text-red-900 text-xl w-[30%] sm:w-[35%] md:w-[20%]">{title}</h1>
+					<h1 className="text-red-600 text-xs w-[30%] sm:w-[35%] md:w-[20%]">{e_title}</h1>
 					<div className="mt-[2%] font-bold">
 						<InfoRow label="級別">
 							<img
@@ -100,7 +100,7 @@ function Program({
 						<InfoRow label="簡介">
 							<p
 								id="movieText"
-								className={`text-sky-900 mr-[5%] movieText ${isExpanded ? 'expanded' : ''
+								className={`mr-[5%] movieText ${isExpanded ? 'expanded' : ''
 									}`}
 							>
 								{description}
@@ -133,16 +133,19 @@ function Program({
 			</div>
 
 			<div className="grid grid-flow-row gap-[2%] mt-[2%]">
-				<h1 className="font-bold text-red-900">電影預告</h1>
-				<div className="bg-black">
-					<iframe
-					className="ml-[10%] mr-[10%] w-[80%] h-[200px] sm:h-[400px] md:h-[600px] lg:h-[800px]"
-					src={iframe}
-					></iframe>
-				</div>
+				<h1 className="bg-slate-50 border-t border-gray-300 py-2">
+					<p className="text-xl font-bold ps-5">電影預告</p>
+				</h1>
 			</div>
-
-			<div className="mt-[7%] sm:mt-[2%] font-bold text-red-900">線上訂票</div>
+			<div className="bg-black">
+				<iframe
+				className="ml-[10%] mr-[10%] w-[80%] h-[200px] sm:h-[400px] md:h-[600px] lg:h-[800px]"
+				src={iframe}
+				></iframe>
+			</div>
+			<div className="bg-slate-50 border-b border-gray-300 py-2">
+				<p className="text-xl font-bold ps-5">線上訂票</p>
+			</div>
 
 			<div
 				id="chooseticket"
