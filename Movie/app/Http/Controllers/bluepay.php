@@ -14,7 +14,8 @@ class bluepay extends Controller
 
     public function bluepaysuccessful(Request $request)
     {
-        return $request->Status;
+        // return $request->Status;
+        return redirect()->away('https://7152-118-163-218-100.ngrok-free.app');
     }
 
     public function submitPayment(Request $request)
@@ -44,7 +45,8 @@ class bluepay extends Controller
             'WEBATM' => '1',
             'CVS' => '1',
             'CREDIT' => '1',
-            'ClientBackURL' => 'https://dc62-118-163-218-100.ngrok-free.app/',
+            // 'ClientBackURL' => 'https://2139-118-163-218-100.ngrok-free.app/',
+            'ReturnURL' => 'https://610f-118-163-218-100.ngrok-free.app/Movie_Project/Movie/public/api/bluepaysuccessful',
             'InstFlag' => '0',
             'ItemDesc' => $ticket["itemDescArray"],
         ]);
