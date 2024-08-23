@@ -47,9 +47,26 @@ const useLogout = () => {
 			// Clear user data and token on successful logout
 			setUser(null);
 			setToken(null);
-			localStorage.removeItem('token');
+			localStorage.clear();
 			queryClient.invalidateQueries(['userData']);
-			navigate('/');
+			queryClient.removeQueries(['userData']);
+			// Clear any other related queries or cache
+			queryClient.clear();
+			// Smooth navigation
+			const fadeOut = () => {
+				document.body.style.opacity = '0';
+				document.body.style.transition = 'opacity 0.5s ease';
+			};
+
+			const navigateToHome = () => {
+				navigate('/');
+				setTimeout(() => {
+					document.body.style.opacity = '1';
+				}, 50);
+			};
+
+			fadeOut();
+			setTimeout(navigateToHome, 500);
 		},
 		onError: (error) => {
 			console.error('Logout failed:', error);
