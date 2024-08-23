@@ -238,7 +238,7 @@ const TicketBooking = () => {
 								rounded-lg shadow-md
 								transform transition
 								duration-500 ease-in-out
-								hover:animate-shake hover:shadow-lg
+								hover:animate-bounce hover:shadow-lg
 								hover:shadow-yellow-400
 							'
 						>

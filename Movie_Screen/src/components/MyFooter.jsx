@@ -4,7 +4,7 @@ function MyFooter() {
     return (
         <footer className="mt-[2%]">
             <div className="px-4 py-8">
-                <div className="grid grid-cols-3  gap-8">
+                <div className="grid grid-cols-3 gap-8">
                     <div className="text-center">
                         <h3 className="text-lg font-semibold mb-4">影城資訊</h3>
                         <ul>
@@ -30,9 +30,8 @@ function MyFooter() {
                     </div>
                 </div>
 
-
-                <div className="border-t border-gray-700 flex space-x-4 items-center mt-14  pt-5">
-                    <h3 className="text-lg font-semibold">第一影城</h3>
+                <div className="border-t border-gray-700 flex space-x-4 items-center mt-14 pt-5">
+                    <h3 className="text-lg font-semibold hidden sm:block">第一影城</h3>
 
                     <div className="flex space-x-4">
                         <a href="#" className="hover:text-gray-300">
@@ -53,7 +52,6 @@ function MyFooter() {
                         </a>
                     </div>
                 </div>
-
 
                 <div className="pt-8 text-center text-sm">
                     &copy; 2024 第一影城. 版權所有.
