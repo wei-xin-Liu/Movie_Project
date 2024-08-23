@@ -21,6 +21,10 @@ import MemberPage from './pages/MemberPage';
 import LogInCard from './components/member/LogInCard';
 import RegistrationCard from './components/member/RegistrationCard';
 import NotFound from './pages/NotFound';
+import GoogleError from './pages/GoogleError';
+import GoogleBtn from './components/member/GoogleBtn';
+import AuthCallBack from './api/AuthCallBack';
+import AuthError from './pages/AuthError';
 
 const routes = createBrowserRouter([
 	{
@@ -84,6 +88,26 @@ const routes = createBrowserRouter([
 				element: <Bluepaysuccess />,
 			},
 			{
+				path: '/GoogleBtn',
+				element: <GoogleBtn />,
+			},
+			{
+				path: '/googleerror',
+				element: <GoogleError />,
+			},
+			{
+				path: '/auth-callback',
+				element: <AuthCallBack />,
+			},
+			{
+				path: '/autherror',
+				element: <AuthError />,
+			},
+			// {
+			// 	path: '*',
+			// 	element: <NotFound />,
+			// },
+			{
 				path: '/member',
 				element: <ProtectedRoute element={<MemberPage />} />,
 			},
@@ -100,10 +124,6 @@ const routes = createBrowserRouter([
 			{
 				path: '/register',
 				element: <RegistrationCard />,
-			},
-			{
-				path: '*',
-				element: <NotFound />,
 			},
 		],
 	},

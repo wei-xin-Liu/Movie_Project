@@ -13,6 +13,7 @@ import LogInForm from './LogInForm';
 import { IconXboxX } from '@tabler/icons-react';
 import { Link as RouterLink } from 'react-router-dom'; // Import React Router Link
 import { IconMovie } from '@tabler/icons-react';
+import GoogleBtn from './GoogleBtn';
 
 const LogInCard = () => {
 	const [isModalVisible, setIsModalVisible] = useState(true);
@@ -87,6 +88,9 @@ const LogInCard = () => {
 							<Divider />
 							<CardBody>
 								<LogInForm />
+								<div className='flex justify-center items-center w-full my-2'>
+									<GoogleBtn />
+								</div>
 							</CardBody>
 							<Divider />
 							<CardFooter className='flex justify-end'>

@@ -21,12 +21,12 @@ import axiosClient from './axiosSetUp.js';
 // 	return { userData, error, isLoading };
 // };
 
-const useUserData = () => {
-	const getData = async () => {
-		const response = await axiosClient.get('/info');
-		return response.data;
-	};
+const getData = async () => {
+	const response = await axiosClient.get('/info');
+	return response.data;
+};
 
+const useUserData = () => {
 	return useQuery({
 		queryKey: ['userData'],
 		queryFn: getData,
@@ -37,13 +37,13 @@ const useUserData = () => {
 			console.log('login success', data);
 			// localStorage.setItem('ACCESS_TOKEN', data.token);
 			setSuccessMessage('User login successfully');
-			if (data) {
-				setToken(data.data.token);
-				setUser(data.data.name);
-				console.log('token', token); //token
-				console.log('name', user); //null
-				console.log('from data name', data.data.name); //correct
-			}
+			// if (data) {
+			// 	setToken(data.data.token);
+			// 	setUser(data.data.name);
+			// 	console.log('token', token); //token
+			// 	console.log('name', user); //null
+			// 	console.log('from data name', data.data.name); //correct
+			// }
 		},
 		onError: (error) => {
 			console.error('Failed to fetch user data:', error);
