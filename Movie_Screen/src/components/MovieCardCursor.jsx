@@ -8,7 +8,7 @@ function MovieCardCursor() {
 	useEffect(() => {
 		const fetchMovies = async () => {
 			try {
-				const response = await axios.get('http://127.0.0.1:8000/api/movieinfo');
+				const response = await axios.get('http://127.0.0.1:8000/api/movieTop');
 				// 假設 API 返回一個大的電影數組
 				const allMovies = response.data;
 
