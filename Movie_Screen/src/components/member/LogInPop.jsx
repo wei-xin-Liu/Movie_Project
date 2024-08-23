@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Card,
 	CardHeader,
@@ -7,19 +7,15 @@ import {
 	Divider,
 	Link,
 	Image,
-	Input,
-	Button,
 } from '@nextui-org/react';
 import hamburger from '../../img/hamburger.jpg';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import RegistrationForm from './RegistrationForm';
+import LogInForm from './LogInForm';
 import { IconXboxX } from '@tabler/icons-react';
 import { Link as RouterLink } from 'react-router-dom'; // Import React Router Link
 import { IconMovie } from '@tabler/icons-react';
 
-const RegistrationCard = () => {
-	const [isModalVisible, setIsModalVisible] = useState(true);
+const LogInPop = () => {
+	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [isAnimating, setIsAnimating] = useState(false);
 
 	const openModal = () => {
@@ -28,8 +24,27 @@ const RegistrationCard = () => {
 	};
 	const closeModal = () => {
 		setIsAnimating(false);
-		setIsModalVisible(false); // Delay to allow animation to complete
+		setTimeout(() => setIsModalVisible(false), 300); // Delay to match animation duration
 	};
+
+	useEffect(() => {
+		// This effect ensures the card is hidden if clicked outside
+		const handleClickOutside = (event) => {
+			const cardElement = document.getElementById('signin-card');
+			if (cardElement && !cardElement.contains(event.target)) {
+				closeModal();
+			}
+		};
+
+		// Attach event listener to document
+		document.addEventListener('mousedown', handleClickOutside);
+
+		// Clean up the event listener on component unmount
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, []);
+
 	return (
 		<div>
 			{/* <button
@@ -38,7 +53,6 @@ const RegistrationCard = () => {
 			>
 				Show Card
 			</button> */}
-
 			{isModalVisible && (
 				<div className='fixed inset-0 z-50 flex items-center justify-center'>
 					{/* Backdrop */}
@@ -49,6 +63,7 @@ const RegistrationCard = () => {
 
 					{/* Modal/Card */}
 					<div
+						id='signin-card'
 						className={`fixed top-0  left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
 							isAnimating ? 'top-1/2 -translate-y-1/2' : 'top-0'
 						}`}
@@ -59,8 +74,9 @@ const RegistrationCard = () => {
 									className='mr-3 text-white w-[40px] h-[40px]'
 									stroke={1.75}
 								/>
-								<div className='flex flex-col'>
-									<p className='text-white'>會員註冊</p>
+
+								<div className='flex flex-col justify-between'>
+									<p className='text-white text-center'>會員登入</p>
 								</div>
 								<IconXboxX
 									stroke={1}
@@ -70,15 +86,15 @@ const RegistrationCard = () => {
 							</CardHeader>
 							<Divider />
 							<CardBody>
-								<RegistrationForm />
+								<LogInForm />
 							</CardBody>
 							<Divider />
 							<CardFooter className='flex justify-end'>
-								<RouterLink to='/login' className='text-blue-600 '>
+								<RouterLink to='/register' className='text-blue-600 '>
 									<span className='text-zinc-400 no-underline	'>
-										Already registered?
+										Not registered?{' '}
 									</span>
-									{'   '} Sign in Here
+									{'   '} Create an account
 								</RouterLink>
 							</CardFooter>
 						</Card>
@@ -89,4 +105,4 @@ const RegistrationCard = () => {
 	);
 };
 
-export default RegistrationCard;
+export default LogInPop;

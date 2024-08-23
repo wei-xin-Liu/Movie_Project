@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import LogInSchema from '../../schema/LogInSchema.js';
 import axiosClient from '../../api/axiosSetUp.js';
-import { useStateContext } from '../../context/ContextProvider.jsx'
+import { useStateContext } from '../../context/ContextProvider.jsx';
 
 const LogInForm = () => {
 	const { user, token, setUser, setToken } = useStateContext();
@@ -29,7 +29,7 @@ const LogInForm = () => {
 	});
 
 	const postData = async (data) => {
-		const response = await axiosClient.post('/membertop', data);
+		const response = await axiosClient.post('/login', data);
 		return response.data;
 	};
 
@@ -47,8 +47,8 @@ const LogInForm = () => {
 			setGeneralError('');
 			setSuccessMessage('User login successfully');
 			setTimeout(() => {
-				navigate('/memberform');
-			}, 1000); // 1000 milliseconds = 1 second			} else {
+				navigate('/member');
+			}, 500); // 1000 milliseconds = 1 second			} else {
 		},
 
 		onError: (error) => {

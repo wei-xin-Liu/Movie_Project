@@ -11,12 +11,13 @@ function Program() {
 
 	// 獲取單部電影資訊
 	useEffect(() => {
-		axios.get(`http://localhost/Movie_Project/Movie/public/api/movies/${id}`) // http://localhost:8000/api/movies/${id}
-			.then(response => {
+		axios
+			.get(`http://127.0.0.1:8000/api/movies/${id}`) // http://localhost:8000/api/movies/${id}
+			.then((response) => {
 				setMovies(response.data);
 			})
-			.catch(error => {
-				console.error("There was an error fetching the movies!", error);
+			.catch((error) => {
+				console.error('There was an error fetching the movies!', error);
 			});
 	}, [id]);
 
@@ -24,7 +25,7 @@ function Program() {
 		<React.Fragment>
 			{movies ? <ProgramComponent {...movies} /> : <p>Loading...</p>}
 		</React.Fragment>
-	)
+	);
 }
 
-export default Program
+export default Program;

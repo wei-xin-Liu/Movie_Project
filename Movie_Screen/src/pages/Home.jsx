@@ -1,9 +1,8 @@
-import React from 'react'
-import MovieCursor from '../components/MovieCursor'
-import QuickBuy from '../components/QuickBuy'
-import NewsList from '../components/NewsList'
-import MovieCardCursor from '../components/MovieCardCursor'
-
+import React from 'react';
+import MovieCursor from '../components/MovieCursor';
+import QuickBuy from '../components/QuickBuy';
+import NewsList from '../components/NewsList';
+import MovieCardCursor from '../components/MovieCardCursor';
 
 function Home() {
 	return (
@@ -15,7 +14,7 @@ function Home() {
 				<NewsList />
 			</div>
 
-			<hr className="border-black mx-[2%]" />
+			<hr className='border-black mx-[2%]' />
 
 			<div className="flex text-center pb-3">
 				<div className="font-bold mt-[7%] md:mt-[2%] ml-[2%] text-2xl">現正熱映</div>
@@ -24,7 +23,7 @@ function Home() {
 
 			<MovieCardCursor />
 		</React.Fragment>
-	)
+	);
 }
 
-export default Home
+export default Home;
