@@ -30,7 +30,16 @@ function MovieClassName() {
 
 	const CategoryButton = ({ category, label }) => (
 		<button
-			className={`font-bold text-sky-900 bg-blue-400 mb-4 mr-4 w-28 h-10 ${selectedCategory === category ? 'bg-blue-600' : ''}`}
+			className={`
+				font-bold
+				text-violet-900
+				bg-blue-400
+				mb-4
+				mr-4
+				w-28
+				h-10
+				${selectedCategory === category ? 'bg-blue-600' : ''}
+			`}
 			onClick={() => setSelectedCategory(category)}
 		>
 			{label}
