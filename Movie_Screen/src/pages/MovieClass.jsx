@@ -32,13 +32,12 @@ function MovieClassName() {
 		<button
 			className={`
 				font-bold
-				text-violet-900
 				bg-blue-400
 				mb-4
 				mr-4
 				w-28
 				h-10
-				${selectedCategory === category ? 'bg-blue-600' : ''}
+				${selectedCategory === category ? 'bg-blue-600 text-white' : 'text-violet-900'}
 			`}
 			onClick={() => setSelectedCategory(category)}
 		>

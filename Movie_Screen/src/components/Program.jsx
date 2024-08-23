@@ -151,7 +151,15 @@ function Program({
 				{weekDates.map(({ dateString, dayString }, index) => (
 					<button
 						key={index}
-						className={`min-w-[100px] sm:min-w-[80px] w-auto sm:w-auto choosedate inline-block px-2 ${selectedDateIdx === index ? 'bg-indigo-500 text-white' : ''
+						className={`
+							min-w-[100px]
+							sm:min-w-[80px]
+							w-auto
+							sm:w-auto
+							choosedate
+							inline-block
+							px-2
+							${selectedDateIdx === index ? 'bg-indigo-500 text-white' : 'text-red-900'
 							} ${hoveredDateIdx === index && selectedDateIdx !== index
 								? 'bg-gray-300'
 								: ''
@@ -161,7 +169,7 @@ function Program({
 						onMouseLeave={() => setHoveredDateIdx(null)}
 					>
 						<p className="font-bold whitespace-nowrap">{dateString}</p>
-						<p className="text-red-900 font-bold whitespace-nowrap">{dayString}</p>
+						<p className="font-bold whitespace-nowrap">{dayString}</p>
 					</button>
 				))}
 			</div>
