@@ -45,7 +45,7 @@ Route::group(
     ],
     function () {
         Route::get('info', [ApiController::class, 'info']);
-        Route::get('refresh-token', [ApiController::class, 'refreshToken']);
+        Route::post('refresh-token', [ApiController::class, 'refreshToken']);
         Route::get('logout', [ApiController::class, 'logout']);
         Route::put('update-info', [ApiController::class, 'updateInfo']);
         Route::delete('delete-account', [

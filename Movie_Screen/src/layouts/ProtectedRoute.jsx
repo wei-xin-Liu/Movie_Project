@@ -6,15 +6,15 @@ import useUserData from '../api/useUserData.jsx';
 import Loading from '../components/Loading.jsx';
 
 const ProtectedRoute = ({ element }) => {
-	const { token } = useStateContext(); // Assuming useStateContext provides the token
-	const [shouldNavigate, setShouldNavigate] = useState(false);
-	const navigate = useNavigate();
+	// const { token } = useStateContext(); // Assuming useStateContext provides the token
+	// const [shouldNavigate, setShouldNavigate] = useState(false);
+	// const navigate = useNavigate();
 	const { data: userData, isLoading } = useUserData();
-	console.log('userData:', userData); //not defined
-	// console.log(userData.name);
-	console.log('userData:', token);
-	console.log(userData?.user.name);
-	console.log(userData?.token);
+	// console.log('userData:', userData); //not defined
+	// // console.log(userData.name);
+	// console.log('userData:', token);
+	// console.log(userData?.user.name);
+	// console.log(userData?.token);
 
 	useEffect(() => {
 		if (!userData?.token) {

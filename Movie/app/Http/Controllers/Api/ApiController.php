@@ -72,12 +72,21 @@ class ApiController extends Controller
     // Logout API - GET (JWT Auth Token)
     public function logout()
     {
+
         auth()->logout();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'User logged out',
-        ]);
+        try {
+            JWTAuth::invalidate(JWTAuth::getToken());
+            return response()->json([
+                'status' => true,
+                'message' => 'Successfully logged out'
+            ]);
+        } catch (JWTException $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to logout',
+            ], 500);
+        }
     }
 
     public function info()
@@ -97,26 +106,25 @@ class ApiController extends Controller
             'token' => $token,
         ]);
     }
+
     public function refreshToken()
     {
-        if (!auth()->check()) {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'Unauthenticated',
-                ],
-                401
-            );
+        try {
+            $token = JWTAuth::parseToken()->refresh();
+            
+            return response()->json([
+                'status' => true,
+                'message' => 'Token refreshed successfully',
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => auth()->factory()->getTTL() * 60
+            ]);
+        } catch (JWTException $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Could not refresh token',
+            ], 401);
         }
-
-        $token = auth()->refresh();
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Refresh token',
-            'token' => $token,
-            'expires_in' => auth()->factory()->getTTL() * 60,
-        ]);
     }
 
     public function updateInfo(UpdateInfoRequest $request)
