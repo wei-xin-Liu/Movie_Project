@@ -34,33 +34,34 @@ axiosClient.interceptors.response.use(
 					// Attempt to refresh the token
 					const refreshResponse = await axios.post('refresh-token');
 
+					const newToken = refreshResponse.data.access_token;
+
 					// Update the token in localStorage
-					localStorage.setItem('ACCESS_TOKEN', refreshResponse.data.token);
+					localStorage.setItem('ACCESS_TOKEN', newToken);
 
 					// Update the Authorization header with the new token
-					axiosClient.defaults.headers.Authorization = `Bearer ${refreshResponse.data.token}`;
+					axiosClient.defaults.headers.common[
+						'Authorization'
+					] = `Bearer ${newToken}`;
 
 					// Retry the original request with the new token
-					originalRequest.headers.Authorization = `Bearer ${refreshResponse.data.token}`;
+					originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
 					return axiosClient(originalRequest);
 				} catch (refreshError) {
 					// If refresh fails, remove the token and redirect to login
+					console.error('Token refresh failed:', refreshError);
 					localStorage.removeItem('ACCESS_TOKEN');
 					window.location.href = '/login'; // Redirect to login or handle appropriately
 					return Promise.reject(refreshError);
 				}
 			}
-		} else if (error.request) {
-			// Handle no response from server
-			console.error('Request error:', error.request);
-		} else {
-			// Handle other errors
-			console.error('General error:', error.message);
-		}
 
-		return Promise.reject(error);
+			return Promise.reject(error);
+		}
 	}
 );
+
+export default axiosClient;
 
 // axiosClient.interceptors.response.use(
 // 	(response) => response,
@@ -79,5 +80,3 @@ axiosClient.interceptors.response.use(
 // 		return Promise.reject(error);
 // 	}
 // );
-
-export default axiosClient;
