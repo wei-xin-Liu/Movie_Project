@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import LogInSchema from '../../schema/LogInSchema.js';
 import axiosClient from '../../api/axiosSetUp.js';
 import { useStateContext } from '../../context/ContextProvider.jsx';
+import GoogleBtn from './GoogleBtn.jsx';
 
 const LogInForm = () => {
 	const { user, token, setUser, setToken } = useStateContext();
@@ -115,7 +116,7 @@ const LogInForm = () => {
 	// };
 
 	return (
-		<div className='mt-3'>
+		<div className='mt-4'>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className='px-0 sm:px-3 space-y-5 w-full '
@@ -155,14 +156,17 @@ const LogInForm = () => {
 					required
 					// onChange={handleInputChange('password')}
 				/>
-				<Button
-					type='submit'
-					disableRipple
-					// onPress={closeModal}
-					className='w-full px-4 mt-4 bg-indigo-600 text-white rounded'
-				>
-					Log In
-				</Button>
+				<div className='flex flex-col justify-center items-center mt-1 space-y-2'>
+					<Button
+						type='submit'
+						disableRipple
+						// onPress={closeModal}
+						className='w-[400px] height-[40px] px-4  bg-indigo-600 text-white rounded'
+					>
+						Log In
+					</Button>
+					<GoogleBtn />
+				</div>
 			</form>
 		</div>
 	);

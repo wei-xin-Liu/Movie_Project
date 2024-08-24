@@ -18,6 +18,8 @@ const MemberTop = () => {
 		}
 	}, [userData, setUser]);
 
+	console.log(userData?.name);
+
 	if (!token) {
 		<Navigate to='/signin' />; // Redirect to login if token is not available
 	}
@@ -60,16 +62,13 @@ const MemberTop = () => {
 				<div className='flex container mx-auto w-[80%]'>
 					<div className='flex-row w-1/3 h-min py-3 mx-3 mr-2 flex-1 overflow-auto  border-1.5 border-zinc-400'>
 						<div className='py-2 px-5 align-middle'>
-							<p className='text-lg text-slate-700 font-bold'>
+							<div className='text-lg text-slate-700 font-bold'>
 								Hello! 親愛的會員{' '}
-								<p className='text-2xl indent-2'> {token && user.name} </p>
-							</p>
+								<p className='text-2xl indent-2'> {userData?.name} </p>
+							</div>
 							<p className='text-lg text-slate-700 font-bold mt-3'>
 								會員信箱：
-								<span className='text-xl indent-2'>
-									{' '}
-									{token && user.email}{' '}
-								</span>
+								<span className='text-xl indent-2'> {userData?.email} </span>
 							</p>
 						</div>
 						<div className='mt-2'>

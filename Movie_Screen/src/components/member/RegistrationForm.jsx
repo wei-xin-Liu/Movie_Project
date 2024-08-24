@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import RegistrationSchema from '../../schema/RegistrationSchema.js';
 import axiosClient from '../../api/axiosSetUp.js';
 import { useStateContext } from '../../context/ContextProvider.jsx';
+import GoogleBtn from './GoogleBtn.jsx';
 
 const RegistrationForm = () => {
 	const { user, token, setUser, setToken } = useStateContext();
@@ -181,14 +182,17 @@ const RegistrationForm = () => {
 					required
 					// onChange={handleInputChange('password_confirmation')}
 				/>
-				<Button
-					type='submit'
-					disableRipple
-					// onPress={closeModal}
-					className='w-full px-4 mt-4 bg-indigo-600 text-white rounded'
-				>
-					Register
-				</Button>
+				<div className='flex flex-col justify-center items-center mt-1 space-y-2'>
+					<Button
+						type='submit'
+						disableRipple
+						// onPress={closeModal}
+						className='w-[400px] height-[40px] px-4  bg-indigo-600 text-white rounded'
+					>
+						Log In
+					</Button>
+					<GoogleBtn />
+				</div>
 			</form>
 		</div>
 	);

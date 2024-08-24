@@ -5,22 +5,21 @@ import {
 	CardBody,
 	CardFooter,
 	Divider,
-	Link,
-	Image,
 } from '@nextui-org/react';
-import hamburger from '../../img/hamburger.jpg';
 import LogInForm from './LogInForm';
 import { IconXboxX } from '@tabler/icons-react';
 import { Link as RouterLink } from 'react-router-dom'; // Import React Router Link
 import { IconMovie } from '@tabler/icons-react';
+import GoogleBtn from './GoogleBtn';
 
 const LogInCard = () => {
 	const [isModalVisible, setIsModalVisible] = useState(true);
-	const [isAnimating, setIsAnimating] = useState(false);
+	const [isAnimating, setIsAnimating] = useState(true);
 
 	const openModal = () => {
 		setIsModalVisible(true);
-		setTimeout(() => setIsAnimating(true), 10); // Slight delay to trigger animation
+		setIsAnimating(true);
+		// setTimeout(() => setIsAnimating(true), 2); // Slight delay to trigger animation
 	};
 	const closeModal = () => {
 		setIsAnimating(false);
@@ -54,7 +53,7 @@ const LogInCard = () => {
 				Show Card
 			</button> */}
 			{isModalVisible && (
-				<div className='fixed inset-0 z-50 flex items-center justify-center'>
+				<div className='fixed inset-0 z-50 flex items-center justify-center transition-all duration-500'>
 					{/* Backdrop */}
 					<div
 						className='fixed inset-0 bg-black bg-opacity-10 backdrop-blur-sm'
@@ -65,7 +64,7 @@ const LogInCard = () => {
 					<div
 						id='signin-card'
 						className={`fixed top-0  left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
-							isAnimating ? 'top-1/2 -translate-y-1/2' : 'top-0'
+							isAnimating ? 'top-1/4 -translate-y-1/4' : 'top-0'
 						}`}
 					>
 						<Card className='sm:w-[450px]  max-h-screen'>
