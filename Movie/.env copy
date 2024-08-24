@@ -22,7 +22,7 @@ LOG_LEVEL=debug
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=movie
+DB_DATABASE=movie_9
 DB_USERNAME=root
 DB_PASSWORD=
 
@@ -68,4 +68,4 @@ JWT_SECRET=bVFTdLmLdBb1Y622g4AWW8HbueYNDiYHHvfp5KTT8TcsKnFHxXvsLJhd5kl1ZO1E
 
 GOOGLE_CLIENT_ID=1013767351612-u7n2sth6cd41ggqjmatp0nd7mutvr6ag.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=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
-GOOGLE_REDIRECT_URL=http://localhost:8000/api/auth/google
+GOOGLE_REDIRECT_URL=http://localhost:8000/api/auth/google/callback

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TicketContext } from '../pages/Program';
-// import axios from 'axios';
+import axios from 'axios';
 
 const TicketBooking = () => {
 	const navigate = useNavigate();
 
 	const { selectedTicket } = useContext(TicketContext);
-	const { date, time, title, theater } = selectedTicket;
+	const { date, time, title, e_title, theater } = selectedTicket;
 
 	const [ticketPrice, setTicketPrice] = useState([]);
 	const [foods, setFoods] = useState([]);
@@ -106,9 +106,9 @@ const TicketBooking = () => {
 
 	// 包裝相同布局的預約資訊
 	const TicketInfo = ({ label, value }) => (
-		<h1 className="flex w-full font-bold">
-			<span className="w-1/2">{label}</span>
-			<span className="w-1/2 text-rose-800">{value}</span>
+		<h1 className='flex w-full font-bold'>
+			<span className='w-1/2'>{label}</span>
+			<span className='w-1/2 text-rose-800'>{value}</span>
 		</h1>
 	);
 
@@ -136,10 +136,11 @@ const TicketBooking = () => {
 				totalPrice: totalPrice(),
 				foods,
 				title,
+				e_title,
 			},
 		});
 	};
-
+	console.log(e_title);
 	// 設置每個區塊的顯示時間
 	useEffect(() => {
 		const timers = [];
@@ -173,6 +174,7 @@ const TicketBooking = () => {
 				`}
 			>
 				<TicketInfo label='電影名稱' value={title} />
+				<TicketInfo label='電影英文名稱' value={e_title} />
 				<TicketInfo label='影廳' value={theater} />
 				<TicketInfo label='預定日期' value={date} />
 				<TicketInfo label='場次時間' value={time.substring(0, 5)} />
@@ -197,7 +199,7 @@ const TicketBooking = () => {
 					${showSection >= 2 ? 'opacity-100' : 'opacity-0'}
 				`}
 			>
-				<h2 className="text-xl font-bold text-center">票種</h2>
+				<h2 className='text-xl font-bold text-center'>票種</h2>
 				<ul>
 					{ticketPrice.map(({ T_Adult, T_Stud, T_Early, T_Love }, index) => (
 						<li className='flex flex-col my-2' key={index}>
@@ -227,8 +229,8 @@ const TicketBooking = () => {
 					${showSection >= 3 ? 'opacity-100' : 'opacity-0'}
 				`}
 			>
-				<h2 className="text-xl font-bold text-center pb-4">可選食物</h2>
-				<ul className="grid grid-cols-2 gap-4">
+				<h2 className='text-xl font-bold text-center pb-4'>可選食物</h2>
+				<ul className='grid grid-cols-2 gap-4'>
 					{foods.map(({ FID, name, price, image }) => (
 						<li
 							key={FID}

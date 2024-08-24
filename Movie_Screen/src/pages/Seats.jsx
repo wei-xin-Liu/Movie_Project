@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SeatMap from '../components/SeatMap';
 import { TicketContext } from './Program';
-// import axios from 'axios';
+import axios from 'axios';
 
 const Seats = () => {
 	const navigate = useNavigate();
@@ -19,13 +19,13 @@ const Seats = () => {
 	const { date, time, theater } = selectedTicket;
 
 	const location = useLocation();
-	const { title, ticketCounts, foodCounts, totalPrice, foods } =
+	const { title, e_title, ticketCounts, foodCounts, totalPrice, foods } =
 		location.state || {};
-
 	const totalTicket = Object.values(ticketCounts).reduce(
 		(sum, count) => sum + count,
 		0
 	);
+
 
 	// 至少選擇1張票
 	useEffect(() => {
@@ -48,7 +48,6 @@ const Seats = () => {
 				const response = await axios.post(
 					'http://127.0.0.1:8000/api/get-total-seats',
 					{
-						// http://localhost:8000/api/get-total-seats
 						theater,
 					}
 				);
@@ -69,7 +68,6 @@ const Seats = () => {
 				const response = await axios.post(
 					'http://127.0.0.1:8000/api/get-empty-seats',
 					{
-						// http://localhost:8000/api/get-empty-seats
 						show_date: formatDate(date),
 						show_time: time,
 						theater,
@@ -99,6 +97,7 @@ const Seats = () => {
 
 		const data = {
 			title: title,
+			e_title: e_title,
 			date: formatDate(date),
 			time: time,
 			theater: theater,
@@ -111,6 +110,7 @@ const Seats = () => {
 		setSelectedData(data);
 	}, [
 		title,
+		e_title,
 		date,
 		time,
 		theater,
@@ -120,6 +120,7 @@ const Seats = () => {
 		selectedSeats,
 		foods,
 	]);
+
 
 	// 提交訂單資訊
 	const submit = async () => {
@@ -135,17 +136,17 @@ const Seats = () => {
 			}));
 
 			await Promise.all(
-				bookingData.map(
-					(data) => axios.post('http://127.0.0.1:8000/api/book-seat', data) // http://localhost:8000/api/book-seat
+				bookingData.map((data) =>
+					axios.post('http://127.0.0.1:8000/api/book-seat', data)
 				)
 			);
 
 			await axios.post('http://127.0.0.1:8000/api/member-order', {
-				member_id: 1,
+				member_id: 2,
 				detail: jsonData,
-				totalPrice
+				totalPrice,
 			});
-			
+
 			navigate('/Choosepay', { state: selectedData });
 		} catch (error) {
 			console.error('Error booking seats:', error);
