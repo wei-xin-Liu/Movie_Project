@@ -20,11 +20,12 @@ import { IconMovie } from '@tabler/icons-react';
 
 const RegistrationCard = () => {
 	const [isModalVisible, setIsModalVisible] = useState(true);
-	const [isAnimating, setIsAnimating] = useState(false);
+	const [isAnimating, setIsAnimating] = useState(true);
 
 	const openModal = () => {
 		setIsModalVisible(true);
-		setTimeout(() => setIsAnimating(true), 10); // Slight delay to trigger animation
+		setIsAnimating(true);
+		// setTimeout(() => setIsAnimating(true), 10); // Slight delay to trigger animation
 	};
 	const closeModal = () => {
 		setIsAnimating(false);
@@ -50,7 +51,7 @@ const RegistrationCard = () => {
 					{/* Modal/Card */}
 					<div
 						className={`fixed top-0  left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
-							isAnimating ? 'top-1/2 -translate-y-1/2' : 'top-0'
+							isAnimating ? 'top-1/4 -translate-y-1/4' : 'top-0'
 						}`}
 					>
 						<Card className='sm:w-[450px]  max-h-screen'>
