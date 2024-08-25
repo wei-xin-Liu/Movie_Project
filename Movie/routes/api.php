@@ -11,6 +11,7 @@ use App\Http\Controllers\FoodController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MemberorderController;
+use App\Http\Controllers\OrderDetail;
 
 use App\Http\Controllers\bluepay;
 
@@ -32,7 +33,7 @@ Route::post('/get-empty-seats', [SeatController::class, 'getEmptySeats']);
 Route::post('/get-total-seats', [SeatController::class, 'getTotalSeats']);
 Route::post('/get-ticket-prices', [TicketController::class, 'getTicketPrices']);
 Route::post('/book-seat', [BookingController::class, 'bookSeat']);
-Route::post('/member-order', [MemberorderController::class, 'memberOrder']);
+// Route::post('/member-order', [MemberorderController::class, 'memberOrder']);
 
 Route::post('/bluepay', [App\Http\Controllers\bluepay::class, 'submitPayment']);
 Route::post('/bluepaysuccessful', [
@@ -64,5 +65,10 @@ Route::group(
             ApiController::class,
             'deleteAccount',
         ]); // New delete route
+        Route::get('user/orders', [OrderDetail::class, 'getUserOrders']);
+        Route::post('/member-order', [
+            MemberorderController::class,
+            'memberOrder',
+        ]);
     }
 );

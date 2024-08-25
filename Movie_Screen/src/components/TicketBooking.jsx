@@ -140,7 +140,7 @@ const TicketBooking = () => {
 			},
 		});
 	};
-	console.log(e_title);
+
 	// 設置每個區塊的顯示時間
 	useEffect(() => {
 		const timers = [];

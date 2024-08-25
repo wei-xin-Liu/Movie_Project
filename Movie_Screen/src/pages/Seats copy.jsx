@@ -26,6 +26,7 @@ const Seats = () => {
 		0
 	);
 
+
 	// 至少選擇1張票
 	useEffect(() => {
 		if (totalTicket === 0) {
@@ -120,15 +121,11 @@ const Seats = () => {
 		foods,
 	]);
 
-	// 提交訂單資訊
-	const saveOrder = () => {
-		localStorage.setItem('order', JSON.stringify(selectedData));
-	};
-	const submit = async () => {
-		const jsonData = JSON.stringify(selectedData);
-		setIsSubmitting(true);
-		saveOrder();
 
+	// 提交訂單資訊
+	const submit = async () => {
+		setIsSubmitting(true);
+		const jsonData = JSON.stringify(selectedData);
 		try {
 			const bookingData = selectedSeats.map((seat_id) => ({
 				member_id: 1, // 用戶測試
@@ -144,11 +141,11 @@ const Seats = () => {
 				)
 			);
 
-			// await axios.post('http://127.0.0.1:8000/api/member-order', {
-			// 	member_id: 2,
-			// 	detail: jsonData,
-			// 	totalPrice,
-			// });
+			await axios.post('http://127.0.0.1:8000/api/member-order', {
+				member_id: 2,
+				detail: jsonData,
+				totalPrice,
+			});
 
 			navigate('/Choosepay', { state: selectedData });
 		} catch (error) {

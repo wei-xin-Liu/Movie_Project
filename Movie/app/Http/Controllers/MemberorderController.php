@@ -4,19 +4,49 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Memberorder;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class MemberorderController extends Controller
 {
     public function memberOrder(Request $request)
     {
-        $validatedData = $request->validate([
-            'member_id'     => 'required|integer',
-            'detail'        => 'required|json',
-            'totalPrice'    => 'required|integer'
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'detail' => 'required|json',
+                'totalPrice' => 'required|integer',
+            ]);
+            // $validatedData['user_id'] = auth()->id(); // Get the authenticated user's ID
+            $user = JWTAuth::parseToken()->authenticate();
 
-        Memberorder::create($validatedData);
+            if (!$user) {
+                return response()->json(['message' => 'User not found'], 404);
+            }
 
-        return response()->json(['message' => 'Member order successfully!'], 201);
+            $validatedData['user_id'] = $user->id;
+
+            Memberorder::create($validatedData);
+
+            return response()->json(
+                ['message' => 'Member order created successfully!'],
+                201
+            );
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(
+                [
+                    'message' => 'Validation failed',
+                    'errors' => $e->errors(),
+                ],
+                422
+            );
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'message' =>
+                        'An error occurred while processing your request',
+                    'error' => $e->getMessage(),
+                ],
+                500
+            );
+        }
     }
 }

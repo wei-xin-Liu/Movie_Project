@@ -25,6 +25,8 @@ import GoogleError from './pages/GoogleError';
 import GoogleBtn from './components/member/GoogleBtn';
 import AuthCallBack from './api/AuthCallBack';
 import AuthError from './pages/AuthError';
+import GoPay from './pages/GoPay';
+import ShowOrder from './pages/ShowOrder';
 
 const routes = createBrowserRouter([
 	{
@@ -102,6 +104,14 @@ const routes = createBrowserRouter([
 			{
 				path: '/autherror',
 				element: <AuthError />,
+			},
+			{
+				path: '/gopay',
+				element: <GoPay />,
+			},
+			{
+				path: '/showorder',
+				element: <ShowOrder />,
 			},
 			{
 				path: '*',
