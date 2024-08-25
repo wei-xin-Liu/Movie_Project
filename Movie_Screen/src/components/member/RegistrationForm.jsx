@@ -189,7 +189,7 @@ const RegistrationForm = () => {
 						// onPress={closeModal}
 						className='w-[400px] height-[40px] px-4  bg-indigo-600 text-white rounded'
 					>
-						Log In
+						註冊
 					</Button>
 					<GoogleBtn />
 				</div>
