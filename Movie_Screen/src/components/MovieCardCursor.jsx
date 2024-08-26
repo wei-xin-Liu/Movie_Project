@@ -15,8 +15,8 @@ function MovieCardCursor() {
 				setMovies(allMovies);
 				// 將電影分組，每組4部電影
 				const groups = [];
-				for (let i = 0; i < allMovies.length; i += 4) {
-					groups.push(allMovies.slice(i, i + 4));
+				for (let i = 0; i < allMovies.length; i += 5) {
+					groups.push(allMovies.slice(i, i + 5));
 				}
 				setMovieGroups(groups);
 
@@ -70,10 +70,10 @@ function MovieCardCursor() {
 				{/* 導航按鈕 */}
 				<button
 					onClick={prevSlide1}
-					className='hover:bg-white/50 text-black p-2 hidden md:block'
+					className='w-[10%] hover:bg-white/50 text-black p-2 hidden md:block'
 				>
 					<svg
-						className='w-3 md:w-24 md:h-6'
+						className='w-3 mx-auto md:w-24 md:h-6'
 						fill='none'
 						stroke='currentColor'
 						viewBox='0 0 24 24'
@@ -88,7 +88,7 @@ function MovieCardCursor() {
 					</svg>
 				</button>
 
-				<div id='moviecarousel1' className='md:w-[90%] overflow-hidden'>
+				<div id='moviecarousel1' className='md:w-[80%] overflow-hidden'>
 					<div
 						className='flex transition-transform duration-500 ease-in-out'
 						style={{ transform: `translateX(-${currentIndex1 * 100}%)` }}
@@ -96,7 +96,7 @@ function MovieCardCursor() {
 						{/* 輪播項目 */}
 						{movieGroups.map((group, index) => (
 							<div key={index} className="w-full flex-shrink-0 hidden md:block">
-								<div className="grid md:grid-cols-4 gap-4 p-8 h-full">
+								<div className="grid md:grid-cols-5 gap-4 h-full">
 									{group.map(({ MID, image, rating, title, e_title, release_date }) => (
 										<a href={`/program/${MID}`} key={MID} className="no-underline">
 											<div
@@ -114,8 +114,8 @@ function MovieCardCursor() {
 											"
 											>
 												<div className="relative">
-													<img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
-													<img className="absolute top-2 right-2 w-8 z-10" src={rating.ratingimgurl} alt={rating.ratingdesc} />
+													<div style={{ aspectRatio: '2/3' }} ><img className="h-full object-cover rounded-t" src={image} alt={title} /></div>
+													<img className="absolute md:bottom-[-40px] right-2 w-8 z-10" src={rating.ratingimgurl} alt={rating.ratingdesc} />
 												</div>
 												<div className="h-full flex flex-col p-2">
 													<p className="text-red-900 text-xl">{title}</p>
@@ -149,10 +149,10 @@ function MovieCardCursor() {
 
 				<button
 					onClick={nextSlide1}
-					className='hover:bg-white/50 text-black p-2 hidden md:block'
+					className='w-[10%] hover:bg-white/50 text-black p-2 hidden md:block'
 				>
 					<svg
-						className='w-3 md:w-24 md:h-6'
+						className='w-3 mx-auto md:w-24 md:h-6'
 						fill='none'
 						stroke='currentColor'
 						viewBox='0 0 24 24'

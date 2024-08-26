@@ -10,7 +10,11 @@ function QuickBuy() {
 			try {
 				// const response = await axios.get('http://localhost/Movie_Project/Movie/public/api/movieinfo');
 				const response = await axios.get('http://127.0.0.1:8000/api/movieinfo');
-				setMovies(response.data);
+				const sortedMovies = response.data.sort((a, b) =>
+					new Date(b.release_date) - new Date(a.release_date)
+				);
+				setMovies(sortedMovies);
+				// setMovies(response.data);
 			} catch (error) {
 				console.error('Error fetching movies:', error);
 			}
@@ -126,7 +130,7 @@ function QuickBuy() {
 
 	return (
 		<>
-			<div className="bg-gray-100 p-2 md:p-6 rounded-lg shadow-md w-full mx-auto">
+			<div className="bg-gray-100 p-2 md:p-4 md:my-8 rounded-lg shadow-md w-[70%]  ml-[20%]">
 				<h2 className="text-2xl font-bold mb-2 md:mb-4 text-center text-sky-900">快速訂票</h2>
 				<form>
 					{/* 選擇電影 */}
@@ -241,7 +245,7 @@ function QuickBuy() {
 									return (
 										!isPastShowtime && (
 											<option key={index} value={time}>
-												{time}
+												{time.substring(0, 5)}
 											</option>
 										)
 									);

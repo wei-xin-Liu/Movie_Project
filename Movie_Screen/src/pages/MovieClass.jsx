@@ -11,7 +11,11 @@ function MovieClassName() {
 				// 	'http://localhost/Movie_Project/Movie/public/api/movieinfo'
 				// );
 				const response = await axios.get('http://127.0.0.1:8000/api/movieinfo');
-				setMovies(response.data);
+				const sortedMovies = response.data.sort((a, b) =>
+					new Date(b.release_date) - new Date(a.release_date)
+				);
+				setMovies(sortedMovies);
+				// setMovies(response.data);
 			} catch (error) {
 				console.error('Error fetching movies:', error);
 			}
@@ -37,7 +41,7 @@ function MovieClassName() {
 				mr-4
 				w-28
 				h-10
-				${selectedCategory === category ? 'bg-blue-600 text-white' : 'text-violet-900'}
+				${selectedCategory === category ? 'bg-blue-600 text-white' : 'text-white'}
 			`}
 			onClick={() => setSelectedCategory(category)}
 		>
@@ -47,19 +51,19 @@ function MovieClassName() {
 
 	return (
 		<div className="md:mx-20">
-			<div className="ml-8 mt-8">
+			{/* <div className="ml-8 mt-8">
 				<CategoryButton category="熱映中" label="熱映中" />
-				{/* <CategoryButton category="即將上映" label="即將上映" /> */}
-			</div>
+				<CategoryButton category="即將上映" label="即將上映" />
+			</div> */}
 
-			<div className='ml-8 mt-4'>
+			<div className='ml-8 mt-8'>
 				{['全部', '動作', '劇情', '驚悚', '動畫'].map((category) => (
 					<CategoryButton key={category} category={category} label={category} />
 				))}
 				{/* <CategoryButton category="即將入場" label="即將入場" /> */}
 			</div>
 
-			<div className="grid grid-flow-row md:grid-cols-4 gap-4 p-8">
+			<div className="grid grid-flow-row md:grid-cols-5 gap-4 p-8">
 				{filterMovies().map(({ MID, image, title, rating, e_title, release_date }) => (
 					<a href={`/program/${MID}`} key={MID} className="no-underline">
 						<div
@@ -78,8 +82,8 @@ function MovieClassName() {
                             "
 						>
 							<div className="relative">
-								<img className="w-full h-64 rounded-b object-cover" src={image} alt={title} />
-								<img className="absolute top-2 right-2 w-8 z-10" src={rating.ratingimgurl} alt={rating.ratingdesc} />
+								<div style={{ aspectRatio: '2/3' }} ><img className="h-full object-cover rounded-t" src={image} alt={title} /></div>							
+								<img className="absolute md:bottom-[-40px] right-2 w-8 z-10" src={rating.ratingimgurl} alt={rating.ratingdesc} />
 							</div>
 							<div className="h-full flex flex-col p-2">
 								<p className="text-red-900 text-xl">{title}</p>

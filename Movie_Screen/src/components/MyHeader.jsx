@@ -39,9 +39,9 @@ function MyHeader() {
 	return (
 		<header className='bg-blue-600 text-white m-0 p-4'>
 			<div className='flex justify-between items-center h-10'>
-				<div className='font-bold w-40 text-center'>
-					<a href='/' className='flex items-center'>
-						<IconMovie className='mr-3 w-[40px] h-[40px]' stroke={1.75} />
+				<div className='font-bold text-center'>
+					<a href='/' className='flex items-center text-xl'>
+						<IconMovie className='ml-16 mr-3 w-[40px] h-[40px]' stroke={1.75} />
 						第一影城
 					</a>
 				</div>
@@ -72,7 +72,7 @@ function MyHeader() {
 					</div>
 					<div>
 						<div
-							className='w-52 text-center cursor-pointer hover:text-gray-300'
+							className='w-52 text-center cursor-pointer hover:text-gray-300 text-lg'
 							onClick={handleLoginLogout}
 						>
 							{token ? '會員登出' : '會員登入'}

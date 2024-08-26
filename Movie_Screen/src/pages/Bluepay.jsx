@@ -19,7 +19,7 @@ function Bluepay() {
                 <input type="hidden" name="TradeInfo" value={edata} />
                 <input type="hidden" name="TradeSha" value={hash} />
             </form>
-            <p>Submitting payment...</p>
+            <p className='ml-[45%]'>Submitting payment...</p>
         </div>
     );
 };

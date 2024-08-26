@@ -9,7 +9,7 @@ function Home() {
 		<React.Fragment>
 			<MovieCursor />
 
-			<div className="m-[2%] grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-0 md:mx-20">
+			<div className="mx-[10%] grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-0 ">
 				<QuickBuy />
 				<NewsList />
 			</div>

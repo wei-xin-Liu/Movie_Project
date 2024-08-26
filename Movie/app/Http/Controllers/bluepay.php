@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Session\Middleware\StartSession;
 
 class bluepay extends Controller
 {
@@ -14,9 +15,18 @@ class bluepay extends Controller
 
     public function bluepaysuccessful(Request $request)
     {
-        // return $request->Status;
-        return redirect()->away('http://localhost:5173');
+        // return $request;
+        // $sensitiveData = $request->Status;
+        // $request->session()->put('payment_data', $sensitiveData);        
+        return redirect()->away('https://516f-118-163-218-100.ngrok-free.app/Bluepaysuccess');
     }
+
+    // public function getPaymentData(Request $request)
+    // {
+    //     $paymentData = $request->session()->get('payment_data');
+    //     $request->session()->forget('payment_data'); // 使用後刪除數據
+    //     return response()->json($paymentData);
+    // }
 
     public function submitPayment(Request $request)
     {
@@ -46,7 +56,7 @@ class bluepay extends Controller
             'CVS' => '1',
             'CREDIT' => '1',
             // 'ClientBackURL' => 'https://2139-118-163-218-100.ngrok-free.app/',
-            'ReturnURL' => 'http://localhost/Movie_Project/Movie/public/api/bluepaysuccessful',
+            'ReturnURL' => 'https://2e72-118-163-218-100.ngrok-free.app/Movie_Project/Movie/public/api/bluepaysuccessful',
             'InstFlag' => '0',
             'ItemDesc' => $ticket["itemDescArray"],
         ]);

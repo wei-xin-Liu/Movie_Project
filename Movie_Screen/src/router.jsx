@@ -21,6 +21,7 @@ import MemberPage from './pages/MemberPage';
 import LogInCard from './components/member/LogInCard';
 import RegistrationCard from './components/member/RegistrationCard';
 import NotFound from './pages/NotFound';
+import AudioDescriptionInfo from './pages/AudioDescriptionInfo'
 
 const routes = createBrowserRouter([
 	{
@@ -84,9 +85,14 @@ const routes = createBrowserRouter([
 				element: <Bluepaysuccess />,
 			},
 			{
+				path: '/AudioDescriptionInfo',
+				element: <AudioDescriptionInfo />,
+			},
+			{
 				path: '/member',
 				element: <ProtectedRoute element={<MemberPage />} />,
 			},
+
 		],
 	},
 	{

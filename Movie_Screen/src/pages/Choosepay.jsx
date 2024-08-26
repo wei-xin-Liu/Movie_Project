@@ -7,12 +7,30 @@ function Choosepay() {
 
 	let itemDescArray = '';
 	const { selectedFoods, ticketCounts, totalPrice } = state;
-	for (let index = 0; index < selectedFoods.length; index++) {
-		itemDescArray += `${selectedFoods[index].name}x${selectedFoods[index].quantity}, `;
-	}
 	const entries = Object.entries(ticketCounts);
 	const filteredEntries = entries.filter(([key, value]) => value > 0);
-	filteredEntries.map(([key, value]) => (itemDescArray += `${key}x${value}, `));
+	filteredEntries.map(([key, value]) => {
+		// "adult":1,"student":0,"early":0,"love":0
+		if (key == "adult") {
+			key = "成人票"
+		}
+		else if (key == "student") {
+			key = "學生票"
+		}
+		else if (key == "early") {
+			key = "早鳥票"
+		}
+		else if (key == "love") {
+			key = "愛心票"
+		}
+		return (itemDescArray += `${key}x${value}, \n`)
+	});
+
+	
+	for (let index = 0; index < selectedFoods.length; index++) {
+		itemDescArray += `${selectedFoods[index].name}x${selectedFoods[index].quantity}, \n`;
+	}
+	
 
 	const totalPricestr = totalPrice.toString();
 
@@ -60,7 +78,7 @@ function Choosepay() {
 						付款方式
 					</label>
 					<div className='flex'>
-						<div className='ml-[20%]'>
+						<div className='mx-auto'>
 							<input
 								type='radio'
 								id='online-payment'
@@ -72,7 +90,7 @@ function Choosepay() {
 							/>
 							<label htmlFor='online-payment'>信用卡付款</label>
 						</div>
-						<div className='ml-[20%]'>
+						{/* <div className='ml-[20%]'>
 							<input
 								type='radio'
 								id='in-person-payment'
@@ -83,7 +101,7 @@ function Choosepay() {
 								className='mr-2'
 							/>
 							<label htmlFor='in-person-payment'>臨櫃付款</label>
-						</div>
+						</div> */}
 					</div>
 				</div>
 

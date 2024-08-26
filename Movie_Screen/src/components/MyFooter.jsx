@@ -25,7 +25,7 @@ function MyFooter() {
                         <h3 className="text-lg font-semibold mb-4">其他資訊</h3>
                         <ul>
                             <li><a href="#" className="hover:text-gray-300">常見問題</a></li>
-                            <li><a href="#" className="hover:text-gray-300">口述影像</a></li>
+                            <li><a href="/AudioDescriptionInfo" className="hover:text-gray-300">口述影像</a></li>
                         </ul>
                     </div>
                 </div>
