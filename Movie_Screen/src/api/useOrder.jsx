@@ -11,7 +11,7 @@ export const useUserOrders = () => {
 		queryKey: ['userOrders'],
 		queryFn: async () => {
 			const data = await fetchOrders();
-			console.log('Fetched orders:', data); // Add this line
+			// console.log('Fetched orders:', data); // Add this line
 			return data;
 		},
 	});

@@ -42,7 +42,7 @@ const OrderCard = ({ order, width = 'w-full' }) => {
 				</div>
 				<div>
 					<div className='flex-row'>
-						<p>payment success</p>
+						<p>訂單成功</p>
 					</div>
 				</div>
 			</CardHeader>
@@ -56,12 +56,19 @@ const OrderCard = ({ order, width = 'w-full' }) => {
 					{orderDetails.date || 'N/A'} {'  '} {orderDetails.time || 'N/A'}
 				</p>
 				<p className='text-sm tracking-tight text-slate-500'>座位</p>
-				<p className='flex indent-4 text-sm list-none tracking-tight text-zinc-800'>
-					{selectedSeats.map((seat, index) => (
-						<li key={index}>座位: {seat}</li>
-					))}
+				<p className='indent-4 text-sm text-zinc-800'>
+					<span>座位：</span>
+					{selectedSeats.length > 0 ? (
+						selectedSeats.map((seat, index) => (
+							<span key={index}>
+								{seat}
+								{index < selectedSeats.length - 1 ? ', ' : ''}
+							</span>
+						))
+					) : (
+						<span>無座位</span>
+					)}
 				</p>
-
 				<div
 					className='py-2 flex items-center justify-center cursor-pointer hover:text-gray-500 transition-colors duration-200'
 					onClick={toggleExpand}
@@ -108,11 +115,15 @@ const OrderCard = ({ order, width = 'w-full' }) => {
 								{ticketCounts.love > 0 && (
 									<li>愛心票: {ticketCounts.love} 張</li>
 								)}
-								{selectedFoods.map((food, index) => (
-									<li key={index}>
-										餐點： {food.name} - 數量: {food.quantity}
-									</li>
-								))}
+								{selectedFoods.length > 0 ? (
+									selectedFoods.map((food, index) => (
+										<li key={index}>
+											餐點：{food.name} - 數量: {food.quantity}
+										</li>
+									))
+								) : (
+									<li>餐點: 無餐點</li>
+								)}
 							</p>
 							<p className='text-sm tracking-tight text-slate-500'>
 								訂單編號：

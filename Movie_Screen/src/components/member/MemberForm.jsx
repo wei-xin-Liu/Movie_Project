@@ -58,11 +58,11 @@ const MemberForm = () => {
 		if (userData) {
 			setUser(userData);
 		}
-		console.log('userData:', userData); //not defined
-		// console.log(userData.name);
-		console.log('userData:', token);
-		console.log(user); //
-		console.log(userData?.user.name);
+		// console.log('userData:', userData); //not defined
+		// // console.log(userData.name);
+		// console.log('userData:', token);
+		// console.log(user); //
+		// console.log(userData?.user.name);
 	}, [userData, setUser]);
 
 	useEffect(() => {

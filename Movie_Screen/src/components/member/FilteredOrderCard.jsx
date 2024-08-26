@@ -90,7 +90,7 @@ export function UpcomingOrdersCard() {
 		</>
 	);
 }
-export function PastOrdersCard() {
+export function PastOrdersCard({ width }) {
 	const { data: orders, isLoading, error } = useUserOrders();
 	const [pastOrders, setPastOrders] = useState([]);
 
@@ -122,7 +122,9 @@ export function PastOrdersCard() {
 	return (
 		<>
 			{pastOrders.length > 0 ? (
-				pastOrders.map((order) => <OrderCard key={order.oid} order={order} />)
+				pastOrders.map((order) => (
+					<OrderCard key={order.oid} order={order} width={width} />
+				))
 			) : (
 				<div>No past orders</div>
 			)}

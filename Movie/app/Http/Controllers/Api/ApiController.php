@@ -72,20 +72,22 @@ class ApiController extends Controller
     // Logout API - GET (JWT Auth Token)
     public function logout()
     {
-
         auth()->logout();
 
         try {
             JWTAuth::invalidate(JWTAuth::getToken());
             return response()->json([
                 'status' => true,
-                'message' => 'Successfully logged out'
+                'message' => 'Successfully logged out',
             ]);
         } catch (JWTException $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Failed to logout',
-            ], 500);
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Failed to logout',
+                ],
+                500
+            );
         }
     }
 
@@ -111,19 +113,22 @@ class ApiController extends Controller
     {
         try {
             $token = JWTAuth::parseToken()->refresh();
-            
+
             return response()->json([
                 'status' => true,
                 'message' => 'Token refreshed successfully',
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => auth()->factory()->getTTL() * 60
+                'expires_in' => auth()->factory()->getTTL() * 60,
             ]);
         } catch (JWTException $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Could not refresh token',
-            ], 401);
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Could not refresh token',
+                ],
+                401
+            );
         }
     }
 

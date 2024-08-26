@@ -6,6 +6,11 @@ import ExpandableCard from './ExpandableCard.jsx';
 import useUserData from '../../api/useUserData.jsx';
 import useLogout from '../../api/useLogout.jsx';
 import { useStateContext } from '../../context/ContextProvider.jsx';
+import {
+	MostRecentOrderCard,
+	UpcomingOrdersCard,
+	PastOrdersCard,
+} from '../member/FilteredOrderCard.jsx';
 
 const MemberTop = () => {
 	const { user, token, setUser, setToken } = useStateContext();
@@ -18,7 +23,7 @@ const MemberTop = () => {
 		}
 	}, [userData, setUser]);
 
-	console.log(userData?.name);
+	// console.log(userData?.name);
 
 	if (!token) {
 		<Navigate to='/signin' />; // Redirect to login if token is not available
@@ -123,9 +128,8 @@ const MemberTop = () => {
 									最新訂單
 								</p>
 
-								<div className='flex mt-6 py-4 justify-center item-center'>
-									<ExpandableCard width='w-full' />
-								</div>
+								<div className='flex mt-6 py-4 justify-center item-center'></div>
+								<MostRecentOrderCard />
 							</div>
 						</div>
 					</div>

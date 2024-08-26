@@ -7,12 +7,19 @@ import MemberSeen from './MemberSeen.jsx';
 const MemberData = () => {
 	const [selectedPart, setSelectedPart] = useState('info');
 	const handleScrollToSection = (sectionId) => {
-		setTimeout(() => {
-			const element = document.getElementById(sectionId);
-			if (element) {
+		const element = document.getElementById(sectionId);
+
+		if (element) {
+			// Check if the element is already in view
+			const rect = element.getBoundingClientRect();
+			const isInView = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+			if (!isInView) {
 				element.scrollIntoView({ behavior: 'smooth', block: 'end' });
 			}
-		}, 1100); // 1-second delay
+		} else {
+			console.warn(`Element with ID ${sectionId} not found.`);
+		}
 	};
 
 	const showComponent = () => {
@@ -45,19 +52,6 @@ const MemberData = () => {
 				</Button>
 				<Button
 					className={` px-4 py-2 text-base tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
-						selectedPart === 'reward'
-							? 'text-[#415a77] border-b-[7px] border-[#415a77]'
-							: ''
-					}`}
-					onPress={() => {
-						setSelectedPart('reward');
-						handleScrollToSection('reward-section');
-					}}
-				>
-					紅利點數
-				</Button>
-				<Button
-					className={` px-4 py-2 text-base tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
 						selectedPart === 'seen'
 							? 'text-[#415a77] border-b-[7px] border-[#415a77]'
 							: ''
@@ -68,6 +62,19 @@ const MemberData = () => {
 					}}
 				>
 					觀影記錄
+				</Button>
+				<Button
+					className={` px-4 py-2 text-base tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
+						selectedPart === 'reward'
+							? 'text-[#415a77] border-b-[7px] border-[#415a77]'
+							: ''
+					}`}
+					onPress={() => {
+						setSelectedPart('reward');
+						handleScrollToSection('reward-section');
+					}}
+				>
+					紅利點數
 				</Button>
 			</ButtonGroup>
 			<hr className='mt-0' />

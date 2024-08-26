@@ -26,7 +26,7 @@ const LogInPage = () => {
 		) {
 			navigate(-1);
 		} else {
-			navigate('/'); // or some other safe fallback route
+			navigate(0); // or some other safe fallback route
 		}
 	};
 
