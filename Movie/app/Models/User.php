@@ -63,8 +63,8 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    public function tickets()
+    public function orders()
     {
-        return $this->hasMany(Tickets::class);
+        return $this->hasMany(MemberOrder::class, 'user_id');
     }
 }

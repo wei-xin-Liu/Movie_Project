@@ -18,9 +18,15 @@ import Bluepay from './pages/Bluepay';
 import Bluepaysuccess from './pages/Bluepaysuccess';
 import Choosepay from './pages/Choosepay';
 import MemberPage from './pages/MemberPage';
-import LogInCard from './components/member/LogInCard';
-import RegistrationCard from './components/member/RegistrationCard';
+import LogInPage from './pages/LogInPage';
+import RegistrationPage from './pages/RegistrationPage';
 import NotFound from './pages/NotFound';
+import GoogleError from './pages/GoogleError';
+import GoogleBtn from './components/member/GoogleBtn';
+import AuthCallBack from './api/AuthCallBack';
+import AuthError from './pages/AuthError';
+import GoPay from './pages/GoPay';
+import ShowOrder from './pages/ShowOrder';
 
 const routes = createBrowserRouter([
 	{
@@ -84,6 +90,34 @@ const routes = createBrowserRouter([
 				element: <Bluepaysuccess />,
 			},
 			{
+				path: '/GoogleBtn',
+				element: <GoogleBtn />,
+			},
+			{
+				path: '/googleerror',
+				element: <GoogleError />,
+			},
+			{
+				path: '/auth-callback',
+				element: <AuthCallBack />,
+			},
+			{
+				path: '/autherror',
+				element: <AuthError />,
+			},
+			{
+				path: '/gopay',
+				element: <GoPay />,
+			},
+			{
+				path: '/showorder',
+				element: <ShowOrder />,
+			},
+			{
+				path: '*',
+				element: <NotFound />,
+			},
+			{
 				path: '/member',
 				element: <ProtectedRoute element={<MemberPage />} />,
 			},
@@ -95,15 +129,11 @@ const routes = createBrowserRouter([
 		children: [
 			{
 				path: '/login',
-				element: <LogInCard />,
+				element: <LogInPage />,
 			},
 			{
 				path: '/register',
-				element: <RegistrationCard />,
-			},
-			{
-				path: '*',
-				element: <NotFound />,
+				element: <RegistrationPage />,
 			},
 		],
 	},

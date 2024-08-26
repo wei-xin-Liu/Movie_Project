@@ -16,7 +16,7 @@ function Program({
 	iframe,
 	e_title,
 	theaters,
-	rating
+	rating,
 }) {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [selectedDateIdx, setSelectedDateIdx] = useState(0);
@@ -24,7 +24,6 @@ function Program({
 
 	const { selectedTicket, setSelectedTicket } = useContext(TicketContext);
 	const navigate = useNavigate();
-
 	const toggleMovieText = () => setIsExpanded(!isExpanded);
 
 	// 從今天開始的未來7天供用戶選擇
@@ -59,6 +58,7 @@ function Program({
 			MID,
 			time,
 			title,
+			e_title,
 			theater,
 		});
 		navigate('/ticketing');
@@ -87,17 +87,17 @@ function Program({
 					<div className="mt-[2%] font-bold">
 						<InfoRow label="級別">
 							<img
-								className="w-[50px] md:w-[40px] sm:w-[30px]"
+								className='w-[50px] md:w-[40px] sm:w-[30px]'
 								src={`/${rating.ratingimgurl}`}
 								alt={rating.ratingiddesc}
 							/>
 						</InfoRow>
-						<InfoRow label="片長">{movieLength}分鐘</InfoRow>
-						<InfoRow label="上映日">{release_date}</InfoRow>
-						<InfoRow label="類型">{genre}</InfoRow>
-						<InfoRow label="演員">{actor}</InfoRow>
-						<InfoRow label="導演">{director}</InfoRow>
-						<InfoRow label="簡介">
+						<InfoRow label='片長'>{movieLength}分鐘</InfoRow>
+						<InfoRow label='上映日'>{release_date}</InfoRow>
+						<InfoRow label='類型'>{genre}</InfoRow>
+						<InfoRow label='演員'>{actor}</InfoRow>
+						<InfoRow label='導演'>{director}</InfoRow>
+						<InfoRow label='簡介'>
 							<p
 								id="movieText"
 								className={`mr-[5%] movieText ${isExpanded ? 'expanded' : ''
@@ -106,9 +106,9 @@ function Program({
 								{description}
 							</p>
 							<button
-								id="btnmovieText"
+								id='btnmovieText'
 								onClick={toggleMovieText}
-								className="
+								className='
 									min-w-[100px]
 									w-[30%]
 									sm:min-w-[60px]
@@ -123,7 +123,7 @@ function Program({
 									overflow-hidden
 									truncate
 									text-center
-								"
+								'
 							>
 								{isExpanded ? '更少...' : '更多...'}
 							</button>
@@ -148,8 +148,8 @@ function Program({
 			</div>
 
 			<div
-				id="chooseticket"
-				className="flex mt-[2%] ml-[5%] overflow-x-auto whitespace-nowrap"
+				id='chooseticket'
+				className='flex mt-[2%] ml-[5%] overflow-x-auto whitespace-nowrap'
 			>
 				{weekDates.map(({ dateString, dayString }, index) => (
 					<button
@@ -177,17 +177,19 @@ function Program({
 				))}
 			</div>
 
-			<div className="mt-[2%] ml-[5%]">
+			<div className='mt-[2%] ml-[5%]'>
 				{Object.keys(theaters).map((theater, index) => (
-					<div key={index} className="mb-[2%]">
-						<h3 className="font-bold">{theater}</h3>
-						<div className="flex flex-wrap">
+					<div key={index} className='mb-[2%]'>
+						<h3 className='font-bold'>{theater}</h3>
+						<div className='flex flex-wrap'>
 							{theaters[theater].map((time, idx) => {
 								const isPastShowtime =
 									selectedDateIdx === 0 &&
 									(() => {
 										const now = new Date();
-										const [hours, minutes, seconds] = time.split(':').map(Number);
+										const [hours, minutes, seconds] = time
+											.split(':')
+											.map(Number);
 										const showTime = new Date();
 										showTime.setHours(hours, minutes, seconds, 0);
 
@@ -211,8 +213,7 @@ function Program({
 											border-indigo-500
 											hover:scale-[1.1]
 											hover:bg-indigo-500
-											truncate ${isPastShowtime ? 'opacity-50 cursor-not-allowed' : ''
-										}`}
+											truncate ${isPastShowtime ? 'opacity-50 cursor-not-allowed' : ''}`}
 									>
 										{time.substring(0, 5)}
 									</button>

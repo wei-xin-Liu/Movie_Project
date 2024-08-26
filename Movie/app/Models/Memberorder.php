@@ -11,11 +11,12 @@ class Memberorder extends Model
 
     protected $table = 'memberorder';
 
-    protected $fillable = [
-        'member_id',
-        'detail',
-        'totalPrice'
-    ];
+    protected $fillable = ['detail', 'totalPrice', 'user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public $timestamps = false;
 }

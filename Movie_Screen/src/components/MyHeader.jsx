@@ -10,7 +10,7 @@ function MyHeader() {
 	// console.log(isMobileMenuOpen);
 
 	const openMenu = (event) => {
-		event.stopPropagation(); // Prevent event from affecting other elements
+		// event.stopPropagation(); // Prevent event from affecting other elements
 		setIsMobileMenuOpen(true);
 	};
 	const closeMenu = () => setIsMobileMenuOpen(false);
@@ -28,7 +28,7 @@ function MyHeader() {
 	};
 
 	const handleLoginLogout = (event) => {
-		event.stopPropagation(); // Prevent event from affecting other elements
+		// event.stopPropagation(); // Prevent event from affecting other elements
 		if (token) {
 			onLogout();
 		} else {
@@ -78,7 +78,11 @@ function MyHeader() {
 							{token ? '會員登出' : '會員登入'}
 						</div>
 
-						{isLogInCardVisible && !token && <LogInCard />}
+						{isLogInCardVisible && !token && (
+							<div>
+								<LogInCard />
+							</div>
+						)}
 					</div>
 				</div>
 				<button className='md:hidden focus:outline-none' onClick={openMenu}>

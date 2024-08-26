@@ -8,7 +8,6 @@ export const TicketContext = createContext();
 function Program() {
 	const [movies, setMovies] = useState(null);
 	const { id } = useParams();
-
 	// 獲取單部電影資訊
 	useEffect(() => {
 		axios
