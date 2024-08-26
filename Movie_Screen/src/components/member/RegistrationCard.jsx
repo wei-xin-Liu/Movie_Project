@@ -46,7 +46,7 @@ const RegistrationCard = () => {
 						}`}
 					>
 						<Card className='sm:w-[450px] max-h-screen'>
-							<CardHeader className='flex items-center justify-between h-15 gap-3 bg-indigo-600'>
+							<CardHeader className='flex items-center justify-between h-15 gap-3 bg-[#1d3461]/95'>
 								<IconMovie
 									className='mr-3 text-white w-[40px] h-[40px]'
 									stroke={1.75}
@@ -68,7 +68,7 @@ const RegistrationCard = () => {
 							<CardFooter className='flex justify-end'>
 								<button
 									onClick={() => setShowLogInCard(true)}
-									className='text-blue-600 text-sm'
+									className='text-blue-500 text-sm'
 								>
 									<span className='text-zinc-400 no-underline'>
 										已經是會員?

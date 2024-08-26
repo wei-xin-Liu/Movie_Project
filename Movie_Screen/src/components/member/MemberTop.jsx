@@ -136,7 +136,7 @@ const MemberTop = () => {
 									最新訂單
 								</p>
 
-								<div className='flex mt-6 py-4 justify-center item-center'></div>
+								<div className='flex mt-3 py-2 justify-center item-center'></div>
 								<MostRecentOrderCard />
 							</div>
 						</div>

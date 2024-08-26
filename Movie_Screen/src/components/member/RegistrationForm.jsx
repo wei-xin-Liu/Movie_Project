@@ -187,7 +187,7 @@ const RegistrationForm = () => {
 						type='submit'
 						disableRipple
 						// onPress={closeModal}
-						className='w-[400px] height-[40px] px-4  bg-indigo-600 text-white rounded'
+						className='w-[400px] height-[40px] px-4   bg-[#6290c8]/95 text-white rounded'
 					>
 						註冊
 					</Button>

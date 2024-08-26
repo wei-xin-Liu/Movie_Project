@@ -47,7 +47,7 @@ const RegistrationPage = () => {
 		<div>
 			{/* <button
 				onClick={openModal}
-				className='px-4 py-2 bg-indigo-600 text-white rounded'
+				className='px-4 py-2 bg-[#415a77]/80 text-white rounded'
 			>
 				Show Card
 			</button> */}
@@ -64,7 +64,7 @@ const RegistrationPage = () => {
 					className={`fixed top-[8%]  left-1/2 transform -translate-x-1/2 transition-all duration-500`}
 				>
 					<Card className='sm:w-[450px]  max-h-screen'>
-						<CardHeader className='flex items-center justify-between h-15 gap-3 bg-indigo-600'>
+						<CardHeader className='flex items-center justify-between h-15 gap-3 bg-[#415a77]/80'>
 							<IconMovie
 								className='mr-3 text-white w-[40px] h-[40px]'
 								stroke={1.75}
