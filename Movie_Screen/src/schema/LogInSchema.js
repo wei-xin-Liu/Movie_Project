@@ -1,18 +1,15 @@
 import * as yup from 'yup';
 
 const LogInSchema = yup.object().shape({
-	email: yup
-		.string()
-		.email('Invalid email address')
-		.required('Email is required'),
+	email: yup.string().email('電子郵件地址無效').required('電子郵件是必需的'),
 	password: yup
 		.string()
-		.required('Password is required')
-		.min(8, 'Password must be at least 8 characters')
-		.max(20, 'Password must be at most 20 characters')
+		.required('密碼是必需的')
+		.min(8, '密碼必須至少 8 個字符')
+		.max(20, '密碼最多 20 個字符')
 		.matches(
 			/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/,
-			'Password must include at least one letter and one number, and can only contain letters and numbers'
+			'密碼必須包含至少一個字母和一個數字，且只能包含字母和數字'
 		),
 });
 

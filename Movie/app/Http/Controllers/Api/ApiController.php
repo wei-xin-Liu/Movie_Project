@@ -24,7 +24,7 @@ class ApiController extends Controller
             return response()->json(
                 [
                     'status' => false,
-                    'message' => 'Invalid Email or Password. Please try again',
+                    'message' => '無效的電子郵件或密碼。請再試一次',
                 ],
                 422
             );
@@ -38,7 +38,8 @@ class ApiController extends Controller
         // return response(compact('user', 'token'));
         return response([
             'status' => true,
-            'message' => 'User logged in successfully',
+            'message' => '會員登入成功',
+
             'data' => [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -67,7 +68,7 @@ class ApiController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'User registered successfully',
+            'message' => '會員註冊成功',
             'data' => [
                 'user' => $user,
                 'token' => $token,
@@ -85,13 +86,13 @@ class ApiController extends Controller
             JWTAuth::invalidate(JWTAuth::getToken());
             return response()->json([
                 'status' => true,
-                'message' => 'Successfully logged out',
+                'message' => '登出成功',
             ]);
         } catch (JWTException $e) {
             return response()->json(
                 [
                     'status' => false,
-                    'message' => 'Failed to logout',
+                    'message' => '登出失敗',
                 ],
                 500
             );
