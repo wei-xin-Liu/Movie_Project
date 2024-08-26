@@ -106,6 +106,7 @@ function QuickBuy() {
 			MID: selectedMovieId,
 			time,
 			title: selectedMovieTitle,
+			e_title: onemovie.e_title,
 			theater,
 		});
 		navigate('/ticketing');

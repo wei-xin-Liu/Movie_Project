@@ -12,7 +12,7 @@ function Choosepay() {
 	filteredEntries.map(([key, value]) => {
 		// "adult":1,"student":0,"early":0,"love":0
 		if (key == "adult") {
-			key = "成人票"
+			key = "全票"
 		}
 		else if (key == "student") {
 			key = "學生票"
@@ -26,11 +26,11 @@ function Choosepay() {
 		return (itemDescArray += `${key}x${value}, \n`)
 	});
 
-	
+
 	for (let index = 0; index < selectedFoods.length; index++) {
 		itemDescArray += `${selectedFoods[index].name}x${selectedFoods[index].quantity}, \n`;
 	}
-	
+
 
 	const totalPricestr = totalPrice.toString();
 
@@ -88,7 +88,7 @@ function Choosepay() {
 								onChange={(e) => setPaymentMethod(e.target.value)}
 								className='mr-2'
 							/>
-							<label htmlFor='online-payment'>信用卡付款</label>
+							<label htmlFor='online-payment'>線上付款</label>
 						</div>
 						{/* <div className='ml-[20%]'>
 							<input
@@ -108,16 +108,12 @@ function Choosepay() {
 				<button
 					type='submit'
 					className='
-                        bg-transparent
-                        hover:bg-teal-600
-                        text-teal-600
+                        bg-[#0466c8]
+                        hover:bg-[#0466c8]/[0.8]                   
                         font-semibold
-                        hover:text-white
+                        text-white
                         py-2
                         px-4
-                        border
-                        border-teal-600
-                        hover:border-transparent
                         rounded
                     '
 				>
