@@ -50,7 +50,7 @@ const LogInForm = ({ closeModal }) => {
 			setSuccessMessage('使用者登入成功');
 			setTimeout(() => {
 				closeModal(); // Close the modal after success
-				navigate(0);
+				navigate(-1);
 				// Conditionally navigate based on current path
 				// if (location.pathname === '/seat') {
 				// 	navigate(-1);
