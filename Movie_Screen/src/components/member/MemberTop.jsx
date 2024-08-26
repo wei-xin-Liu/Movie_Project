@@ -58,22 +58,30 @@ const MemberTop = () => {
 
 	return (
 		<>
-			<div className='w-[90%]'>
-				<header className='mt-6 py-2 w-36 h-16 md:w-48 md:ml-10 md:px-5 md:py-4 text-2xl bg-[#8e9aaf]  text-white text-center border-1  border-[#415a77] rounded-md'>
-					會員中心
+			<div className='w-[85%] mx-auto border-b-1 border-[#002855]/80 h-16 mt-8'>
+				<header className='flex items-center justify-center my-5 py-2 w-36 h-14 md:w-40 md:ml-0 md:p-5 md:mt-10 md:mb-10 border-b-3 border-1 bg-[#415a77]/80 border-[#415a77]/80 rounded-sm'>
+					<p className='flex justify-center items-center text-center text-2xl text-white '>
+						會員中心
+					</p>
 				</header>
 			</div>
-			<div className='flex justify-center mt-4'>
-				<div className='flex container mx-auto w-[80%]'>
-					<div className='flex-row w-1/3 h-min py-3 mx-3 mr-2 flex-1 overflow-auto  border-1.5 border-zinc-400'>
+			<div className='flex justify-center mt-10'>
+				<div className='flex container mx-auto w-[75%]'>
+					<div className='flex-row w-1/3 h-min py-3 mx-3 mr-5 flex-1 overflow-auto  border-1 border-[#002855]/80'>
 						<div className='py-2 px-5 align-middle'>
 							<div className='text-lg text-slate-700 font-bold'>
 								Hello! 親愛的會員{' '}
-								<p className='text-2xl indent-2'> {userData?.name} </p>
+								<p className='mt-4 text-2xl indent-2 text-[#415a77]/90'>
+									{' '}
+									{userData?.name}{' '}
+								</p>
 							</div>
 							<p className='text-lg text-slate-700 font-bold mt-3'>
 								會員信箱：
-								<span className='text-xl indent-2'> {userData?.email} </span>
+								<span className='text-xl indent-2 text-[#415a77]/90'>
+									{' '}
+									{userData?.email}{' '}
+								</span>
 							</p>
 						</div>
 						<div className='mt-2'>
@@ -97,13 +105,13 @@ const MemberTop = () => {
 						<div className='flex justify-center mt-2'>
 							<Button
 								onPress={onLogout}
-								className='text-center text-slate-100 bg-blue-500 w-full h-11 mx-2 rounded-sm'
+								className='text-center text-slate-100 bg-[#0488c8] w-full h-11 mx-2 rounded-sm'
 							>
 								登出
 							</Button>
 						</div>
 					</div>
-					<div className='flex w-2/3  border-1.5 border-zinc-400 min-h-max  max-h-screen'>
+					<div className='flex w-2/3  border-1 border-[#002855]/80 min-h-max  max-h-screen'>
 						<div className='w-1/2 py-3 overflow-auto '>
 							<div className='py-2 px-8 align-middle'>
 								<p className='text-2xl text-slate-700 font-bold text-center'>
@@ -117,7 +125,7 @@ const MemberTop = () => {
 								</p>
 							</div>
 							<div className='flex justify-center mt-8'>
-								<Button className='text-center bg-transparent text-[#415a77] border-1 border-[#415a77]  w-full h-11 mx-2 rounded-sm   transition-colors duration-150 ease-in-out hover:bg-[#415a77] hover:text-white hover:border-gray-300 focus:outline-none focus:ring-0'>
+								<Button className='text-center bg-transparent   text-[#415a77] border-1 border-[#415a77]  w-full h-11 ml-5 rounded-sm   transition-colors duration-150 ease-in-out hover:bg-[#415a77] hover:text-white hover:border-gray-300 focus:outline-none focus:ring-0'>
 									查看點數明細
 								</Button>
 							</div>

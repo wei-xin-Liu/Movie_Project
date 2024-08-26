@@ -33,7 +33,7 @@ const OrderCard = ({ order, width = 'w-full' }) => {
 		>
 			<CardHeader className='justify-between'>
 				<div className='flex-col'>
-					<p className='text-base tracking-tight text-blue-500'>
+					<p className='text-base tracking-tight text-[#0488c8]'>
 						{orderDetails.title || 'No Title'}
 					</p>
 					<p className='text-sm tracking-tight text-slate-500'>
@@ -42,7 +42,7 @@ const OrderCard = ({ order, width = 'w-full' }) => {
 				</div>
 				<div>
 					<div className='flex-row'>
-						<p>訂單成功</p>
+						<p className='text-sm text-zinc-600'>訂單成功</p>
 					</div>
 				</div>
 			</CardHeader>
@@ -74,9 +74,9 @@ const OrderCard = ({ order, width = 'w-full' }) => {
 					onClick={toggleExpand}
 				>
 					{expanded ? (
-						<IconArrowBadgeUp stroke={1.25} />
+						<IconArrowBadgeUp stroke={2} className='text-[#0488c8]' />
 					) : (
-						<IconArrowBadgeDown stroke={1.25} />
+						<IconArrowBadgeDown stroke={2} className='text-[#0488c8]' />
 					)}
 				</div>
 				{expanded && (

@@ -6,7 +6,7 @@ const MemberReward = () => {
 		return (
 			<div className='w-[80%] mx-auto'>
 				<div className='flex items-center justify-center my-5'>
-					<Spinner label='請稍後' color='primary' labelColor='primary' />
+					<Spinner label='請稍後' color='default' labelColor='default' />
 				</div>
 			</div>
 		);

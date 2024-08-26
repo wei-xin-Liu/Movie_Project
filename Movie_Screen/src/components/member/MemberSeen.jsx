@@ -12,7 +12,7 @@ const MemberSeen = () => {
 		return (
 			<div className='w-[80%] mx-auto'>
 				<div className='flex items-center justify-center my-5'>
-					<Spinner label='請稍後' color='primary' labelColor='primary' />
+					<Spinner label='請稍後' color='default' labelColor='default' />
 				</div>
 			</div>
 		);
@@ -71,8 +71,8 @@ const MemberSeen = () => {
 				<ButtonGroup radius='sm' className='my-3'>
 					<Button
 						className={`${
-							selectedButton === 'unwatch' ? 'bg-blue-700' : 'bg-blue-500'
-						}`}
+							selectedButton === 'unwatch' ? 'bg-[#0488c8]' : 'bg-[#415a77]/80'
+						} w-24 h-[44px] text-zinc-100 text-[16px]`}
 						onPress={() => {
 							setSelectedButton('unwatch');
 							handleScrollToSection('unwatch');
@@ -82,8 +82,8 @@ const MemberSeen = () => {
 					</Button>
 					<Button
 						className={`${
-							selectedButton === 'seen' ? 'bg-blue-700' : 'bg-blue-500'
-						}`}
+							selectedButton === 'seen' ? 'bg-[#0488c8]' : 'bg-[#415a77]/80'
+						} w-24 h-[44px] text-zinc-100 text-[16px]`}
 						onPress={() => {
 							setSelectedButton('seen');
 							handleScrollToSection('seen');
