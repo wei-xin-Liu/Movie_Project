@@ -36,14 +36,14 @@ function MyTop() {
                         fixed
                         bottom-5
                         right-5
-                        bg-blue-600
+                        bg-[#002855]
                         text-white
                         p-3
                         rounded-full
                         shadow-lg
                         transition-opacity
                         duration-300
-                        hover:bg-blue-600
+                        hover:bg-[#002855]
                         focus:outline-none
                         ${isVisible ? 'opacity-100' : 'opacity-0'
                     }`}

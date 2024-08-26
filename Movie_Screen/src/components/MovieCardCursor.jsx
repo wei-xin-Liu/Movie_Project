@@ -10,8 +10,11 @@ function MovieCardCursor() {
 			try {
 				const response = await axios.get('http://127.0.0.1:8000/api/movieTop');
 				// 假設 API 返回一個大的電影數組
-				const allMovies = response.data;
-
+				const allMovies = response.data.sort((a, b) =>
+					new Date(b.release_date) - new Date(a.release_date)
+				);
+				// setMovies(sortedMovies);
+				// const allMovies = response.data;
 				setMovies(allMovies);
 				// 將電影分組，每組4部電影
 				const groups = [];
@@ -96,7 +99,7 @@ function MovieCardCursor() {
 						{/* 輪播項目 */}
 						{movieGroups.map((group, index) => (
 							<div key={index} className="w-full flex-shrink-0 hidden md:block">
-								<div className="grid md:grid-cols-5 gap-4 h-full">
+								<div className="grid md:grid-cols-5 gap-8 h-full">
 									{group.map(({ MID, image, rating, title, e_title, release_date }) => (
 										<a href={`/program/${MID}`} key={MID} className="no-underline">
 											<div
@@ -118,21 +121,21 @@ function MovieCardCursor() {
 													<img className="absolute md:bottom-[-40px] right-2 w-8 z-10" src={rating.ratingimgurl} alt={rating.ratingdesc} />
 												</div>
 												<div className="h-full flex flex-col p-2">
-													<p className="text-red-900 text-xl">{title}</p>
-													<p className="text-red-600 text-xs">{e_title}</p>
+													<p className="text-[#172121] text-xl">{title}</p>
+													<p className="text-[#7F7b82] text-xs">{e_title}</p>
 													<div className="grow" />
 													<div className="content-center">
-														<p className="text-orange-800 text-1xl pt-2">上映日期：{release_date}</p>
+														<p className="text-[#002855] text-1xl pt-2">上映日期：{release_date}</p>
 													</div>
 												</div>
 												<button
 													className="
 														w-full
-														bg-indigo-600
+														bg-[#0466c8]
 														text-white
 														p-2
 														rounded-md
-														hover:bg-indigo-700
+														hover:bg-[#0466c8]/[0.8]
 														"
 												>
 													線上訂票

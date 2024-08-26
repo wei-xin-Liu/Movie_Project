@@ -18,7 +18,7 @@ class bluepay extends Controller
         // return $request;
         // $sensitiveData = $request->Status;
         // $request->session()->put('payment_data', $sensitiveData);        
-        return redirect()->away('https://516f-118-163-218-100.ngrok-free.app/Bluepaysuccess');
+        return redirect()->away('http://localhost:5173/Bluepaysuccess');
     }
 
     // public function getPaymentData(Request $request)
@@ -56,7 +56,7 @@ class bluepay extends Controller
             'CVS' => '1',
             'CREDIT' => '1',
             // 'ClientBackURL' => 'https://2139-118-163-218-100.ngrok-free.app/',
-            'ReturnURL' => 'https://2e72-118-163-218-100.ngrok-free.app/Movie_Project/Movie/public/api/bluepaysuccessful',
+            'ReturnURL' => ' https://3996-123-205-23-185.ngrok-free.app/Movie_Project/Movie/public/api/bluepaysuccessful',
             'InstFlag' => '0',
             'ItemDesc' => $ticket["itemDescArray"],
         ]);

@@ -4,7 +4,7 @@ import "../css/TheaterInfo_News_Audio.css";
 function New2() {
     return (
         <React.Fragment>
-            <div className="container loca w-[80%] block">
+            <div className="mx-[10%]">
                 <time className="newsTime text-gray-400 tracking-[1.5px] p-[0.5%] mt-[2%]">2023/10/02</time>
                 <h1 className="newsH1 text-[#2f96ee] block text-[2em] my-[0.67em] font-bold">iShow會員權益公告</h1>
                 <p>第一影城為提供更多元便利的服務，非iShow會員無法使用線上訂票功能。原申辦網路會員者敬請於112/12/31(日)前免費辦理升級成為iShow會員，
