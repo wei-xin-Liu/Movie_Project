@@ -138,13 +138,13 @@ const ShowOrder = ({ width }) => {
 														訂單編號：
 													</p>
 													<p className='indent-4 text-sm tracking-tight text-zinc-800'>
-														4146933
+														{order.oid}
 													</p>
 													<p className='text-sm tracking-tight text-slate-500'>
 														訂單時間：
 													</p>
 													<p className='indent-4 text-sm tracking-tight text-zinc-800'>
-														2024/08/12 09:16:33
+														{order.createTime}
 													</p>
 													<p className='text-sm tracking-tight text-slate-500'>
 														金額：
