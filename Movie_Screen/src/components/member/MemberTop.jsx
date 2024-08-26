@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import barcode from '../../img/barcode.png';
 import { Navigate } from 'react-router-dom';
-import { Button } from '@nextui-org/button';
+import { Button, Progress } from '@nextui-org/react';
 import ExpandableCard from './ExpandableCard.jsx';
 import useUserData from '../../api/useUserData.jsx';
 import useLogout from '../../api/useLogout.jsx';
@@ -11,20 +11,26 @@ import {
 	UpcomingOrdersCard,
 	PastOrdersCard,
 } from '../member/FilteredOrderCard.jsx';
+import { jwtDecode } from 'jwt-decode';
+import useTotalPoints from '../../api/useTotalPoint.jsx';
 
 const MemberTop = () => {
 	const { user, token, setUser, setToken } = useStateContext();
 	const { data: userData, error, isLoading } = useUserData();
-	const logoutMutation = useLogout();
 
+	const { data: points } = useTotalPoints();
+	const logoutMutation = useLogout();
+	// console.log(points);
+	const decodedToken = jwtDecode(token);
+	console.log(decodedToken);
 	useEffect(() => {
 		if (userData && userData.data) {
 			setUser(userData && userData.data);
 		}
 	}, [userData, setUser]);
 
+	if (isLoading) return <div>Loading...</div>;
 	// console.log(userData?.name);
-
 	if (!token) {
 		<Navigate to='/signin' />; // Redirect to login if token is not available
 	}
@@ -43,7 +49,6 @@ const MemberTop = () => {
 	// const onLogout = () => {
 	// 	mutation.mutate(); // Trigger the mutation when the button is clicked
 	// };
-
 	const onLogout = () => {
 		logoutMutation.mutate(); // Trigger the mutation when the button is clicked
 	};
@@ -121,8 +126,22 @@ const MemberTop = () => {
 							<div className='flex mt-6 py-4 justify-center item-center'>
 								<p className='text-center text-2xl text-slate-700  tracking-[.45em]'>
 									{' '}
-									共 <span>0</span> 點{' '}
+									共 <span>{points}</span> 點{' '}
 								</p>
+							</div>
+							<div className='mx-[5%] my-4 flex justify'>
+								<Progress
+									size='md'
+									aria-label='Loading...'
+									value={50}
+									classNames={{
+										base: 'max-w-lg',
+										track: 'drop-shadow-md border border-default',
+										indicator: 'bg-indigo-500',
+										label: 'tracking-wider font-medium text-default-600',
+										value: 'text-foreground/60',
+									}}
+								/>
 							</div>
 							<div className='flex justify-center mt-8'>
 								<Button className='text-center bg-transparent   text-[#415a77] border-1 border-[#415a77]  w-full h-11 ml-5 rounded-sm   transition-colors duration-150 ease-in-out hover:bg-[#415a77] hover:text-white hover:border-gray-300 focus:outline-none focus:ring-0'>

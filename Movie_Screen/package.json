@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
+    "@nextui-org/progress": "^2.0.33",
     "@nextui-org/react": "^2.4.6",
     "@react-oauth/google": "^0.12.1",
     "@tabler/icons-react": "^3.12.0",
@@ -19,6 +20,7 @@
     "date-fns": "^3.6.0",
     "esbuild-wasm": "^0.23.1",
     "framer-motion": "^11.3.28",
+    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-google-button": "^0.8.0",

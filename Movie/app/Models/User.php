@@ -60,11 +60,32 @@ class User extends Authenticatable implements JWTSubject
             'name' => $this->name, // User's name
             'email' => $this->email, // User's email
             'iat' => time(), // Issued at time
+            'membership_level' => $this->getMembershipLevel(),
         ];
     }
 
     public function orders()
     {
         return $this->hasMany(MemberOrder::class, 'user_id');
+    }
+
+    // Calculate the total reward points for the user
+    public function getTotalRewardPoints()
+    {
+        return $this->orders->sum('rewardPoint');
+    }
+
+    // Determine the membership level based on total reward points
+    public function getMembershipLevel()
+    {
+        $points = $this->getTotalRewardPoints();
+
+        if ($points > 1000) {
+            return 'gold';
+        } elseif ($points >= 500) {
+            return 'silver';
+        } else {
+            return 'normal';
+        }
     }
 }

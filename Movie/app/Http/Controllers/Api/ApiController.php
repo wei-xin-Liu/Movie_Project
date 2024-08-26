@@ -33,6 +33,7 @@ class ApiController extends Controller
         // Get the authenticated user
         $user = JWTAuth::user();
         $token = JWTAuth::fromUser($user);
+        $membershipLevel = $user->getMembershipLevel();
 
         // return response(compact('user', 'token'));
         return response([
@@ -41,8 +42,9 @@ class ApiController extends Controller
             'data' => [
                 'id' => $user->id,
                 'name' => $user->name,
-                'user' => $user,
+                // 'user' => $user,
                 'token' => $token,
+                'membership_level' => $membershipLevel,
             ],
             'expires_in' => auth()->factory()->getTTL() * 60,
         ]);
@@ -59,6 +61,7 @@ class ApiController extends Controller
         ]);
 
         $token = JWTAuth::fromUser($user);
+        $membershipLevel = $user->getMembershipLevel();
 
         return response()->json([
             'status' => true,
@@ -67,6 +70,7 @@ class ApiController extends Controller
                 'user' => $user,
                 'token' => $token,
             ],
+            'membership_level' => $membershipLevel,
         ]);
     }
     // Logout API - GET (JWT Auth Token)
@@ -97,6 +101,7 @@ class ApiController extends Controller
         $userData = request()->user();
         $user = JWTAuth::user();
         $token = JWTAuth::fromUser($user);
+        $membershipLevel = $user->getMembershipLevel();
 
         return response()->json([
             'status' => true,
@@ -106,6 +111,7 @@ class ApiController extends Controller
             'name' => request()->user()->name,
             'email' => request()->user()->email,
             'token' => $token,
+            'membership_level' => $membershipLevel,
         ]);
     }
 
@@ -189,6 +195,15 @@ class ApiController extends Controller
             );
         }
     }
+
+    public function getTotalPoints()
+    {
+        $user = auth()->user();
+        return response()->json([
+            'total_points' => $user->getTotalRewardPoints(),
+        ]);
+    }
+
     // public function me()
     // {
     //     // // Get the authenticated user from the token

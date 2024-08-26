@@ -41,9 +41,9 @@ const LogInForm = ({ closeModal }) => {
 		onSuccess: ({ data }) => {
 			console.log('login success', data);
 			// localStorage.setItem('ACCESS_TOKEN', data.token);
-			setToken(data.token);
-			setUser(data.user.name);
-			console.log('token', token);
+			// setToken(data.token);
+			// setUser(data.user.name);
+			// console.log('token', token);
 			// console.log('from data name', data.user.name); //correct
 			reset();
 			setGeneralError('');

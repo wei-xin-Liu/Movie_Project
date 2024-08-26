@@ -68,5 +68,6 @@ Route::group(
             MemberorderController::class,
             'memberOrder',
         ]);
+        Route::get('/user/points', [ApiController::class, 'getTotalPoints']);
     }
 );
