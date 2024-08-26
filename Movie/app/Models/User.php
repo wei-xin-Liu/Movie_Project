@@ -81,11 +81,11 @@ class User extends Authenticatable implements JWTSubject
         $points = $this->getTotalRewardPoints();
 
         if ($points > 1000) {
-            return 'gold';
+            return '金金會員';
         } elseif ($points >= 500) {
-            return 'silver';
+            return '紫紫會員';
         } else {
-            return 'normal';
+            return '藍藍會員';
         }
     }
 }

@@ -28,7 +28,7 @@ const RegistrationPage = () => {
 			location.state?.from &&
 			!['/login', '/register'].includes(location.state.from.pathname)
 		) {
-			navigate(-1);
+			navigate(0);
 		} else {
 			navigate('/'); // or some other safe fallback route
 		}

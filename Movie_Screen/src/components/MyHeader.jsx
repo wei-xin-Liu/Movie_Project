@@ -20,7 +20,9 @@ function MyHeader() {
 		setIsLogInCardVisible(!isLogInCardVisible);
 	};
 
-	const { token } = useStateContext();
+	// const { token } = useStateContext();
+	const token = localStorage.getItem('ACCESS_TOKEN');
+
 	const logoutMutation = useLogout();
 	const onLogout = () => {
 		logoutMutation.mutate(); // Trigger the mutation when the button is clicked

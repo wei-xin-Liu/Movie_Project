@@ -43,7 +43,7 @@ export function MostRecentOrderCard() {
 			{mostRecentOrder ? (
 				<OrderCard order={mostRecentOrder} />
 			) : (
-				<div>No recent orders</div>
+				<div className='text-center'>無最新訂單</div>
 			)}
 		</div>
 	);
@@ -85,7 +85,7 @@ export function UpcomingOrdersCard() {
 					<OrderCard key={order.oid} order={order} />
 				))
 			) : (
-				<div>No upcoming orders</div>
+				<div>無未觀賞電影</div>
 			)}
 		</>
 	);
@@ -126,7 +126,7 @@ export function PastOrdersCard({ width }) {
 					<OrderCard key={order.oid} order={order} width={width} />
 				))
 			) : (
-				<div>No past orders</div>
+				<div>無過去訂單</div>
 			)}
 		</>
 	);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import barcode from '../../img/barcode.png';
 import { Navigate } from 'react-router-dom';
 import { Button, Progress } from '@nextui-org/react';
@@ -15,23 +15,41 @@ import { jwtDecode } from 'jwt-decode';
 import useTotalPoints from '../../api/useTotalPoint.jsx';
 
 const MemberTop = () => {
-	const { user, token, setUser, setToken } = useStateContext();
+	// const { user, token, setUser, setToken } = useStateContext();
 	const { data: userData, error, isLoading } = useUserData();
 
 	const { data: points } = useTotalPoints();
 	const logoutMutation = useLogout();
 	// console.log(points);
-	const decodedToken = jwtDecode(token);
-	console.log(decodedToken);
+	const [memberTitle, setMemberTitle] = useState('');
+
 	useEffect(() => {
-		if (userData && userData.data) {
-			setUser(userData && userData.data);
+		if (userData?.token) {
+			const decodedToken = jwtDecode(userData?.token);
+			const membershipLevel = decodedToken.membership_level;
+
+			// Determine the membership title based on the membership level
+			const title =
+				membershipLevel === '金金會員'
+					? '金金會員' // "Dear Gold Member"
+					: membershipLevel === '紫紫會員'
+						? '親紫紫會員' // "Dear Silver Member"
+						: '藍藍會員'; // "Dear Member"
+
+			setMemberTitle(title);
 		}
-	}, [userData, setUser]);
+	}, [userData?.token]);
+	// Determine the membership title based on the membership level
+
+	// useEffect(() => {
+	// 	if (userData && userData.data) {
+	// 		setUser(userData && userData.data);
+	// 	}
+	// }, [userData, setUser]);
 
 	if (isLoading) return <div>Loading...</div>;
 	// console.log(userData?.name);
-	if (!token) {
+	if (!userData?.token) {
 		<Navigate to='/signin' />; // Redirect to login if token is not available
 	}
 	// const mutation = useMutation({
@@ -75,12 +93,14 @@ const MemberTop = () => {
 					<div className='flex-row w-1/3 h-min py-3 mx-3 mr-5 flex-1 overflow-auto  border-1 border-[#002855]/80'>
 						<div className='py-2 px-5 align-middle'>
 							<div className='text-lg text-slate-700 font-bold'>
-								Hello! 親愛的會員{' '}
-								<p className='mt-4 text-2xl indent-2 text-[#415a77]/90'>
+								Hello! 親愛的{memberTitle}{' '}
+								<p className='mt-4 text-2xl text-center text-[#415a77]/90'>
 									{' '}
 									{userData?.name}{' '}
 								</p>
 							</div>
+							<br />
+
 							<p className='text-lg text-slate-700 font-bold mt-3'>
 								會員信箱：
 								<span className='text-xl indent-2 text-[#415a77]/90'>
@@ -129,15 +149,15 @@ const MemberTop = () => {
 									共 <span>{points}</span> 點{' '}
 								</p>
 							</div>
-							<div className='mx-[5%] my-4 flex justify'>
+							<div className='mx-[5%] my-4 flex justify-center items-center'>
 								<Progress
 									size='md'
 									aria-label='Loading...'
-									value={50}
+									value={100}
 									classNames={{
 										base: 'max-w-lg',
 										track: 'drop-shadow-md border border-default',
-										indicator: 'bg-indigo-500',
+										indicator: 'bg-[#A88F6F]',
 										label: 'tracking-wider font-medium text-default-600',
 										value: 'text-foreground/60',
 									}}
