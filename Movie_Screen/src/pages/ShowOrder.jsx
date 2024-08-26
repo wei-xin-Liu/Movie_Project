@@ -4,8 +4,14 @@ import { Card, Button, CardHeader, CardBody } from '@nextui-org/react';
 import { useState } from 'react';
 import { IconArrowBadgeDown } from '@tabler/icons-react';
 import { IconArrowBadgeUp } from '@tabler/icons-react';
+import RecentOrder from '../components/member/RecentOrder';
+import {
+	MostRecentOrderCard,
+	UpcomingOrdersCard,
+	PastOrdersCard,
+} from '../components/member/FilteredOrderCard';
 
-const ShowOrder = ({ width }) => {
+const ShowOrder = ({ width, order }) => {
 	const [expanded, setExpanded] = useState(false);
 
 	const toggleExpand = () => {
@@ -28,6 +34,19 @@ const ShowOrder = ({ width }) => {
 		});
 		return (
 			<div>
+				recent
+				<MostRecentOrderCard className='bg-fuchsia-500' />
+				<br />
+				upcoming
+				<UpcomingOrdersCard className='bg-fuchsia-500' />
+				<br />
+				<br />
+				<br />
+				<br />
+				111
+				<PastOrdersCard className='bg-red-400' />
+				<br />
+				12345
 				<h1>Your Orders</h1>
 				<ul>
 					{orders.map((order) => {
