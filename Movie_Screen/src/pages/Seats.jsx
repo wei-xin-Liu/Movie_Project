@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SeatMap from '../components/SeatMap';
 import { TicketContext } from './Program';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-
+import LogInCard from '../components/member/LogInCard';
 const Seats = () => {
 	const navigate = useNavigate();
 
@@ -120,6 +121,35 @@ const Seats = () => {
 		foods,
 	]);
 
+	const token = localStorage.getItem('ACCESS_TOKEN'); // Check if user is logged in
+	if (!token) {
+		return <LogInCard />;
+	}
+	const saveBooking = useMutation({
+		mutationFn: async (data) => {
+			try {
+				const response = await axios.post(
+					'http://127.0.0.1:8000/api/member-order',
+					data,
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+							'Content-Type': 'application/json',
+						},
+					}
+				);
+				console.log('Response:', response);
+				return response.data;
+			} catch (error) {
+				console.error(
+					'Axios error:',
+					error.response ? error.response.data : error.message
+				);
+				throw error;
+			}
+		},
+	});
+
 	// 提交訂單資訊
 	const saveOrder = () => {
 		localStorage.setItem('order', JSON.stringify(selectedData));
@@ -149,8 +179,22 @@ const Seats = () => {
 			// 	detail: jsonData,
 			// 	totalPrice,
 			// });
+			const order = JSON.parse(localStorage.getItem('order'));
 
-			navigate('/Choosepay', { state: selectedData });
+			const { totalPrice, ...details } = order;
+
+			const data = {
+				detail: JSON.stringify(details),
+				totalPrice: parseInt(totalPrice, 10), // Ensure totalPrice is an integer
+			};
+
+			console.log('Data to be sent:', data); // Log the data for debugging
+
+			saveBooking.mutate(data); // Trigger the mutation
+
+			if (token) {
+				navigate('/Choosepay', { state: selectedData });
+			}
 		} catch (error) {
 			console.error('Error booking seats:', error);
 			setIsSubmitting(false);

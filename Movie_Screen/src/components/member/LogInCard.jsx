@@ -23,7 +23,7 @@ const LogInCard = () => {
 	};
 	const closeModal = () => {
 		setIsAnimating(false);
-		setTimeout(() => setIsModalVisible(false), 300); // Delay to match animation duration
+		setTimeout(() => setIsModalVisible(false), 500); // Delay to match animation duration
 	};
 
 	useEffect(() => {
@@ -76,7 +76,7 @@ const LogInCard = () => {
 							</CardHeader>
 							<Divider />
 							<CardBody>
-								<LogInForm />
+								<LogInForm closeModal={closeModal} />
 							</CardBody>
 							<Divider />
 							<CardFooter className='flex justify-end'>

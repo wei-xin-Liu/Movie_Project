@@ -31,7 +31,7 @@ const TicketBooking = () => {
 			axios
 				.post('http://127.0.0.1:8000/api/get-ticket-prices', {
 					theaterName: theater,
-				}) // http://localhost:8000/api/get-ticket-prices
+				})
 				.then((response) => setTicketPrice(response.data))
 				.catch((error) =>
 					console.error('Error fetching ticket prices:', error)

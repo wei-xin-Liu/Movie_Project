@@ -30,7 +30,6 @@ function GoPay() {
 				throw error;
 			}
 		},
-		// ... rest of your code
 	});
 
 	const handleProceedToPayment = () => {

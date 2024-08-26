@@ -3,17 +3,18 @@ import { Input, Button } from '@nextui-org/react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LogInSchema from '../../schema/LogInSchema.js';
 import axiosClient from '../../api/axiosSetUp.js';
 import { useStateContext } from '../../context/ContextProvider.jsx';
 import GoogleBtn from './GoogleBtn.jsx';
 
-const LogInForm = () => {
+const LogInForm = ({ closeModal }) => {
 	const { user, token, setUser, setToken } = useStateContext();
 	const [generalError, setGeneralError] = useState(''); // State for general errors
 	const [successMessage, setSuccessMessage] = useState('');
 	const navigate = useNavigate();
+	const location = useLocation(); // Get current location
 
 	const {
 		register,
@@ -46,10 +47,17 @@ const LogInForm = () => {
 			// console.log('from data name', data.user.name); //correct
 			reset();
 			setGeneralError('');
-			setSuccessMessage('User login successfully');
+			setSuccessMessage('使用者登入成功');
 			setTimeout(() => {
-				navigate('/member');
-			}, 500); // 1000 milliseconds = 1 second			} else {
+				closeModal(); // Close the modal after success
+				navigate(0);
+				// Conditionally navigate based on current path
+				// if (location.pathname === '/seat') {
+				// 	navigate(-1);
+				// } else {
+				// 	navigate(0); // Reload the page
+				// }
+			}, 300); // 500 milliseconds = 0.5 seconds
 		},
 
 		onError: (error) => {
@@ -160,7 +168,7 @@ const LogInForm = () => {
 					<Button
 						type='submit'
 						disableRipple
-						// onPress={closeModal}
+						onPress={closeModal}
 						className='w-[400px] height-[40px] px-4  bg-indigo-600 text-white rounded'
 					>
 						登入
