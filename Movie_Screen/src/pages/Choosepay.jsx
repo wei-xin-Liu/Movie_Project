@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 
 function Choosepay() {
 	const { state } = useLocation();
@@ -11,26 +13,21 @@ function Choosepay() {
 	const filteredEntries = entries.filter(([key, value]) => value > 0);
 	filteredEntries.map(([key, value]) => {
 		// "adult":1,"student":0,"early":0,"love":0
-		if (key == "adult") {
-			key = "成人票"
+		if (key == 'adult') {
+			key = '成人票';
+		} else if (key == 'student') {
+			key = '學生票';
+		} else if (key == 'early') {
+			key = '早鳥票';
+		} else if (key == 'love') {
+			key = '愛心票';
 		}
-		else if (key == "student") {
-			key = "學生票"
-		}
-		else if (key == "early") {
-			key = "早鳥票"
-		}
-		else if (key == "love") {
-			key = "愛心票"
-		}
-		return (itemDescArray += `${key}x${value}, \n`)
+		return (itemDescArray += `${key}x${value}, \n`);
 	});
 
-	
 	for (let index = 0; index < selectedFoods.length; index++) {
 		itemDescArray += `${selectedFoods[index].name}x${selectedFoods[index].quantity}, \n`;
 	}
-	
 
 	const totalPricestr = totalPrice.toString();
 
@@ -38,6 +35,33 @@ function Choosepay() {
 	const [data, setData] = useState([]);
 
 	const navigate = useNavigate();
+
+	const token = localStorage.getItem('ACCESS_TOKEN'); // Check if user is logged in
+
+	const saveBooking = useMutation({
+		mutationFn: async (data) => {
+			try {
+				const response = await axios.post(
+					'http://127.0.0.1:8000/api/member-order',
+					data,
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+							'Content-Type': 'application/json',
+						},
+					}
+				);
+				console.log('Response:', response);
+				return response.data;
+			} catch (error) {
+				console.error(
+					'Axios error:',
+					error.response ? error.response.data : error.message
+				);
+				throw error;
+			}
+		},
+	});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault(); // 阻止表單默認提交行為
@@ -55,6 +79,23 @@ function Choosepay() {
 		} catch (error) {
 			console.error('Error fetching data:', error);
 		}
+
+		const order = JSON.parse(localStorage.getItem('order'));
+		if (!order) {
+			console.error('Order data is missing');
+			return;
+		}
+
+		const { totalPrice, ...details } = order;
+
+		const data = {
+			detail: JSON.stringify(details),
+			totalPrice: parseInt(totalPrice, 10), // Ensure totalPrice is an integer
+		};
+
+		console.log('Data to be sent:', data); // Log the data for debugging
+
+		saveBooking.mutate(data); // Trigger the mutation
 	};
 
 	return (

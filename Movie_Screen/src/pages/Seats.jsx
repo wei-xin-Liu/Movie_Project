@@ -158,47 +158,47 @@ const Seats = () => {
 		const jsonData = JSON.stringify(selectedData);
 		setIsSubmitting(true);
 		saveOrder();
+		navigate('/Choosepay', { state: selectedData });
+		// try {
+		// 	const bookingData = selectedSeats.map((seat_id) => ({
+		// 		member_id: 1, // 用戶測試
+		// 		seat_id,
+		// 		watch_time: time,
+		// 		watch_date: formatDate(date),
+		// 		theater,
+		// 	}));
 
-		try {
-			const bookingData = selectedSeats.map((seat_id) => ({
-				member_id: 1, // 用戶測試
-				seat_id,
-				watch_time: time,
-				watch_date: formatDate(date),
-				theater,
-			}));
+		// 	await Promise.all(
+		// 		bookingData.map((data) =>
+		// 			axios.post('http://127.0.0.1:8000/api/book-seat', data)
+		// 		)
+		// 	);
 
-			await Promise.all(
-				bookingData.map((data) =>
-					axios.post('http://127.0.0.1:8000/api/book-seat', data)
-				)
-			);
+		// 	// await axios.post('http://127.0.0.1:8000/api/member-order', {
+		// 	// 	member_id: 2,
+		// 	// 	detail: jsonData,
+		// 	// 	totalPrice,
+		// 	// });
+		// 	const order = JSON.parse(localStorage.getItem('order'));
 
-			// await axios.post('http://127.0.0.1:8000/api/member-order', {
-			// 	member_id: 2,
-			// 	detail: jsonData,
-			// 	totalPrice,
-			// });
-			const order = JSON.parse(localStorage.getItem('order'));
+		// 	const { totalPrice, ...details } = order;
 
-			const { totalPrice, ...details } = order;
+		// 	const data = {
+		// 		detail: JSON.stringify(details),
+		// 		totalPrice: parseInt(totalPrice, 10), // Ensure totalPrice is an integer
+		// 	};
 
-			const data = {
-				detail: JSON.stringify(details),
-				totalPrice: parseInt(totalPrice, 10), // Ensure totalPrice is an integer
-			};
+		// 	console.log('Data to be sent:', data); // Log the data for debugging
 
-			console.log('Data to be sent:', data); // Log the data for debugging
+		// 	saveBooking.mutate(data); // Trigger the mutation
 
-			saveBooking.mutate(data); // Trigger the mutation
-
-			if (token) {
-				navigate('/Choosepay', { state: selectedData });
-			}
-		} catch (error) {
-			console.error('Error booking seats:', error);
-			setIsSubmitting(false);
-		}
+		// 	if (token) {
+		// 		navigate('/Choosepay', { state: selectedData });
+		// 	}
+		// } catch (error) {
+		// 	console.error('Error booking seats:', error);
+		// 	setIsSubmitting(false);
+		// }
 	};
 
 	return (
