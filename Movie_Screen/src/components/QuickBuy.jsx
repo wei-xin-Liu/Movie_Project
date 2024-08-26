@@ -4,7 +4,6 @@ import { TicketContext } from '../pages/Program';
 
 function QuickBuy() {
 	const [movies, setMovies] = useState([]);
-
 	useEffect(() => {
 		const fetchMovies = async () => {
 			try {
@@ -134,17 +133,22 @@ function QuickBuy() {
 				<h2 className="text-2xl font-bold mb-2 md:mb-4 text-center text-sky-900">快速訂票</h2>
 				<form>
 					{/* 選擇電影 */}
-					<div className="mb-2 md:mb-4">
-						<label htmlFor="movie" className="block text-sm font-medium text-gray-700 mb-2">選擇電影</label>
+					<div className='mb-2 md:mb-4'>
+						<label
+							htmlFor='movie'
+							className='block text-sm font-medium text-gray-700 mb-2'
+						>
+							選擇電影
+						</label>
 						<select
-							id="movie"
-							name="movie"
-							className="w-full p-2 border border-gray-300 rounded-md"
+							id='movie'
+							name='movie'
+							className='w-full p-2 border border-gray-300 rounded-md'
 							onChange={handleMovieChange}
 							value={selectedMovieId}
 						>
-							<option value="">請選擇電影</option>
-							{movies.map(movie => (
+							<option value=''>請選擇電影</option>
+							{movies.map((movie) => (
 								<option key={movie.MID} value={movie.MID}>
 									{movie.title}
 								</option>
@@ -225,7 +229,7 @@ function QuickBuy() {
                                 rounded-md 
                             '
 						>
-							<option value=''>選擇時間</option>
+							<option value='{}'>選擇時間</option>
 							{selectedTheaterId != '' &&
 								onemovie.theaters[selectedTheaterId].map((time, index) => {
 									// console.log(selectedDateIdx);
@@ -255,14 +259,17 @@ function QuickBuy() {
 
 					{/* 提交按鈕 */}
 					<div>
-						<button onClick={() => handleTimeClick(selectedTimeId, selectedTheaterId)} className="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700 font-bold">
+						<button
+							onClick={() => handleTimeClick(selectedTimeId, selectedTheaterId)}
+							className='w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-700 font-bold'
+						>
 							立即訂票
 						</button>
 					</div>
 				</form>
 			</div>
 		</>
-	)
+	);
 }
 
 export default QuickBuy;
