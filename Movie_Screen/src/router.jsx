@@ -27,6 +27,7 @@ import AuthCallBack from './api/AuthCallBack';
 import AuthError from './pages/AuthError';
 import GoPay from './pages/GoPay';
 import ShowOrder from './pages/ShowOrder';
+import OrderCard from './components/member/OrderCard';
 import AudioDescriptionInfo from './pages/AudioDescriptionInfo';
 
 const routes = createBrowserRouter([
@@ -113,6 +114,10 @@ const routes = createBrowserRouter([
 			{
 				path: '/showorder',
 				element: <ShowOrder />,
+			},
+			{
+				path: '/ordercard',
+				element: <OrderCard />,
 			},
 			{
 				path: '*',
