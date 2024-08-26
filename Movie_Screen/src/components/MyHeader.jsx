@@ -37,7 +37,7 @@ function MyHeader() {
 	};
 
 	return (
-		<header className='bg-blue-600 text-white m-0 p-4'>
+		<header className='bg-[#002855] text-white m-0 p-4'>
 			<div className='flex justify-between items-center h-10'>
 				<div className='font-bold text-center'>
 					<a href='/' className='flex items-center text-xl'>

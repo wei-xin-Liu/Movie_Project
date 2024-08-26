@@ -17,8 +17,8 @@ function Home() {
 			<hr className='border-black mx-[2%]' />
 
 			<div className="flex text-center pb-3">
-				<div className="font-bold mt-[7%] md:mt-[2%] ml-[2%] text-2xl">現正熱映</div>
-				<div className="font-bold text-2xl mt-[7%] md:mt-[2%] mr-[2%] ml-[25%] md:ml-[80%] hover:text-blue-400"><a href="/MovieClass">瀏覽更多</a></div>
+				<div className="font-bold my-[7%] md:my-[2%] ml-[2%] text-3xl text-[#0466c8]">現正熱映</div>
+				<div className="font-bold text-2xl my-[7%] md:my-[2%] mr-[2%] ml-[25%] md:ml-[80%] text-[#0466c8]/[0.8] hover:text-blue-800"><a href="/MovieClass">瀏覽更多</a></div>
 			</div>
 
 			<MovieCardCursor />

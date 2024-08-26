@@ -6,7 +6,7 @@ function Bluepaysuccess() {
     const navigate = useNavigate();
     
     function handleReturn() {
-        navigate('/Home');
+        navigate('/');
     }
     // const [paymentData, setPaymentData] = useState(null);
 

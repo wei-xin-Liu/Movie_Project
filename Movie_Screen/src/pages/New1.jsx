@@ -4,7 +4,7 @@ import "../css/TheaterInfo_News_Audio.css";
 function New1() {
     return (
         <React.Fragment>
-            <div className="container loca w-[80%] block">
+            <div className="mx-[10%]">
                 <time className="newsTime text-gray-400 tracking-[1.5px] p-[0.5%] mt-[2%]">2024/04/01</time>
                 <h1 className="newsH1 text-[#2f96ee] block text-[2em] my-[0.67em] font-bold">MUCROWN訂票公告</h1>
                 <h4 className='block my-[1.33em] font-bold'>MUCROWN頂級影廳目前線上訂票僅開放「單人套票」。</h4>
