@@ -23,6 +23,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import NotFound from './pages/NotFound';
 import GoogleError from './pages/GoogleError';
 import GoogleBtn from './components/member/GoogleBtn';
+import MemberProgress from './components/member/MemberProgress';
 import AuthCallBack from './api/AuthCallBack';
 import AuthError from './pages/AuthError';
 import GoPay from './pages/GoPay';
@@ -118,6 +119,10 @@ const routes = createBrowserRouter([
 			{
 				path: '/ordercard',
 				element: <OrderCard />,
+			},
+			{
+				path: '/memberprogress',
+				element: <MemberProgress />,
 			},
 			{
 				path: '*',

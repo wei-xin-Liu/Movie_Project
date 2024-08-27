@@ -13,6 +13,7 @@ import {
 } from '../member/FilteredOrderCard.jsx';
 import { jwtDecode } from 'jwt-decode';
 import useTotalPoints from '../../api/useTotalPoint.jsx';
+import MemberProgress from './MemberProgress.jsx';
 
 const MemberTop = () => {
 	// const { user, token, setUser, setToken } = useStateContext();
@@ -92,7 +93,7 @@ const MemberTop = () => {
 				<div className='flex container mx-auto w-[75%]'>
 					<div className='flex-row w-1/3 h-min py-3 mx-3 mr-5 flex-1 overflow-auto  border-1 border-[#002855]/80'>
 						<div className='py-2 px-5 align-middle'>
-							<div className='text-lg text-slate-700 font-bold'>
+							<div className='text-lg text-foreground/60 font-bold'>
 								Hello! 親愛的{memberTitle}{' '}
 								<p className='mt-4 text-2xl text-center text-[#415a77]/90'>
 									{' '}
@@ -101,7 +102,7 @@ const MemberTop = () => {
 							</div>
 							<br />
 
-							<p className='text-lg text-slate-700 font-bold mt-3'>
+							<p className='text-lg text-foreground/60 font-bold mt-3'>
 								會員信箱：
 								<span className='text-xl indent-2 text-[#415a77]/90'>
 									{' '}
@@ -139,18 +140,18 @@ const MemberTop = () => {
 					<div className='flex w-2/3  border-1 border-[#002855]/80 min-h-max  max-h-screen'>
 						<div className='w-1/2 py-3 overflow-auto '>
 							<div className='py-2 px-8 align-middle'>
-								<p className='text-2xl text-slate-700 font-bold text-center'>
+								<p className='text-2xl text-foreground/60 font-bold text-center'>
 									會員點數
 								</p>
 							</div>
 							<div className='flex mt-6 py-4 justify-center item-center'>
-								<p className='text-center text-2xl text-slate-700  tracking-[.45em]'>
+								<p className='text-center text-2xl text-foreground/60  tracking-[.45em]'>
 									{' '}
 									共 <span>{points}</span> 點{' '}
 								</p>
 							</div>
-							<div className='mx-[5%] my-4 flex justify-center items-center'>
-								<Progress
+							<div className='mt-6 ml-5'>
+								{/* <Progress
 									size='md'
 									aria-label='Loading...'
 									value={100}
@@ -161,7 +162,8 @@ const MemberTop = () => {
 										label: 'tracking-wider font-medium text-default-600',
 										value: 'text-foreground/60',
 									}}
-								/>
+								/> */}
+								<MemberProgress />
 							</div>
 							<div className='flex justify-center mt-8'>
 								<Button className='text-center bg-transparent   text-[#415a77] border-1 border-[#415a77]  w-full h-11 ml-5 rounded-sm   transition-colors duration-150 ease-in-out hover:bg-[#415a77] hover:text-white hover:border-gray-300 focus:outline-none focus:ring-0'>
@@ -171,7 +173,7 @@ const MemberTop = () => {
 						</div>
 						<div className='w-1/2 py-3 overflow-auto '>
 							<div className='py-2 px-8 align-middle'>
-								<p className='text-2xl font-bold text-center text-slate-700 '>
+								<p className='text-2xl font-bold text-center text-foreground/60 '>
 									最新訂單
 								</p>
 

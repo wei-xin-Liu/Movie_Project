@@ -49,7 +49,7 @@ const LogInForm = ({ closeModal }) => {
 			setGeneralError('');
 			setSuccessMessage('使用者登入成功');
 			setTimeout(() => {
-				navigate(-1);
+				navigate(-1); //will jump to no where
 				{
 					closeModal;
 				} // Close the modal after success
