@@ -137,6 +137,16 @@
     box-sizing: border-box;
 }
 
+.fa-calendar-days {
+    width: 24 ;
+    height: 24;
+}
+
+.fa-angle-left {
+    width: 24 ;
+    height: 24;
+}
+
 .content{
   width: 100%;
 }

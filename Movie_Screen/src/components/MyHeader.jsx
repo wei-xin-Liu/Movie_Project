@@ -41,7 +41,7 @@ function MyHeader() {
 			<div className='flex justify-between items-center h-10'>
 				<div className='font-bold text-center'>
 					<a href='/' className='flex items-center text-xl'>
-						<IconMovie className='ml-16 mr-3 w-[40px] h-[40px]' stroke={1.75} />
+						<IconMovie className='md:ml-16 md:mr-3 w-[40px] h-[40px]' stroke={1.75} />
 						第一影城
 					</a>
 				</div>

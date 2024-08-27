@@ -14,7 +14,7 @@ function NewList() {
 
     return (
         <React.Fragment>
-            <div className="mx-[10%]">
+            <div className="mx-[2%] md:mx-[10%]">
                 <ul className='block list-disc my-[1em] '>
                     <h1 className="block text-[2em] my-[0.67em] font-bold text-[#0466c8]">最新公告</h1>
                     {newsItems.map((item, index) => (
