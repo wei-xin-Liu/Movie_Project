@@ -22,8 +22,7 @@ import LogInPage from './pages/LogInPage';
 import RegistrationPage from './pages/RegistrationPage';
 import NotFound from './pages/NotFound';
 import GoogleError from './pages/GoogleError';
-import GoogleBtn from './components/member/GoogleBtn';
-import MemberProgress from './components/member/MemberProgress';
+import MemberIcon from './components/member/MemberIcon';
 import AuthCallBack from './api/AuthCallBack';
 import AuthError from './pages/AuthError';
 import GoPay from './pages/GoPay';
@@ -93,10 +92,6 @@ const routes = createBrowserRouter([
 				element: <Bluepaysuccess />,
 			},
 			{
-				path: '/GoogleBtn',
-				element: <GoogleBtn />,
-			},
-			{
 				path: '/googleerror',
 				element: <GoogleError />,
 			},
@@ -121,8 +116,8 @@ const routes = createBrowserRouter([
 				element: <OrderCard />,
 			},
 			{
-				path: '/memberprogress',
-				element: <MemberProgress />,
+				path: '/reward',
+				element: <MemberIcon />,
 			},
 			{
 				path: '*',

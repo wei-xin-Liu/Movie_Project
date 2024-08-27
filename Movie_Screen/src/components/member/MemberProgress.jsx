@@ -66,7 +66,7 @@ const MemberProgress = () => {
 			setPointsLabel(label);
 			setProgressText(
 				currentLevel === '金金會員'
-					? '您好: 金金會員 ${name}'
+					? `您好: 金金會員 ${name}`
 					: `您好: ${currentLevel}, 再${remainingPoints}點 即可成為${nextLevel}`
 			);
 		}

@@ -39,6 +39,7 @@ const MemberData = () => {
 			<div className=' mt-0 border-b-1 border-[#002855]/80'>
 				<ButtonGroup radius='sm' size='lg' className='my-5 mt-10'>
 					<Button
+						id='memberInfo'
 						className={`text-foreground/60  px-4 py-2 text-lg tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
 							selectedPart === 'info'
 								? 'text-[#415a77] border-b-[5px] border-[#415a77]/80'
@@ -65,6 +66,7 @@ const MemberData = () => {
 						觀影記錄
 					</Button>
 					<Button
+						id='MemberReward'
 						className={` text-foreground/60 px-4 py-2 text-lg tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
 							selectedPart === 'reward'
 								? 'text-[#415a77] border-b-[5px] border-[#415a77]/80'
@@ -75,7 +77,7 @@ const MemberData = () => {
 							handleScrollToSection('reward-section');
 						}}
 					>
-						紅利點數
+						會員權益
 					</Button>
 				</ButtonGroup>
 			</div>
