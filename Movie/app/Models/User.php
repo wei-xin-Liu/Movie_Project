@@ -57,9 +57,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return [
             'sub' => $this->getJWTIdentifier(), // User ID or any other unique identifier
+            'iat' => time(), // Issued at time
             'name' => $this->name, // User's name
             'email' => $this->email, // User's email
-            'iat' => time(), // Issued at time
+            'membership_point' => $this->getTotalRewardPoints(),
             'membership_level' => $this->getMembershipLevel(),
         ];
     }

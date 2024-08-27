@@ -33,8 +33,8 @@ class ApiController extends Controller
         // Get the authenticated user
         $user = JWTAuth::user();
         $token = JWTAuth::fromUser($user);
+        $membershipPoint = $user->getTotalRewardPoints();
         $membershipLevel = $user->getMembershipLevel();
-
         // return response(compact('user', 'token'));
         return response([
             'status' => true,
@@ -45,6 +45,7 @@ class ApiController extends Controller
                 'name' => $user->name,
                 // 'user' => $user,
                 'token' => $token,
+                'membership_point' => $membershipPoint,
                 'membership_level' => $membershipLevel,
             ],
             'expires_in' => auth()->factory()->getTTL() * 60,
@@ -62,6 +63,7 @@ class ApiController extends Controller
         ]);
 
         $token = JWTAuth::fromUser($user);
+        $membershipPoint = $user->getTotalRewardPoints();
         $membershipLevel = $user->getMembershipLevel();
 
         return response()->json([
@@ -71,6 +73,7 @@ class ApiController extends Controller
                 'user' => $user,
                 'token' => $token,
             ],
+            'membership_point' => $membershipPoint,
             'membership_level' => $membershipLevel,
         ]);
     }
