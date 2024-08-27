@@ -67,7 +67,7 @@ const MemberSeen = () => {
 		};
 
 		return (
-			<div className='w-full ml-5 my-5'>
+			<div id='memberSeen'className='w-full ml-5 my-5'>
 				<ButtonGroup radius='sm' className='my-3'>
 					<Button
 						className={`${

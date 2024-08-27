@@ -14,6 +14,7 @@ import {
 import { jwtDecode } from 'jwt-decode';
 import useTotalPoints from '../../api/useTotalPoint.jsx';
 import MemberProgress from './MemberProgress.jsx';
+import MemberIcon from './MemberIcon.jsx';
 
 const MemberTop = () => {
 	// const { user, token, setUser, setToken } = useStateContext();
@@ -72,12 +73,19 @@ const MemberTop = () => {
 		logoutMutation.mutate(); // Trigger the mutation when the button is clicked
 	};
 	const handleScrollToSection = (sectionId) => {
-		setTimeout(() => {
-			const element = document.getElementById(sectionId);
-			if (element) {
+		const element = document.getElementById(sectionId);
+
+		if (element) {
+			// Check if the element is already in view
+			const rect = element.getBoundingClientRect();
+			const isInView = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+			if (!isInView) {
 				element.scrollIntoView({ behavior: 'smooth', block: 'end' });
 			}
-		}, 1100); // 1-second delay
+		} else {
+			console.warn(`Element with ID ${sectionId} not found.`);
+		}
 	};
 
 	return (
@@ -93,16 +101,20 @@ const MemberTop = () => {
 				<div className='flex container mx-auto w-[75%]'>
 					<div className='flex-row w-1/3 h-min py-3 mx-3 mr-5 flex-1 overflow-auto  border-1 border-[#002855]/80'>
 						<div className='py-2 px-5 align-middle'>
-							<div className='text-lg text-foreground/60 font-bold'>
-								Hello! 親愛的{memberTitle}{' '}
+							<div className='text-2xl text-foreground/60 font-bold text-center'>
+								親愛的{'   '}
+								{memberTitle} <MemberIcon />
 								<p className='mt-4 text-2xl text-center text-[#415a77]/90'>
 									{' '}
 									{userData?.name}{' '}
 								</p>
+								<p className='mt-3 text-2xl text-foreground/60 font-bold text-center'>
+									您好
+								</p>
 							</div>
 							<br />
 
-							<p className='text-lg text-foreground/60 font-bold mt-3'>
+							<p className='text-lg text-center  text-foreground/60 font-bold mt-0'>
 								會員信箱：
 								<span className='text-xl indent-2 text-[#415a77]/90'>
 									{' '}
@@ -111,7 +123,7 @@ const MemberTop = () => {
 							</p>
 						</div>
 						<div className='mt-2'>
-							<img className='mx-auto w-72 h-40' src={barcode} alt='' />
+							<img className='mx-auto w-72 h-24' src={barcode} alt='' />
 						</div>
 						{/* //TODO Need write condition to display or not */}
 						{/* <div className='mt-4'>
@@ -166,8 +178,13 @@ const MemberTop = () => {
 								<MemberProgress />
 							</div>
 							<div className='flex justify-center mt-8'>
-								<Button className='text-center bg-transparent   text-[#415a77] border-1 border-[#415a77]  w-full h-11 ml-5 rounded-sm   transition-colors duration-150 ease-in-out hover:bg-[#415a77] hover:text-white hover:border-gray-300 focus:outline-none focus:ring-0'>
-									查看點數明細
+								<Button
+									onPress={() => {
+										handleScrollToSection('MemberReward');
+									}}
+									className='text-center bg-transparent   text-[#415a77] border-1 border-[#415a77]  w-full h-11 ml-5 rounded-sm   transition-colors duration-150 ease-in-out hover:bg-[#415a77] hover:text-white hover:border-gray-300 focus:outline-none focus:ring-0'
+								>
+									查看會員權益
 								</Button>
 							</div>
 						</div>

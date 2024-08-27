@@ -129,7 +129,7 @@ const MemberForm = () => {
 
 		return (
 			<>
-				<div id='memberInfo'>
+				<div>
 					<form
 						className='w-full ml-5 mx-auto'
 						onSubmit={handleSubmit(onSubmit)}
