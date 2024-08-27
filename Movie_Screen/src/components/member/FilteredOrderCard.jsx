@@ -24,12 +24,20 @@ export function MostRecentOrderCard() {
 					);
 					return { ...order, orderDateTime };
 				})
-				.filter((order) => order.orderDateTime)
-				.sort(
-					(a, b) =>
-						Math.abs(a.orderDateTime - now) - Math.abs(b.orderDateTime - now)
+				// 	.filter((order) => order.orderDateTime)
+				// 	.sort(
+				// 		(a, b) =>
+				// 			Math.abs(a.orderDateTime - now) - Math.abs(b.orderDateTime - now)
+				// 	)
+				// 	.slice(0, 1); // Get the closest order to now
+
+				// setMostRecentOrder(sortedOrders[0] || null);
+
+				.filter(
+					(order) => order.orderDateTime && isAfter(order.orderDateTime, now)
 				)
-				.slice(0, 1); // Get the closest order to now
+				.sort((a, b) => a.orderDateTime - b.orderDateTime)
+				.slice(0, 1); // Get up to 3 upcoming orders
 
 			setMostRecentOrder(sortedOrders[0] || null);
 		}

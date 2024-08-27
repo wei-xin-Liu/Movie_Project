@@ -35,7 +35,7 @@ const MemberTop = () => {
 				membershipLevel === '金金會員'
 					? '金金會員' // "Dear Gold Member"
 					: membershipLevel === '紫紫會員'
-						? '親紫紫會員' // "Dear Silver Member"
+						? '紫紫會員' // "Dear Silver Member"
 						: '藍藍會員'; // "Dear Member"
 
 			setMemberTitle(title);
