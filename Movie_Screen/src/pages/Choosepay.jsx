@@ -13,26 +13,21 @@ function Choosepay() {
 	const filteredEntries = entries.filter(([key, value]) => value > 0);
 	filteredEntries.map(([key, value]) => {
 		// "adult":1,"student":0,"early":0,"love":0
-		if (key == "adult") {
-			key = "全票"
-		}
-		else if (key == "student") {
-			key = "學生票"
-		}
-		else if (key == "early") {
-			key = "早鳥票"
-		}
-		else if (key == "love") {
-			key = "愛心票"
+		if (key == 'adult') {
+			key = '全票';
+		} else if (key == 'student') {
+			key = '學生票';
+		} else if (key == 'early') {
+			key = '早鳥票';
+		} else if (key == 'love') {
+			key = '愛心票';
 		}
 		return (itemDescArray += `${key}x${value}, \n`);
 	});
 
-
 	for (let index = 0; index < selectedFoods.length; index++) {
 		itemDescArray += `${selectedFoods[index].name}x${selectedFoods[index].quantity}, \n`;
 	}
-
 
 	const totalPricestr = totalPrice.toString();
 
@@ -96,7 +91,7 @@ function Choosepay() {
 
 			setData(response.data); // 保存數據到狀態
 			console.log(response.data);
-			// navigate('/Bluepay', { state: { data: response.data } });
+			navigate('/Bluepay', { state: { data: response.data } });
 
 			// 立即導航到新頁面，並傳遞數據
 		} catch (error) {

@@ -24,7 +24,7 @@ const MemberTop = () => {
 	const logoutMutation = useLogout();
 	// console.log(points);
 	const [memberTitle, setMemberTitle] = useState('');
-
+	console.log(userData);
 	useEffect(() => {
 		if (userData?.token) {
 			const decodedToken = jwtDecode(userData?.token);
@@ -123,7 +123,12 @@ const MemberTop = () => {
 							</p>
 						</div>
 						<div className='mt-2'>
-							<img className='mx-auto w-72 h-24' src={barcode} alt='' />
+							<img
+								src={userData.barcode_path}
+								alt='Barcode'
+								className='mx-auto w-[280px] '
+							/>
+							<p className='text-center p-1'>{userData.barcode_id}</p>
 						</div>
 						{/* //TODO Need write condition to display or not */}
 						{/* <div className='mt-4'>

@@ -51,7 +51,7 @@ const RegistrationForm = () => {
 			setTimeout(() => {
 				navigate('/member');
 			}, 1000); // 1000 milliseconds = 1 second			} else {
-			setGeneralError('Failed to get a token');
+			// setGeneralError('Failed to get a token');
 		},
 
 		onError: (error) => {

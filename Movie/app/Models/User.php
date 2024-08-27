@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Milon\Barcode\DNS1D;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -17,7 +18,15 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'barcode_path',
+        'barcode_value',
+        'barcode_id',
+        'barcode_data',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -88,5 +97,29 @@ class User extends Authenticatable implements JWTSubject
         } else {
             return '藍藍會員';
         }
+    }
+    public function generateBarcode(User $user)
+    {
+        $data = json_encode([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'membership_point' => $user->getTotalRewardPoints(),
+            'membership_level' => $user->getMembershipLevel(),
+        ]);
+
+        $barcode = DNS1D::getBarcodePNG($data, 'C39');
+        $barcodePath = 'storage/barcodes/' . $user->id . '.png';
+
+        file_put_contents(public_path($barcodePath), base64_decode($barcode));
+
+        return $barcodePath;
+    }
+
+    public function updateUserBarcode(User $user)
+    {
+        $barcodePath = $this->generateBarcode($user);
+        $user->barcode_path = $barcodePath;
+        $user->save();
     }
 }

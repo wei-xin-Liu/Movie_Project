@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LogInRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\UpdateInfoRequest;
+use App\Services\BarcodeService;
 
 class ApiController extends Controller
 {
@@ -51,7 +52,12 @@ class ApiController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60,
         ]);
     }
+    protected $barcodeService;
 
+    public function __construct(BarcodeService $barcodeService)
+    {
+        $this->barcodeService = $barcodeService;
+    }
     public function signup(SignUpRequest $request)
     {
         $data = $request->validated();
@@ -65,6 +71,8 @@ class ApiController extends Controller
         $token = JWTAuth::fromUser($user);
         $membershipPoint = $user->getTotalRewardPoints();
         $membershipLevel = $user->getMembershipLevel();
+
+        $this->barcodeService->generateForUser($user);
 
         return response()->json([
             'status' => true,
@@ -116,6 +124,8 @@ class ApiController extends Controller
             'email' => request()->user()->email,
             'token' => $token,
             'membership_level' => $membershipLevel,
+            'barcode_path' => url('storage/' . $user->barcode_path),
+            'barcode_id' => $user->barcode_id,
         ]);
     }
 
