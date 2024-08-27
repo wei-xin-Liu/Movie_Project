@@ -78,12 +78,12 @@ function Program({
 					<img
 						src={`/${image}`}
 						alt={title}
-						className="h-[400px] sm:h-[200px] md:h-[300px] lg:h-[350px] object-cover"
+						className="h-[400px] sm:h-[200px] md:h-[300px] lg:h-[400px] object-cover"
 					/>
 				</div>
 				<div className="sm:w-[75%] mt-[2%] sm:mt-[0%]">
-					<h1 className="font-bold text-red-900 text-xl w-[30%] sm:w-[35%] md:w-[20%]">{title}</h1>
-					<h1 className="text-red-600 text-xs w-[30%] sm:w-[35%] md:w-[20%]">{e_title}</h1>
+					<h1 className="font-bold text-[#172121] text-xl w-[30%] sm:w-[35%] md:w-[20%]">{title}</h1>
+					<h1 className="text-[#7F7b82] text-xs w-[30%] sm:w-[35%] md:w-[20%]">{e_title}</h1>
 					<div className="mt-[2%] font-bold">
 						<InfoRow label="級別">
 							<img
@@ -123,6 +123,7 @@ function Program({
 									overflow-hidden
 									truncate
 									text-center
+									p-1
 								'
 							>
 								{isExpanded ? '更少...' : '更多...'}
@@ -132,10 +133,10 @@ function Program({
 				</div>
 			</div>
 
-			<div className="grid grid-flow-row gap-[2%] mt-[2%]">
-				<h1 className="bg-slate-50 border-t border-gray-300 py-2">
-					<p className="text-xl font-bold ps-5">電影預告</p>
-				</h1>
+			<div className="grid grid-flow-row gap-[2%] my-[1%]">
+				<div className="bg-slate-50 border-y border-gray-300 py-2">
+					<p className="text-2xl font-bold ps-5 py-1">電影預告</p>
+				</div>
 			</div>
 			<div className="bg-black">
 				<iframe
@@ -143,8 +144,10 @@ function Program({
 				src={iframe}
 				></iframe>
 			</div>
-			<div className="bg-slate-50 border-b border-gray-300 py-2">
-				<p className="text-xl font-bold ps-5">線上訂票</p>
+			<div className="grid grid-flow-row gap-[2%] my-[1%]">
+				<div className="bg-slate-50 border-y border-gray-300 py-2">
+					<p className="text-2xl font-bold ps-5 py-1">線上訂票</p>
+				</div>
 			</div>
 
 			<div
