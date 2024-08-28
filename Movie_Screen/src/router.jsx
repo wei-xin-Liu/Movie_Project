@@ -27,7 +27,7 @@ import AuthCallBack from './api/AuthCallBack';
 import AuthError from './pages/AuthError';
 import GoPay from './pages/GoPay';
 import ShowOrder from './pages/ShowOrder';
-import AudioDescriptionInfo from './pages/AudioDescriptionInfo'
+import AudioDescriptionInfo from './pages/AudioDescriptionInfo';
 
 const routes = createBrowserRouter([
 	{
@@ -103,7 +103,7 @@ const routes = createBrowserRouter([
 				element: <AuthCallBack />,
 			},
 			{
-				path: '/autherror',
+				path: '/auth-error',
 				element: <AuthError />,
 			},
 			{
@@ -126,7 +126,6 @@ const routes = createBrowserRouter([
 				path: '/member',
 				element: <ProtectedRoute element={<MemberPage />} />,
 			},
-
 		],
 	},
 	{
