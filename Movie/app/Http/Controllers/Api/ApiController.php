@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LogInRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\UpdateInfoRequest;
+use App\Services\BarcodeService;
 
 class ApiController extends Controller
 {
@@ -24,7 +25,7 @@ class ApiController extends Controller
             return response()->json(
                 [
                     'status' => false,
-                    'message' => 'Invalid Email or Password. Please try again',
+                    'message' => '無效的電子郵件或密碼。請再試一次',
                 ],
                 422
             );
@@ -33,21 +34,30 @@ class ApiController extends Controller
         // Get the authenticated user
         $user = JWTAuth::user();
         $token = JWTAuth::fromUser($user);
-
+        $membershipPoint = $user->getTotalRewardPoints();
+        $membershipLevel = $user->getMembershipLevel();
         // return response(compact('user', 'token'));
         return response([
             'status' => true,
-            'message' => 'User logged in successfully',
+            'message' => '會員登入成功',
+
             'data' => [
                 'id' => $user->id,
                 'name' => $user->name,
-                'user' => $user,
+                // 'user' => $user,
                 'token' => $token,
+                'membership_point' => $membershipPoint,
+                'membership_level' => $membershipLevel,
             ],
             'expires_in' => auth()->factory()->getTTL() * 60,
         ]);
     }
+    protected $barcodeService;
 
+    public function __construct(BarcodeService $barcodeService)
+    {
+        $this->barcodeService = $barcodeService;
+    }
     public function signup(SignUpRequest $request)
     {
         $data = $request->validated();
@@ -59,33 +69,41 @@ class ApiController extends Controller
         ]);
 
         $token = JWTAuth::fromUser($user);
+        $membershipPoint = $user->getTotalRewardPoints();
+        $membershipLevel = $user->getMembershipLevel();
+
+        $this->barcodeService->generateForUser($user);
 
         return response()->json([
             'status' => true,
-            'message' => 'User registered successfully',
+            'message' => '會員註冊成功',
             'data' => [
                 'user' => $user,
                 'token' => $token,
             ],
+            'membership_point' => $membershipPoint,
+            'membership_level' => $membershipLevel,
         ]);
     }
     // Logout API - GET (JWT Auth Token)
     public function logout()
     {
-
         auth()->logout();
 
         try {
             JWTAuth::invalidate(JWTAuth::getToken());
             return response()->json([
                 'status' => true,
-                'message' => 'Successfully logged out'
+                'message' => '登出成功',
             ]);
         } catch (JWTException $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Failed to logout',
-            ], 500);
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => '登出失敗',
+                ],
+                500
+            );
         }
     }
 
@@ -95,6 +113,7 @@ class ApiController extends Controller
         $userData = request()->user();
         $user = JWTAuth::user();
         $token = JWTAuth::fromUser($user);
+        $membershipLevel = $user->getMembershipLevel();
 
         return response()->json([
             'status' => true,
@@ -104,6 +123,9 @@ class ApiController extends Controller
             'name' => request()->user()->name,
             'email' => request()->user()->email,
             'token' => $token,
+            'membership_level' => $membershipLevel,
+            'barcode_path' => url('storage/' . $user->barcode_path),
+            'barcode_id' => $user->barcode_id,
         ]);
     }
 
@@ -111,19 +133,22 @@ class ApiController extends Controller
     {
         try {
             $token = JWTAuth::parseToken()->refresh();
-            
+
             return response()->json([
                 'status' => true,
                 'message' => 'Token refreshed successfully',
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => auth()->factory()->getTTL() * 60
+                'expires_in' => auth()->factory()->getTTL() * 60,
             ]);
         } catch (JWTException $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Could not refresh token',
-            ], 401);
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'Could not refresh token',
+                ],
+                401
+            );
         }
     }
 
@@ -184,6 +209,15 @@ class ApiController extends Controller
             );
         }
     }
+
+    public function getTotalPoints()
+    {
+        $user = auth()->user();
+        return response()->json([
+            'total_points' => $user->getTotalRewardPoints(),
+        ]);
+    }
+
     // public function me()
     // {
     //     // // Get the authenticated user from the token

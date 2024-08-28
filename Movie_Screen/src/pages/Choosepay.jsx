@@ -40,15 +40,14 @@ function Choosepay() {
 	const [data, setData] = useState([]);
 
 	const navigate = useNavigate();
-
 	const token = localStorage.getItem('ACCESS_TOKEN'); // Check if user is logged in
 
 	const saveBooking = useMutation({
-		mutationFn: async (data) => {
+		mutationFn: async (orderdata) => {
 			try {
 				const response = await axios.post(
 					'http://127.0.0.1:8000/api/member-order',
-					data,
+					orderdata,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,
@@ -71,6 +70,24 @@ function Choosepay() {
 	const handleSubmit = async (e) => {
 		e.preventDefault(); // 阻止表單默認提交行為
 
+		const order = JSON.parse(localStorage.getItem('order'));
+		if (!order) {
+			console.error('Order orderdata is missing');
+			return;
+		}
+
+		console.log(order);
+
+		const { totalPrice, ...details } = order;
+		console.log(details);
+		const orderdata = {
+			detail: JSON.stringify(details),
+			totalPrice: parseInt(totalPrice, 10), // Ensure totalPrice is an integer
+		};
+
+		console.log('Orderdata to be sent:', orderdata); // Log the orderdata for debugging
+		saveBooking.mutate(orderdata); // Trigger the mutation
+
 		try {
 			const response = await axios.post('http://127.0.0.1:8000/api/bluepay', {
 				itemDescArray,
@@ -78,29 +95,13 @@ function Choosepay() {
 			});
 
 			setData(response.data); // 保存數據到狀態
+			console.log(response.data);
+			navigate('/Bluepay', { state: { data: response.data } });
 
 			// 立即導航到新頁面，並傳遞數據
-			navigate('/Bluepay', { state: { data: response.data } });
 		} catch (error) {
 			console.error('Error fetching data:', error);
 		}
-
-		const order = JSON.parse(localStorage.getItem('order'));
-		if (!order) {
-			console.error('Order data is missing');
-			return;
-		}
-
-		const { totalPrice, ...details } = order;
-
-		const data = {
-			detail: JSON.stringify(details),
-			totalPrice: parseInt(totalPrice, 10), // Ensure totalPrice is an integer
-		};
-
-		console.log('Data to be sent:', data); // Log the data for debugging
-
-		saveBooking.mutate(data); // Trigger the mutation
 	};
 
 	return (
@@ -135,6 +136,7 @@ function Choosepay() {
 								className='mr-2'
 							/>
 							<label htmlFor='online-payment'>線上付款</label>
+							<label htmlFor='online-payment'>線上付款</label>
 						</div>
 						{/* <div className='ml-[20%]'>
 							<input
@@ -156,7 +158,10 @@ function Choosepay() {
 					className='
                         bg-[#0466c8]
                         hover:bg-[#0466c8]/[0.8]                   
+                        bg-[#0466c8]
+                        hover:bg-[#0466c8]/[0.8]                   
                         font-semibold
+                        text-white
                         text-white
                         py-2
                         px-4

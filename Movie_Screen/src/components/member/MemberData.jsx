@@ -7,12 +7,19 @@ import MemberSeen from './MemberSeen.jsx';
 const MemberData = () => {
 	const [selectedPart, setSelectedPart] = useState('info');
 	const handleScrollToSection = (sectionId) => {
-		setTimeout(() => {
-			const element = document.getElementById(sectionId);
-			if (element) {
+		const element = document.getElementById(sectionId);
+
+		if (element) {
+			// Check if the element is already in view
+			const rect = element.getBoundingClientRect();
+			const isInView = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+			if (!isInView) {
 				element.scrollIntoView({ behavior: 'smooth', block: 'end' });
 			}
-		}, 1100); // 1-second delay
+		} else {
+			console.warn(`Element with ID ${sectionId} not found.`);
+		}
 	};
 
 	const showComponent = () => {
@@ -28,49 +35,53 @@ const MemberData = () => {
 		}
 	};
 	return (
-		<div className='w-[80%] mx-auto my-5'>
-			<ButtonGroup radius='sm' size='lg' className='my-5 mt-10'>
-				<Button
-					className={` px-4 py-2 text-base tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
-						selectedPart === 'info'
-							? 'text-[#415a77] border-b-[7px] border-[#415a77]'
-							: ''
-					}`}
-					onPress={() => {
-						setSelectedPart('info');
-						handleScrollToSection('info-section');
-					}}
-				>
-					個人資料
-				</Button>
-				<Button
-					className={` px-4 py-2 text-base tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
-						selectedPart === 'reward'
-							? 'text-[#415a77] border-b-[7px] border-[#415a77]'
-							: ''
-					}`}
-					onPress={() => {
-						setSelectedPart('reward');
-						handleScrollToSection('reward-section');
-					}}
-				>
-					紅利點數
-				</Button>
-				<Button
-					className={` px-4 py-2 text-base tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
-						selectedPart === 'seen'
-							? 'text-[#415a77] border-b-[7px] border-[#415a77]'
-							: ''
-					}`}
-					onPress={() => {
-						setSelectedPart('seen');
-						handleScrollToSection('seen-section');
-					}}
-				>
-					觀影記錄
-				</Button>
-			</ButtonGroup>
-			<hr className='mt-0' />
+		<div className='w-[75%] mx-auto my-5'>
+			<div className=' mt-0 border-b-1 border-[#002855]/80'>
+				<ButtonGroup radius='sm' size='lg' className='my-5 mt-10'>
+					<Button
+						id='memberInfo'
+						className={`text-foreground/60  px-4 py-2 text-lg tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
+							selectedPart === 'info'
+								? 'text-[#415a77] border-b-[5px] border-[#415a77]/80'
+								: ''
+						}`}
+						onPress={() => {
+							setSelectedPart('info');
+							handleScrollToSection('info-section');
+						}}
+					>
+						個人資料
+					</Button>
+					<Button
+						className={` text-foreground/60 px-4 py-2 text-lg tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
+							selectedPart === 'seen'
+								? 'text-[#415a77] border-b-[5px] border-[#415a77]/80'
+								: ''
+						}`}
+						onPress={() => {
+							setSelectedPart('seen');
+							handleScrollToSection('seen-section');
+						}}
+					>
+						觀影記錄
+					</Button>
+					<Button
+						id='MemberReward'
+						className={` text-foreground/60 px-4 py-2 text-lg tracking-[0.1em] border-b-2 border-[#415a77] cursor-pointer bg-transparent ${
+							selectedPart === 'reward'
+								? 'text-[#415a77] border-b-[5px] border-[#415a77]/80'
+								: ''
+						}`}
+						onPress={() => {
+							setSelectedPart('reward');
+							handleScrollToSection('reward-section');
+						}}
+					>
+						會員權益
+					</Button>
+				</ButtonGroup>
+			</div>
+			{/* <hr className='mt-0 border-b-1 border-[#002855] ' /> */}
 			<div id='info-section' className='mt-4'>
 				{selectedPart === 'info' && showComponent()}
 			</div>

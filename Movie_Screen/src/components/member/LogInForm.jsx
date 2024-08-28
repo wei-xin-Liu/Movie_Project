@@ -40,17 +40,19 @@ const LogInForm = ({ closeModal }) => {
 
 		onSuccess: ({ data }) => {
 			console.log('login success', data);
-			// localStorage.setItem('ACCESS_TOKEN', data.token);
+			localStorage.setItem('ACCESS_TOKEN', data.token);
 			setToken(data.token);
-			setUser(data.user.name);
-			console.log('token', token);
+			// setUser(data.user.name);
+			// console.log('token', token);
 			// console.log('from data name', data.user.name); //correct
 			reset();
 			setGeneralError('');
 			setSuccessMessage('使用者登入成功');
 			setTimeout(() => {
-				closeModal(); // Close the modal after success
-				navigate(-1);
+				navigate(-1); //will jump to no where
+				{
+					closeModal;
+				} // Close the modal after success
 				// Conditionally navigate based on current path
 				// if (location.pathname === '/seat') {
 				// 	navigate(-1);
@@ -169,7 +171,7 @@ const LogInForm = ({ closeModal }) => {
 						type='submit'
 						disableRipple
 						onPress={closeModal}
-						className='w-[400px] height-[40px] px-4  bg-indigo-600 text-white rounded'
+						className='w-[400px] height-[40px] px-4  bg-[#6290c8]/95 text-white rounded'
 					>
 						登入
 					</Button>

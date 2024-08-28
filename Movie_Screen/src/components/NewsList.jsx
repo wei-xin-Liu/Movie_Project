@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function NewsList() {
     return (
@@ -71,4 +71,4 @@ function NewsList() {
     )
 }
 
-export default NewsList
+export default NewsList;

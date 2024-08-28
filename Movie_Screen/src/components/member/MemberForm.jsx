@@ -58,11 +58,11 @@ const MemberForm = () => {
 		if (userData) {
 			setUser(userData);
 		}
-		console.log('userData:', userData); //not defined
-		// console.log(userData.name);
-		console.log('userData:', token);
-		console.log(user); //
-		console.log(userData?.user.name);
+		// console.log('userData:', userData); //not defined
+		// // console.log(userData.name);
+		// console.log('userData:', token);
+		// console.log(user); //
+		// console.log(userData?.user.name);
 	}, [userData, setUser]);
 
 	useEffect(() => {
@@ -129,7 +129,7 @@ const MemberForm = () => {
 
 		return (
 			<>
-				<div id='memberInfo'>
+				<div>
 					<form
 						className='w-full ml-5 mx-auto'
 						onSubmit={handleSubmit(onSubmit)}
@@ -236,14 +236,14 @@ const MemberForm = () => {
 						)}
 						<div className='flex my-5'>
 							<Button
-								className='mr-3 w-32 text-center text-slate-100 bg-blue-500 rounded-sm'
+								className='mr-3 w-32 text-center text-slate-100 bg-[#0488c8] rounded-sm'
 								onPress={handleModifyButtonClick}
 							>
 								修改個人資料
 							</Button>
 							<Button
 								type='submit'
-								className='mr-3 w-32 text-center text-slate-100 bg-blue-500 rounded-sm'
+								className='mr-3 w-32 text-center text-slate-100 bg-[#0488c8] rounded-sm'
 								onPress={handleConfirmButtonClick}
 							>
 								確認
@@ -254,7 +254,7 @@ const MemberForm = () => {
 						<div className='ml-6'>
 							<p
 								onClick={handleToggleClick}
-								className='text-sm text-blue-500 cursor-pointer'
+								className='text-sm text-[#415a77]/80 cursor-pointer'
 							>
 								{showMore ? '隱藏更多功能' : '顯示更多功能'}
 							</p>
@@ -274,7 +274,7 @@ const MemberForm = () => {
 		return (
 			<div className='w-[80%] mx-auto'>
 				<div className='flex items-center justify-center my-16'>
-					<Spinner label='請稍後' color='primary' labelColor='primary' />
+					<Spinner label='請稍後' color='default' labelColor='default' />
 				</div>
 			</div>
 		);

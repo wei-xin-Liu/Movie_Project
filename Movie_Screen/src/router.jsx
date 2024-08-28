@@ -22,11 +22,12 @@ import LogInPage from './pages/LogInPage';
 import RegistrationPage from './pages/RegistrationPage';
 import NotFound from './pages/NotFound';
 import GoogleError from './pages/GoogleError';
-import GoogleBtn from './components/member/GoogleBtn';
+import MemberIcon from './components/member/MemberIcon';
 import AuthCallBack from './api/AuthCallBack';
 import AuthError from './pages/AuthError';
 import GoPay from './pages/GoPay';
 import ShowOrder from './pages/ShowOrder';
+import OrderCard from './components/member/OrderCard';
 import AudioDescriptionInfo from './pages/AudioDescriptionInfo';
 
 const routes = createBrowserRouter([
@@ -91,10 +92,6 @@ const routes = createBrowserRouter([
 				element: <Bluepaysuccess />,
 			},
 			{
-				path: '/GoogleBtn',
-				element: <GoogleBtn />,
-			},
-			{
 				path: '/googleerror',
 				element: <GoogleError />,
 			},
@@ -113,6 +110,14 @@ const routes = createBrowserRouter([
 			{
 				path: '/showorder',
 				element: <ShowOrder />,
+			},
+			{
+				path: '/ordercard',
+				element: <OrderCard />,
+			},
+			{
+				path: '/reward',
+				element: <MemberIcon />,
 			},
 			{
 				path: '*',

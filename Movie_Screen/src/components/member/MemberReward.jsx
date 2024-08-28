@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner } from '@nextui-org/react';
+import BlueRewardCard from './BlueRewardCard';
+import PurpleRewardCard from './PurpleRewardCard';
+import GoldRewardCard from './GoldRewardCard';
 
 const MemberReward = () => {
 	const LoadingSpinner = () => {
 		return (
 			<div className='w-[80%] mx-auto'>
 				<div className='flex items-center justify-center my-5'>
-					<Spinner label='請稍後' color='primary' labelColor='primary' />
+					<Spinner label='請稍後' color='default' labelColor='default' />
 				</div>
 			</div>
 		);
@@ -25,8 +28,10 @@ const MemberReward = () => {
 	return (
 		<div>
 			{showSecondComponent ? (
-				<div className='flex items-center justify-center my-3'>
-					<p className='text-2xl'>最近無紀錄</p>
+				<div className='flex gap-3'>
+					<BlueRewardCard />
+					<PurpleRewardCard />
+					<GoldRewardCard />
 				</div>
 			) : (
 				<LoadingSpinner />

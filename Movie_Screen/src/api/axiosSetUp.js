@@ -23,41 +23,42 @@ axiosClient.interceptors.response.use(
 	async (error) => {
 		const originalRequest = error.config;
 
-		if (error.response) {
-			// Handle server errors
-			console.error('Response error:', error.response.data);
+		if (
+			error.response &&
+			error.response.status === 401 &&
+			!originalRequest._retry
+		) {
+			originalRequest._retry = true;
 
-			if (error.response.status === 401 && !originalRequest._retry) {
-				originalRequest._retry = true;
+			try {
+				const response = await axios.post(
+					'http://127.0.0.1:8000/api/refresh-token'
+				);
 
-				try {
-					// Attempt to refresh the token
-					const refreshResponse = await axios.post('refresh-token');
+				const { access_token, expires_in } = response.data;
 
-					const newToken = refreshResponse.data.access_token;
+				localStorage.setItem('ACCESS_TOKEN', access_token);
+				// Optionally store the expiration time
+				localStorage.setItem(
+					'TOKEN_EXPIRATION',
+					new Date().getTime() + expires_in * 1000
+				);
 
-					// Update the token in localStorage
-					localStorage.setItem('ACCESS_TOKEN', newToken);
+				axiosClient.defaults.headers.common['Authorization'] =
+					`Bearer ${access_token}`;
+				originalRequest.headers['Authorization'] = `Bearer ${access_token}`;
 
-					// Update the Authorization header with the new token
-					axiosClient.defaults.headers.common[
-						'Authorization'
-					] = `Bearer ${newToken}`;
-
-					// Retry the original request with the new token
-					originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
-					return axiosClient(originalRequest);
-				} catch (refreshError) {
-					// If refresh fails, remove the token and redirect to login
-					console.error('Token refresh failed:', refreshError);
-					localStorage.removeItem('ACCESS_TOKEN');
-					window.location.href = '/login'; // Redirect to login or handle appropriately
-					return Promise.reject(refreshError);
-				}
+				return axiosClient(originalRequest);
+			} catch (refreshError) {
+				console.error('Token refresh failed:', refreshError);
+				localStorage.removeItem('ACCESS_TOKEN');
+				localStorage.removeItem('TOKEN_EXPIRATION');
+				window.location.href = '/login';
+				return Promise.reject(refreshError);
 			}
-
-			return Promise.reject(error);
 		}
+
+		return Promise.reject(error);
 	}
 );
 
