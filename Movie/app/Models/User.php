@@ -122,4 +122,14 @@ class User extends Authenticatable implements JWTSubject
         $user->barcode_path = $barcodePath;
         $user->save();
     }
+
+    public function getUserWithBarcode($id)
+{
+    $user = User::findOrFail($id);
+
+    $user->barcode_image_url = 'data:image/png;base64,' . base64_encode($user->barcode_image);
+
+    return response()->json($user);
+}
+
 }

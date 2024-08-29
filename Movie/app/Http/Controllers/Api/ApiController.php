@@ -114,6 +114,8 @@ class ApiController extends Controller
         $user = JWTAuth::user();
         $token = JWTAuth::fromUser($user);
         $membershipLevel = $user->getMembershipLevel();
+        // Generate the Base64-encoded URL for the barcode image
+        $barcodeImageUrl = 'data:image/png;base64,' . base64_encode($user->barcode_image);
 
         return response()->json([
             'status' => true,
@@ -126,6 +128,7 @@ class ApiController extends Controller
             'membership_level' => $membershipLevel,
             'barcode_path' => url('storage/' . $user->barcode_path),
             'barcode_id' => $user->barcode_id,
+            'barcode_image_url' => $barcodeImageUrl,  // Include the Base64-encoded barcode image URL
         ]);
     }
 
