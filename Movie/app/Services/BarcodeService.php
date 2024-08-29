@@ -32,6 +32,7 @@ class BarcodeService
         $user->update([
             'barcode_path' => "barcodes/{$user->id}.png",
             'barcode_id' => $uniqueId,
+            'barcode_image' => $barcode,
             'barcode_data' => json_encode([
                 'id' => $user->id,
                 'name' => $user->name,
