@@ -109,29 +109,53 @@ class ApiController extends Controller
 
     public function info()
     {
-        //$userData = auth()->user();
-        $userData = request()->user();
-        $user = JWTAuth::user();
-        $token = JWTAuth::fromUser($user);
-        $membershipLevel = $user->getMembershipLevel();
-        // Generate the Base64-encoded URL for the barcode image
-        $barcodeImageUrl = 'data:image/png;base64,' . base64_encode($user->barcode_image);
+        try {
+            // Get the currently authenticated user
+            $user = JWTAuth::user();
+            if (!$user) {
+                return response()->json(
+                    ['status' => false, 'message' => 'User not authenticated'],
+                    401
+                );
+            }
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Profile data',
-            'user' => $userData,
-            'user_id' => request()->user()->id,
-            'name' => request()->user()->name,
-            'email' => request()->user()->email,
-            'token' => $token,
-            'membership_level' => $membershipLevel,
-            'barcode_path' => url('storage/' . $user->barcode_path),
-            'barcode_id' => $user->barcode_id,
-            'barcode_image_url' => $barcodeImageUrl,  // Include the Base64-encoded barcode image URL
-        ]);
+            $token = JWTAuth::fromUser($user);
+            $membershipLevel = $user->getMembershipLevel();
+
+            // Generate the Base64-encoded URL for the barcode image
+            // Handle barcode image encoding
+            $barcodeImageBase64 = $user->getBarcodeImageUrlAttribute();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Profile data',
+                'user' => $user,
+                'user_id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'token' => $token,
+                'membership_level' => $membershipLevel,
+                'barcode_path' => url('storage/' . $user->barcode_path),
+                'barcode_id' => $user->barcode_id,
+                'barcode_src' => $barcodeImageBase64
+                    ? $barcodeImageBase64
+                    : null,
+            ]);
+        } catch (\Exception $e) {
+            // Return a detailed error message
+            \Log::error('Error in info method: ' . $e->getMessage(), [
+                'exception' => $e,
+            ]);
+            return response()->json(
+                [
+                    'status' => false,
+                    'message' => 'An error occurred',
+                    'error' => $e->getMessage(), // Include the error message for debugging
+                ],
+                500
+            );
+        }
     }
-
     public function refreshToken()
     {
         try {
