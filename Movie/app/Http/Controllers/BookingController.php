@@ -23,7 +23,6 @@ class BookingController extends Controller
         $request->merge(['TID' => $TID]);
 
         $validatedData = $request->validate([
-            'member_id'     => 'required|integer',
             'seat_id'       => 'required|integer',
             'watch_time'    => 'required|string',
             'watch_date'    => 'required|date',
