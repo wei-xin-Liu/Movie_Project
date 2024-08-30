@@ -136,7 +136,6 @@ function Choosepay() {
 								className='mr-2'
 							/>
 							<label htmlFor='online-payment'>線上付款</label>
-							<label htmlFor='online-payment'>線上付款</label>
 						</div>
 						{/* <div className='ml-[20%]'>
 							<input
@@ -157,11 +156,8 @@ function Choosepay() {
 					type='submit'
 					className='
                         bg-[#0466c8]
-                        hover:bg-[#0466c8]/[0.8]                   
-                        bg-[#0466c8]
-                        hover:bg-[#0466c8]/[0.8]                   
+                        hover:bg-[#0466c8]/[0.8]                                
                         font-semibold
-                        text-white
                         text-white
                         py-2
                         px-4
