@@ -17,7 +17,7 @@ class bluepay extends Controller
     {
         // return $request;
         // $sensitiveData = $request->Status;
-        // $request->session()->put('payment_data', $sensitiveData);        
+        // $request->session()->put('payment_data', $sensitiveData);
         return redirect()->away('http://localhost:5173/Bluepaysuccess');
     }
 
@@ -39,17 +39,17 @@ class bluepay extends Controller
     private function preparePaymentData($ticket)
     {
         // var_dump($ticket);
-        $key = "5tTi1gm5YFK71ktZoXJzh5Dv7co1enEj";
-        $iv = "CNF45L4Ges7muETP";
-        $mid = "MS353425245";
-        
+        $key = '5tTi1gm5YFK71ktZoXJzh5Dv7co1enEj';
+        $iv = 'CNF45L4Ges7muETP';
+        $mid = 'MS353425245';
+
         $data = http_build_query([
             'MerchantID' => $mid,
             'TimeStamp' => time(),
             'Version' => '2.0',
             'RespondType' => 'JSON',
             'MerchantOrderNo' => time(),
-            'Amt' =>  $ticket['totalPricestr'],
+            'Amt' => $ticket['totalPricestr'],
             'VACC' => '1',
             'ALIPAY' => '0',
             'WEBATM' => '1',
@@ -58,12 +58,14 @@ class bluepay extends Controller
             // 'ClientBackURL' => 'https://2139-118-163-218-100.ngrok-free.app/',
             'ReturnURL' => 'https://3996-123-205-23-185.ngrok-free.app/Movie_Project/Movie/public/api/bluepaysuccessful',
             'InstFlag' => '0',
-            'ItemDesc' => $ticket["itemDescArray"],
+            'ItemDesc' => $ticket['itemDescArray'],
         ]);
 
-        $edata = bin2hex(openssl_encrypt($data, "AES-256-CBC", $key, OPENSSL_RAW_DATA, $iv));
-        $hashs = "HashKey=" . $key . "&" . $edata . "&HashIV=" . $iv;
-        $hash = strtoupper(hash("sha256", $hashs));
+        $edata = bin2hex(
+            openssl_encrypt($data, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv)
+        );
+        $hashs = 'HashKey=' . $key . '&' . $edata . '&HashIV=' . $iv;
+        $hash = strtoupper(hash('sha256', $hashs));
 
         return [
             'mid' => $mid,

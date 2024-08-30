@@ -56,9 +56,12 @@ class GenerateBarcodes extends Command
             // Save the barcode image
             file_put_contents($filePath, $barcode);
 
+            $barcodeBase64 = base64_encode($barcode);
+
             $user->update([
                 'barcode_path' => "barcodes/{$user->id}.png",
                 'barcode_id' => $uniqueId,
+                'barcode_image' => $barcodeBase64,
                 'barcode_data' => json_encode([
                     'id' => $user->id,
                     'name' => $user->name,

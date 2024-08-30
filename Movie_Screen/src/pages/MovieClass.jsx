@@ -87,18 +87,18 @@ function MovieClassName() {
 								hover:translate-y-[-5px]
                             "
 							>
-								<div className="relative">
-									<div style={{ aspectRatio: '2/3' }} ><img className="h-full object-cover rounded-t" src={image} alt={title} /></div>
-									<img className="absolute md:bottom-[-40px] right-2 w-8 z-10" src={rating.ratingimgurl} alt={rating.ratingdesc} />
-								</div>
-								<div className="h-full flex flex-col p-2">
-									<p className="text-[#172121] text-xl">{title}</p>
-									<p className="text-[#7F7b82] text-xs">{e_title}</p>
-									<div className="grow" />
-									<div className="content-center">
-										<p className="text-[#002855] text-1xl pt-2">上映日期：{release_date}</p>
+								<div style={{ aspectRatio: '2/3' }} ><img className="h-full object-cover rounded-t" src={image} alt={title} /></div>
+								<div className="flex">
+									<div className="h-full flex flex-col p-2 w-3/4">
+										<p className="text-[#172121] text-xl">{title}</p>
+										<p className="text-[#7F7b82] text-xs">{e_title}</p>
+									</div>
+									<div className="w-1/4 p-1 pt-2">
+										<img className="h-6 lg:h-9 2xl:h-14 md:visible invisible" src={rating.ratingimgurl} alt={rating.ratingdesc} />
 									</div>
 								</div>
+								<div className="grow" />
+								<p className="p-1 text-[#002855] text-1xl">上映日期：{release_date}</p>
 								<div className="content-center">
 									<button
 										className="

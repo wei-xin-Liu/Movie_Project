@@ -155,24 +155,23 @@ const Seats = () => {
 		localStorage.setItem('order', JSON.stringify(selectedData));
 	};
 	const submit = async () => {
-		const jsonData = JSON.stringify(selectedData);
 		setIsSubmitting(true);
 		saveOrder();
 		navigate('/Choosepay', { state: selectedData });
-		// try {
-		// 	const bookingData = selectedSeats.map((seat_id) => ({
-		// 		member_id: 1, // 用戶測試
-		// 		seat_id,
-		// 		watch_time: time,
-		// 		watch_date: formatDate(date),
-		// 		theater,
-		// 	}));
+		try {
+		const bookingData = selectedSeats.map((seat_id) => ({
+		 	member_id: 1, // 用戶測試
+		 	seat_id,
+		 	watch_time: time,
+		 	watch_date: formatDate(date),
+		 	theater,
+		}));
 
-		// 	await Promise.all(
-		// 		bookingData.map((data) =>
-		// 			axios.post('http://127.0.0.1:8000/api/book-seat', data)
-		// 		)
-		// 	);
+		await Promise.all(
+			bookingData.map((data) =>
+			axios.post('http://127.0.0.1:8000/api/book-seat', data)
+			)
+		);
 
 		// 	// await axios.post('http://127.0.0.1:8000/api/member-order', {
 		// 	// 	member_id: 2,
@@ -195,10 +194,10 @@ const Seats = () => {
 		// 	if (token) {
 		// 		navigate('/Choosepay', { state: selectedData });
 		// 	}
-		// } catch (error) {
-		// 	console.error('Error booking seats:', error);
-		// 	setIsSubmitting(false);
-		// }
+		} catch (error) {
+			console.error('Error booking seats:', error);
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
