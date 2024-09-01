@@ -30,6 +30,7 @@ import GoPay from './pages/GoPay';
 import ShowOrder from './pages/ShowOrder';
 import OrderCard from './components/member/OrderCard';
 import AudioDescriptionInfo from './pages/AudioDescriptionInfo';
+import ProtectedSeatsRoute from './components/ProtectedSeatsRoute';
 
 const routes = createBrowserRouter([
 	{
@@ -78,7 +79,12 @@ const routes = createBrowserRouter([
 			},
 			{
 				path: '/seats',
-				element: <Seats />,
+				element: (
+					<ProtectedSeatsRoute
+						element={<Seats />}
+						allowedState="ticketing"
+					/>
+				),
 			},
 			{
 				path: '/Choosepay',

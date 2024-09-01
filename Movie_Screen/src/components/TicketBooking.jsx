@@ -131,12 +131,13 @@ const TicketBooking = () => {
 	const submit = () => {
 		navigate('/Seats', {
 			state: {
+				from: 'ticketing',
 				ticketCounts,
 				foodCounts,
 				totalPrice: totalPrice(),
 				foods,
 				title,
-				e_title,
+				e_title
 			},
 		});
 	};

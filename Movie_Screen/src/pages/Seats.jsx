@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SeatMap from '../components/SeatMap';
 import { TicketContext } from './Program';
-import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import LogInCard from '../components/member/LogInCard';
 const Seats = () => {
@@ -20,6 +19,24 @@ const Seats = () => {
 	const { date, time, theater } = selectedTicket;
 
 	const location = useLocation();
+
+	useEffect(() => {
+        // 添加標記到歷史記錄
+        window.history.replaceState({ navigationState: 'seatsVisited' }, '');
+
+        const handlePopState = () => {
+            if (window.history.state && window.history.state.navigationState !== 'seatsVisited') {
+                navigate('/', { replace: true });
+            }
+        };
+
+        window.addEventListener('popstate', handlePopState);
+
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, [navigate]);
+
 	const { title, e_title, ticketCounts, foodCounts, totalPrice, foods } =
 		location.state || {};
 	const totalTicket = Object.values(ticketCounts).reduce(
@@ -125,30 +142,6 @@ const Seats = () => {
 	if (!token) {
 		return <LogInCard />;
 	}
-	const saveBooking = useMutation({
-		mutationFn: async (data) => {
-			try {
-				const response = await axios.post(
-					'http://127.0.0.1:8000/api/member-order',
-					data,
-					{
-						headers: {
-							Authorization: `Bearer ${token}`,
-							'Content-Type': 'application/json',
-						},
-					}
-				);
-				console.log('Response:', response);
-				return response.data;
-			} catch (error) {
-				console.error(
-					'Axios error:',
-					error.response ? error.response.data : error.message
-				);
-				throw error;
-			}
-		},
-	});
 
 	// 提交訂單資訊
 	const saveOrder = () => {
@@ -160,11 +153,10 @@ const Seats = () => {
 		navigate('/Choosepay', { state: selectedData });
 		try {
 		const bookingData = selectedSeats.map((seat_id) => ({
-		 	member_id: 1, // 用戶測試
-		 	seat_id,
-		 	watch_time: time,
-		 	watch_date: formatDate(date),
-		 	theater,
+			seat_id,
+			watch_time: time,
+			watch_date: formatDate(date),
+			theater,
 		}));
 
 		await Promise.all(
@@ -173,27 +165,6 @@ const Seats = () => {
 			)
 		);
 
-		// 	// await axios.post('http://127.0.0.1:8000/api/member-order', {
-		// 	// 	member_id: 2,
-		// 	// 	detail: jsonData,
-		// 	// 	totalPrice,
-		// 	// });
-		// 	const order = JSON.parse(localStorage.getItem('order'));
-
-		// 	const { totalPrice, ...details } = order;
-
-		// 	const data = {
-		// 		detail: JSON.stringify(details),
-		// 		totalPrice: parseInt(totalPrice, 10), // Ensure totalPrice is an integer
-		// 	};
-
-		// 	console.log('Data to be sent:', data); // Log the data for debugging
-
-		// 	saveBooking.mutate(data); // Trigger the mutation
-
-		// 	if (token) {
-		// 		navigate('/Choosepay', { state: selectedData });
-		// 	}
 		} catch (error) {
 			console.error('Error booking seats:', error);
 			setIsSubmitting(false);

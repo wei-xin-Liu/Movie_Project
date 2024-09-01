@@ -128,7 +128,6 @@ const Seats = () => {
 		const jsonData = JSON.stringify(selectedData);
 		try {
 			const bookingData = selectedSeats.map((seat_id) => ({
-				member_id: 1, // 用戶測試
 				seat_id,
 				watch_time: time,
 				watch_date: formatDate(date),
