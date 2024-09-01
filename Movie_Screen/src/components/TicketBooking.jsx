@@ -190,8 +190,8 @@ const TicketBooking = () => {
 					md:w-1/4
 					sm:w-1/3
 					bg-gradient-to-r
-					from-yellow-400
-					to-yellow-200
+					from-yellow-200
+					to-yellow-400
 					p-6
 					rounded-lg
 					shadow-lg
