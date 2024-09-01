@@ -200,7 +200,7 @@ const MemberTop = () => {
                 </p>
 
                 <div className="flex mt-3 py-2 justify-center item-center"></div>
-                <MostRecentOrderCard />
+                <MostRecentOrderCard width="w-full" />
               </div>
             </div>
           </div>
