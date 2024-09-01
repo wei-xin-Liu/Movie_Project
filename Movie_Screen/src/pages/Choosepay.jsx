@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import LogInCard from '../components/member/LogInCard';
 
 function Choosepay() {
   const { state } = useLocation();
@@ -36,7 +37,9 @@ function Choosepay() {
 
   const navigate = useNavigate();
   const token = localStorage.getItem('ACCESS_TOKEN'); // Check if user is logged in
-
+  if (!token) {
+    return <LogInCard />;
+  }
   const saveBooking = useMutation({
     mutationFn: async (orderdata) => {
       try {
